@@ -18,7 +18,6 @@ public interface ChronicleApi {
     String PARTICIPANT_ID           = "participantId";
     String ANDROID_ID                 = "androidId";
 
-    String ID_PATH              = "/{" + ID + "}";
     String STUDY_ID_PATH            = "/{" + STUDY_ID + "}";
     String PARTICIPANT_ID_PATH      = "/{" + PARTICIPANT_ID + "}";
 
