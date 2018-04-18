@@ -16,28 +16,38 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 public class Device extends AbstractSecurableObject {
     private       String              name;
+    private       String              androidId;
+    private       String              deviceType;
 
     @JsonCreator
     public Device(
             @JsonProperty( SerializationConstants.ID_FIELD ) Optional<UUID> id,
+            @JsonProperty( SerializationConstants.ANDROID_ID_FIELD ) String androidId,
             @JsonProperty( SerializationConstants.NAME_FIELD ) String name,
+            @JsonProperty( SerializationConstants.DEVICE_TYPE_FIELD ) String deviceType,
             @JsonProperty( SerializationConstants.DESCRIPTION_FIELD ) Optional<String> description ) {
         super( id, description );
         checkArgument( StringUtils.isNotBlank( name ), "Device name cannot be blank." );
         this.name = name;
+        this.androidId = androidId;
+        this.deviceType = deviceType;
     }
 
     public Device(
             UUID id,
             String name,
+            String androidId,
+            String deviceType,
             Optional<String> description ) {
-        this( Optional.of( id ), name, description );
+        this( Optional.of( id ), name, androidId, deviceType, description );
     }
 
     public Device(
             String name,
+            String androidId,
+            String deviceType,
             Optional<String> description ) {
-        this( Optional.absent(), name, description );
+        this( Optional.absent(), name, androidId, deviceType, description );
     }
 
     @JsonProperty( SerializationConstants.NAME_FIELD )
