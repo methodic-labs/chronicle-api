@@ -22,7 +22,7 @@ public interface ChronicleApi {
 
     String STUDY_ID                 = "studyId";
     String PARTICIPANT_ID           = "participantId";
-    String ANDROID_ID                 = "androidId";
+    String DEVICE_ID                 = "deviceId";
 
     String STUDY_ID_PATH            = "/{" + STUDY_ID + "}";
     String PARTICIPANT_ID_PATH      = "/{" + PARTICIPANT_ID + "}";
@@ -32,18 +32,18 @@ public interface ChronicleApi {
     void logData( @Path( STUDY_ID ) String studyId, @Path( PARTICIPANT_ID ) String participantId );
 
 //  enrolls android device to participant via app
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ANDROID_ID )
-    String enrollDevice( @Path( STUDY_ID) UUID studyId,
+    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID )
+    void enrollDevice( @Path( STUDY_ID) UUID studyId,
                          @Path( PARTICIPANT_ID ) UUID participantId,
-                         @Path( ANDROID_ID ) String androidId);
+                         @Path( DEVICE_ID ) String deviceId);
 
 //  creates a study
     @POST( BASE + STUDY_PATH )
-    UUID createStudy( @Body Study study);
+    UUID createStudy( @Body Study study );
 
 //  deletes a study
     @DELETE( BASE + STUDY_ID_PATH)
-    void deleteStudy( @Path( STUDY_ID ) UUID studyId);
+    void deleteStudy( @Path( STUDY_ID ) UUID studyId );
 
 //  gets all studies
     @GET( BASE + STUDY_PATH )
@@ -55,11 +55,11 @@ public interface ChronicleApi {
 
 //  creates a participant
     @POST( BASE + PARTICIPANT_PATH )
-    UUID createParticipant( @Body Person participant);
+    UUID createParticipant( @Body Person participant );
 
 //  deletes a participant
     @DELETE( BASE + PARTICIPANT_ID_PATH)
-    void deleteParticipant( @Path( PARTICIPANT_ID ) UUID participantId);
+    void deleteParticipant( @Path( PARTICIPANT_ID ) UUID participantId );
 
 //  gets all participants from all studies and non-associated
     @GET( BASE + PARTICIPANT_PATH )
@@ -67,39 +67,39 @@ public interface ChronicleApi {
 
 //  gets all participants from a study
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_PATH )
-    Person getParticipantsFromStudy( @Path( STUDY_ID ) UUID studyId);
+    Iterable<Person> getParticipantsFromStudy( @Path( STUDY_ID ) UUID studyId );
 
 //  gets participant by id
     @GET( BASE + PARTICIPANT_ID_PATH)
-    Person getParticipantById( @Path( PARTICIPANT_ID ) UUID participantId);
+    Person getParticipantById( @Path( PARTICIPANT_ID ) UUID participantId );
 
 //  updates a participant's metadata
     @PATCH( BASE + UPDATE_PATH + PARTICIPANT_ID_PATH)
     void updateParticipantMetadata( @Path( PARTICIPANT_ID ) UUID participantId,
-                                    @Body MetadataUpdate metadataUpdate);
+                                    @Body MetadataUpdate metadataUpdate );
 
 //  updates a study's metadata
     @PATCH( BASE + UPDATE_PATH + STUDY_ID_PATH)
     void updateStudyMetadata( @Path( STUDY_ID ) UUID studyId,
-                              @Body MetadataUpdate metadataUpdate);
+                              @Body MetadataUpdate metadataUpdate );
 
 //  adds a participant to a study
     @POST( BASE + INSTALL_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     void addParticipantToStudy( @Path( STUDY_ID )UUID studyID,
-                                @Path( PARTICIPANT_ID ) UUID participantId);
+                                @Path( PARTICIPANT_ID ) UUID participantId );
 
 //  removes a participant from a study
     @DELETE( BASE + INSTALL_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     void removeParticipantFromStudy( @Path( STUDY_ID )UUID studyID,
-                                     @Path( PARTICIPANT_ID ) UUID participantId);
+                                     @Path( PARTICIPANT_ID ) UUID participantId );
 
 //  adds bulk of participants to a study
     @POST( BASE + INSTALL_PATH + STUDY_ID_PATH + BULK_PATH)
     void addParticipantsToStudy( @Path( STUDY_ID )UUID studyID,
-                                 @Body Set<UUID> participantIds);
+                                 @Body Set<UUID> participantIds );
 
 //  removes bulk of participants from a study
     @DELETE( BASE + INSTALL_PATH + STUDY_ID_PATH + BULK_PATH)
     void removeParticipantsFromStudy( @Path( STUDY_ID )UUID studyID,
-                                      @Body Set<UUID> participantIds);
+                                      @Body Set<UUID> participantIds );
 }
