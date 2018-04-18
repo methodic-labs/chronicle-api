@@ -1,6 +1,7 @@
 package com.openlattice.chronicle;
-//import com.openlattice.edm.requests.MetadataUpdate;
 
+//import com.openlattice.edm.requests.MetadataUpdate;
+//TODO: Import Study and Person and Device
 
 import retrofit2.http.*;
 import java.util.UUID;
