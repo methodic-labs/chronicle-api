@@ -1,5 +1,6 @@
 package com.openlattice.chronicle;
 
+import com.google.common.collect.SetMultimap;
 import retrofit2.http.*;
 import java.util.UUID;
 
@@ -18,11 +19,13 @@ public interface ChronicleApi {
 
 //  sends phone data to openlattice, should this be PUT because it'll add not create?
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    void logData( @Path( STUDY_ID ) UUID studyId, @Path( PARTICIPANT_ID ) UUID participantId );
+    void logData( @Path( STUDY_ID ) UUID studyId,
+                  @Path( PARTICIPANT_ID ) UUID participantId,
+                  @Body  SetMultimap<UUID, Object> data );
 
 //  enrolls android device to participant via app
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID )
     void enrollDevice( @Path( STUDY_ID) UUID studyId,
-                         @Path( PARTICIPANT_ID ) UUID participantId,
-                         @Path( DEVICE_ID ) String deviceId);
+                       @Path( PARTICIPANT_ID ) UUID participantId,
+                       @Path( DEVICE_ID ) String deviceId);
 }
