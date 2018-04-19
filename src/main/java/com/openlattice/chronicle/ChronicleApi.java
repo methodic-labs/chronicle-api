@@ -18,7 +18,7 @@ public interface ChronicleApi {
 
 //  sends phone data to openlattice, should this be PUT because it'll add not create?
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    void logData( @Path( STUDY_ID ) String studyId, @Path( PARTICIPANT_ID ) String participantId );
+    void logData( @Path( STUDY_ID ) UUID studyId, @Path( PARTICIPANT_ID ) UUID participantId );
 
 //  enrolls android device to participant via app
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID )
