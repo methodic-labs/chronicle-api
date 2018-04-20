@@ -21,20 +21,22 @@ public interface ChronicleApi {
     String DEVICE_ID_PATH           = "/{" + DEVICE_ID + "}";
     String ENTITY_SET_ID_PATH       = "/{" + ENTITY_SET_ID + "}";
 
-//  sends log data to for specific studyID and participantID to a specific entitySetID
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENTITY_SET_ID_PATH )
+//  writes log data for specific studyID and participantID using a specific deviceId to a specific entitySetID
+    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH + ENTITY_SET_ID_PATH )
     void logData( @Path( STUDY_ID ) UUID studyId,
                   @Path( PARTICIPANT_ID ) UUID participantId,
+                  @Path( DEVICE_ID ) UUID deviceId,
                   @Path( ENTITY_SET_ID ) UUID entitySetId,
                   @Body  SetMultimap<UUID, Object> data );
 
-//  enrolls android device to participant
-    @POST( BASE + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
-    void enrollDevice( @Path( PARTICIPANT_ID ) UUID participantId,
+//  enrolls android device to participant in a specific study
+    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
+    void enrollDevice( @Path( STUDY_ID ) UUID studyId,
+                       @Path( PARTICIPANT_ID ) UUID participantId,
                        @Path( DEVICE_ID ) String deviceId );
 
-//  helper function that verifies the participant associates this device
-    @GET( BASE + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
+//  helper function that verifies the participant (in this study) associates this device
+    @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
     Boolean verifyDevice( @Path( STUDY_ID) UUID studyId,
                           @Path( PARTICIPANT_ID ) UUID participantId,
                           @Path( DEVICE_ID ) String deviceId );
