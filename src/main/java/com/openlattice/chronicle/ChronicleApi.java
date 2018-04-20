@@ -1,7 +1,6 @@
 package com.openlattice.chronicle;
 
 import com.google.common.collect.SetMultimap;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import retrofit2.http.*;
 import java.util.UUID;
 
@@ -30,12 +29,14 @@ public interface ChronicleApi {
                   @Body  SetMultimap<UUID, Object> data );
 
 //  enrolls android device to participant in a specific study
+//  we are leaving the study path in for now, because we don't know that participant's across studies are unique
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
     void enrollDevice( @Path( STUDY_ID ) UUID studyId,
                        @Path( PARTICIPANT_ID ) UUID participantId,
                        @Path( DEVICE_ID ) String deviceId );
 
 //  helper function that verifies the participant (in this study) associates this device
+//  we are leaving the study path in for now, because we don't know that participant's across studies are unique
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
     Boolean verifyDevice( @Path( STUDY_ID) UUID studyId,
                           @Path( PARTICIPANT_ID ) UUID participantId,
