@@ -21,11 +21,11 @@ public interface ChronicleApi {
     String DEVICE_ID_PATH           = "/{" + DEVICE_ID + "}";
     String ENTITY_SET_ID_PATH       = "/{" + ENTITY_SET_ID + "}";
 
-//  writes log data for specific studyID and participantID using a specific deviceId to a specific entitySetID
+//  writes log data for specific studyId and participantId using a specific deviceId to a specific entitySetId
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH + ENTITY_SET_ID_PATH )
     void logData( @Path( STUDY_ID ) UUID studyId,
                   @Path( PARTICIPANT_ID ) UUID participantId,
-                  @Path( DEVICE_ID ) UUID deviceId,
+                  @Path( DEVICE_ID ) String deviceId,
                   @Path( ENTITY_SET_ID ) UUID entitySetId,
                   @Body  SetMultimap<UUID, Object> data );
 
