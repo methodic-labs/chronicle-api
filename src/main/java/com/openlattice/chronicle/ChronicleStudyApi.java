@@ -31,7 +31,7 @@ public interface ChronicleStudyApi {
      * Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device, though
      * though that may change in the future.
      *
-     * @apiNote Due to privacy changes in Android the device id is not a reliable way of tracking devices.
+     * Due to privacy changes in Android the device id is not a reliable way of tracking devices.
      * we are leaving the study path in for now, because we don't know that participant's across studies are unique
      *
      * @param studyId The id of the study with which to enroll the partipant's datasource.
