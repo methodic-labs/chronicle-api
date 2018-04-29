@@ -56,7 +56,7 @@ tasks.withType(Checkstyle) {
 import io.swagger.codegen.DefaultGenerator
 import io.swagger.codegen.config.CodegenConfigurator
 
-def swaggerInput = "openlattice.yaml"
+def swaggerInput = "chronicle.yaml"
 def swaggerOutputDir = file('build/swagger')
 task swaggerDocs {
     inputs.file(swaggerInput)
