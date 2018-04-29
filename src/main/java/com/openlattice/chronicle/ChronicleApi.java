@@ -1,54 +1,44 @@
 package com.openlattice.chronicle;
 
 import com.google.common.collect.SetMultimap;
+import java.util.List;
 import retrofit2.http.*;
 
 import java.util.UUID;
 
 public interface ChronicleApi {
 
-    String SERVICE    = "/server";
+    String SERVICE    = "/chronicle";
     String CONTROLLER = "/data";
     String BASE       = SERVICE + CONTROLLER;
 
     String STUDY_ID       = "studyId";
     String PARTICIPANT_ID = "participantId";
-    String DEVICE_ID      = "deviceId";
+    String DATASOURCE_ID  = "datasourceId";
     String ENTITY_SET_ID  = "entitySetId";
 
     String STUDY_ID_PATH       = "/{" + STUDY_ID + "}";
     String PARTICIPANT_ID_PATH = "/{" + PARTICIPANT_ID + "}";
-    String DEVICE_ID_PATH      = "/{" + DEVICE_ID + "}";
+    String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_SET_ID_PATH  = "/{" + ENTITY_SET_ID + "}";
 
-    //  writes log data for specific studyId and participantId using a specific deviceId to a specific entitySetId
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH + ENTITY_SET_ID_PATH )
-    void logData(
+
+    /**
+     * Writes log data for specific studyId and participantId using a specific deviceId to a specific entitySetId.
+     *
+     * @param studyId The study id to associate the data with.
+     * @param participantId The participant id to associate the data with.
+     * @param deviceId The device id logging the data.
+     * @param data
+     * @return The total number of items persisted by the server.
+     *
+     */
+    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
+    Integer upload(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) UUID participantId,
-            @Path( DEVICE_ID ) String deviceId,
-            @Path( ENTITY_SET_ID ) UUID entitySetId,
-            @Body SetMultimap<UUID, Object> data );
+            @Path( DATASOURCE_ID ) String deviceId,
+            @Body List<SetMultimap<UUID, Object>> data );
 
-    //  enrolls android device to participant in a specific study
-    //  we are leaving the study path in for now, because we don't know that participant's across studies are unique
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
-    void enrollDevice(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId,
-            @Path( DEVICE_ID ) String deviceId );
 
-    //  helper function that verifies the participant (in this study) associates this device
-    //  we are leaving the study path in for now, because we don't know that participant's across studies are unique
-    @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DEVICE_ID_PATH )
-    Boolean verifyDevice(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId,
-            @Path( DEVICE_ID ) String deviceId );
-
-    //  helper function to verify the study associates this participant
-    @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Boolean verifyParticipant(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId );
 }
