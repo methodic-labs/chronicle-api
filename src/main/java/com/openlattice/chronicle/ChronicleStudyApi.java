@@ -58,7 +58,7 @@ public interface ChronicleStudyApi {
      */
     //  we are leaving the study path in for now, because we don't know that participant's across studies are unique
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
-    Boolean verifyDevice(
+    Boolean isKnownDatasource(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) UUID participantId,
             @Path( DATASOURCE_ID ) String datasourceId );
@@ -70,7 +70,7 @@ public interface ChronicleStudyApi {
      * @return
      */
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Boolean verifyParticipant(
+    Boolean isKnownParticipant(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) UUID participantId );
 }
