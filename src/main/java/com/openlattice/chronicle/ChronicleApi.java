@@ -36,7 +36,7 @@ public interface ChronicleApi {
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     Integer upload(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId,
+            @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String deviceId,
             @Body List<SetMultimap<UUID, Object>> data );
 
