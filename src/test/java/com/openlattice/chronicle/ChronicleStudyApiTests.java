@@ -51,7 +51,7 @@ public class ChronicleStudyApiTests {
                         RandomStringUtils.random( 10 ) ) ) );
         UUID id = chronicleStudyApi
                 .enrollSource( UUID.randomUUID(),
-                        UUID.randomUUID(),
+                        RandomStringUtils.randomAlphanumeric( 16 ),
                         RandomStringUtils.randomAlphanumeric( 10 ),
                         Optional.of( datasource ) );
         Assert.assertNotNull( "Returned id cannot be null.", id );

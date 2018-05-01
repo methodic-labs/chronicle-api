@@ -41,7 +41,7 @@ public class ChronicleApiTests {
         List<SetMultimap<UUID, Object>> data = ChronicleTestUtils.mockData( RandomUtils.nextInt( 10, 64 ) );
         final int uploadedCount = chronicleApi.upload(
                 UUID.randomUUID(),
-                UUID.randomUUID(),
+                RandomStringUtils.randomAlphanumeric( 16 ),
                 RandomStringUtils.randomAlphanumeric( 16 ),
                 data );
         Assert.assertEquals( "Uploaded count should match number of items uploaded.", data.size(), uploadedCount );
