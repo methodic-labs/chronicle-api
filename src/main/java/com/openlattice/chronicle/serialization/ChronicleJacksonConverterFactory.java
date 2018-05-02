@@ -33,9 +33,9 @@ public class ChronicleJacksonConverterFactory extends Factory {
 
     public ChronicleJacksonConverterFactory() {
         this( new ObjectMapper()
-                .registerModule( new GuavaModule() )
+//                .registerModule( new GuavaModule() )
                 .registerModule( new JodaModule() )
-                .registerModule( new AfterburnerModule() ) );
+//                .registerModule( new AfterburnerModule() ) );
     }
 
     public ChronicleJacksonConverterFactory( ObjectMapper mapper ) {

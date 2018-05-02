@@ -67,7 +67,7 @@ task swaggerDocs {
         config.setOutputDir(swaggerOutputDir.path)
         config.setLang('java')
         config.setAdditionalProperties([
-                'dateLibrary'   : 'java8'
+                'dateLibrary': 'java8'
         ])
 //        config.setImportMappings([
 //                'Dog': 'io.swagger.petstore.client.model.Dog'
@@ -85,7 +85,7 @@ task swaggerJava {
         config.setOutputDir(swaggerOutputDir.path)
         config.setLang('java')
         config.setAdditionalProperties([
-                'dateLibrary'   : 'java8'
+                'dateLibrary': 'java8'
         ])
         config.setImportMappings([
                 'Dog': 'io.swagger.petstore.client.model.Dog'
@@ -107,13 +107,10 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile "org.apache.commons:commons-lang3:${commonsLang_version}"
     compile "commons-io:commons-io:${commonsio_version}"
-
+    compile 'com.google.guava:guava:22.0-android'
     compile "com.fasterxml.jackson.core:jackson-core:${jackson_version}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
-    compile "com.fasterxml.jackson.datatype:jackson-datatype-guava:${jackson_version}"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jackson_version}"
-    compile "com.fasterxml.jackson.module:jackson-module-afterburner:${jackson_version}"
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
 
     testCompile "junit:junit:${junit_version}"
 
