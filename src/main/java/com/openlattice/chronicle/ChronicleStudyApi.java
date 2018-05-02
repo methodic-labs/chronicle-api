@@ -1,13 +1,11 @@
 package com.openlattice.chronicle;
 
-import com.google.common.collect.SetMultimap;
+import com.google.common.base.Optional;
 import com.openlattice.chronicle.sources.Datasource;
-import java.util.Optional;
 import java.util.UUID;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ChronicleStudyApi {
@@ -42,7 +40,7 @@ public interface ChronicleStudyApi {
      * @return The internal chronicle id for a device. It can be used to track a single device across resets, app uninstalls,
      * etc.
      */
-    @PUT( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
+    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     UUID enrollSource(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,

@@ -28,7 +28,7 @@ apply from: "https://raw.githubusercontent.com/openlattice/gradles/master/openla
 apply plugin: 'kotlin'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
-
+targetCompatibility = JavaVersion.VERSION_1_8
 def versions = [
         checkstyle: '7.4',
 ]
@@ -99,18 +99,23 @@ task swaggerJava {
 clean.doFirst {
     delete(swaggerOutputDir)
 }
-
+ext.jackson_version = '2.6.5'
 dependencies {
     compile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
 
     compile "com.squareup.retrofit2:retrofit:${retrofit2_version}"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
     compile "org.apache.commons:commons-lang3:${commonsLang_version}"
     compile "commons-io:commons-io:${commonsio_version}"
     compile 'com.google.guava:guava:22.0-android'
+
     compile "com.fasterxml.jackson.core:jackson-core:${jackson_version}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jackson_version}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-guava:${jackson_version}"
+    compile "com.fasterxml.jackson.module:jackson-module-afterburner:${jackson_version}"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
 
     testCompile "junit:junit:${junit_version}"
 
@@ -140,11 +145,11 @@ eclipse {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "1.7"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "1.7"
     }
 }

@@ -12,16 +12,18 @@ import static com.openlattice.chronicle.ChronicleFields.SDK_VERSION;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.google.common.base.Optional;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Represents the information we collect about each device.
  *
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include= JsonTypeInfo.As.PROPERTY, property="@class")
 public class AndroidDevice implements Datasource {
     private final String              device;
     private final String              model;
@@ -52,7 +54,7 @@ public class AndroidDevice implements Datasource {
         this.sdkVersion = sdkVersion;
         this.product = product;
         this.deviceId = deviceId;
-        this.additionalInfo = additionalInfo.orElseGet( HashMap::new );
+        this.additionalInfo = additionalInfo.or( HashMap::new );
     }
 
     @Override public boolean equals( Object o ) {

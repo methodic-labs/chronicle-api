@@ -6,12 +6,12 @@ import static com.openlattice.chronicle.ChronicleTestUtils.createHttpClient;
 import static com.openlattice.chronicle.ChronicleTestUtils.createRetrofitAdapter;
 import static com.openlattice.chronicle.ChronicleTestUtils.quote;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.net.HttpHeaders;
 import com.openlattice.chronicle.sources.AndroidDevice;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor.Chain;
