@@ -45,7 +45,7 @@ public interface ChronicleStudyApi {
     @PUT( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     UUID enrollSource(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId,
+            @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId,
             @Body Optional<Datasource> datasource );
 
@@ -60,7 +60,7 @@ public interface ChronicleStudyApi {
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     Boolean isKnownDatasource(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId,
+            @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId );
 
     /**
@@ -72,5 +72,5 @@ public interface ChronicleStudyApi {
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Boolean isKnownParticipant(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId );
+            @Path( PARTICIPANT_ID ) String participantId );
 }
