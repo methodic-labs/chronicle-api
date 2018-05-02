@@ -21,9 +21,7 @@
 package com.openlattice.chronicle.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.openlattice.chronicle.serialization.ChronicleCallAdapterFactory;
 import com.openlattice.chronicle.serialization.ChronicleJacksonConverterFactory;
 import java.util.concurrent.TimeUnit;
