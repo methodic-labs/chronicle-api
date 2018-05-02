@@ -78,7 +78,7 @@ public class ChronicleStudyApiTests {
                 .request( request );
 
         switch ( method ) {
-            case "PUT":
+            case "POST":
                 return responseBuilder
                         .header( HttpHeaders.CONTENT_TYPE, JSON_MIME_TYPE )
                         .body( ResponseBody
