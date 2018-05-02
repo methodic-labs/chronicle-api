@@ -37,9 +37,9 @@ public class RetrofitBuilders {
     public static final ObjectMapper mapper = new ObjectMapper();
 
     static {
-        mapper.registerModule( new GuavaModule() );
+//        mapper.registerModule( new GuavaModule() );
         mapper.registerModule( new JodaModule() );
-        mapper.registerModule( new AfterburnerModule() );
+//        mapper.registerModule( new AfterburnerModule() );
     }
 
     public static OkHttpClient.Builder okHttpClient() {
