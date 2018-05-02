@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import javax.ws.rs.NotSupportedException;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor.Chain;
 import okhttp3.MediaType;
@@ -94,7 +93,7 @@ public class ChronicleStudyApiTests {
             default:
                 String errMsg = "Unsupported method: " + method;
                 logger.error( errMsg );
-                throw new NotSupportedException( errMsg );
+                throw new UnsupportedOperationException( errMsg );
 
         }
     }

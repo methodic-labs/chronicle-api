@@ -3,12 +3,11 @@ package com.openlattice.chronicle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
-import com.openlattice.rhizome.proxy.RetrofitBuilders;
+import com.openlattice.chronicle.util.RetrofitBuilders;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
@@ -62,10 +61,8 @@ public final class ChronicleTestUtils {
 
     static {
         mapper = new ObjectMapper();
-        mapper.registerModule( new Jdk8Module() );
-        mapper.registerModule( new JavaTimeModule() );
         mapper.registerModule( new GuavaModule() );
-        //        mapper.registerModule( new JodaModule() );
+        mapper.registerModule( new JodaModule() );
         mapper.registerModule( new AfterburnerModule() );
         mapper.configure( SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false );
     }
@@ -104,7 +101,7 @@ public final class ChronicleTestUtils {
 
     public static Retrofit createRetrofitAdapter( OkHttpClient httpClient ) {
         return RetrofitBuilders.decorateWithRhizomeFactories( RetrofitBuilders
-                .createBaseRhizomeRetrofitBuilder( "http://localhost:8081/rhizome/api/", httpClient ) )
+                .createBaseChronicleRetrofitBuilder( "http://localhost:8081/rhizome/api/", httpClient ) )
                 .build();
     }
 

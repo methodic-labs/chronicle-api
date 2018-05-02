@@ -101,28 +101,30 @@ clean.doFirst {
 }
 
 dependencies {
+    compile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
 
     compile "com.squareup.retrofit2:retrofit:${retrofit2_version}"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.apache.commons:commons-lang3:${commonsLang_version}"
+    compile "commons-io:commons-io:${commonsio_version}"
 
-    if (project.hasProperty('developmentMode') && project.developmentMode) {
-        logger.quiet(project.name + " using project dependencies.")
-        compile(project(path: ":rhizome-client"))
-        testCompile(project(path: ":rhizome-client", configuration: "tests"))
-        testCompile(project(path: ":rhizome", configuration: "tests"))
-    } else {
-        logger.quiet(project.name + " using jar dependencies.")
-        compile "com.openlattice:rhizome-client:${rhizome_client_version}"
-        testCompile "com.openlattice:rhizome:${rhizome_version}:tests"
-        testCompile "com.openlattice:rhizome-client:${rhizome_client_version}:tests"
-    }
+    compile "com.fasterxml.jackson.core:jackson-core:${jackson_version}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-guava:${jackson_version}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jackson_version}"
+    compile "com.fasterxml.jackson.module:jackson-module-afterburner:${jackson_version}"
+    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
+
+    testCompile "junit:junit:${junit_version}"
 
     /*
      * TESTING
      */
-    testCompile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
-    testCompile "org.apache.commons:commons-lang3:${commonsLang_version}"
-    testCompile "junit:junit:${junit_version}"
+
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j_version}"
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j_version}"
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j_version}"
+    testCompile group: 'org.apache.logging.log4j', name: 'log4j-web', version: "${log4j_version}"
     testCompile("org.mockito:mockito-all:${mockito_version}") {
         exclude module: 'hamcrest'
         exclude module: 'hamcrest-core'
