@@ -7,8 +7,10 @@ import static com.openlattice.chronicle.ChronicleTestUtils.mapper;
 import static com.openlattice.chronicle.ChronicleTestUtils.readBody;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.google.common.collect.SetMultimap;
 import com.google.common.net.HttpHeaders;
+import com.openlattice.chronicle.util.RetrofitBuilders;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +36,9 @@ public class ChronicleApiTests {
     private static final Logger logger = LoggerFactory.getLogger( ChronicleApiTests.class );
 
     private static ChronicleApi chronicleApi;
+    static {
+        RetrofitBuilders.getMapper().registerModule( new GuavaModule() );
+    }
 
     @Test
     public void testSubmitData() {

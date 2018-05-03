@@ -23,7 +23,6 @@ package com.openlattice.chronicle.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.openlattice.chronicle.serialization.ChronicleCallAdapterFactory;
 import com.openlattice.chronicle.serialization.ChronicleJacksonConverterFactory;
 import java.util.concurrent.TimeUnit;
@@ -39,7 +38,7 @@ public class RetrofitBuilders {
     static {
         mapper.registerModule( new GuavaModule() );
         mapper.registerModule( new JodaModule() );
-        mapper.registerModule( new AfterburnerModule() );
+//        mapper.registerModule( new AfterburnerModule() );
     }
 
     public static OkHttpClient.Builder okHttpClient() {
@@ -47,6 +46,10 @@ public class RetrofitBuilders {
                 .readTimeout( 0, TimeUnit.MILLISECONDS )
                 .writeTimeout( 0, TimeUnit.MILLISECONDS )
                 .connectTimeout( 0, TimeUnit.MILLISECONDS );
+    }
+
+    public static ObjectMapper getMapper() {
+        return mapper;
     }
 
     public static final Retrofit.Builder decorateWithRhizomeFactories( Retrofit.Builder builder ) {

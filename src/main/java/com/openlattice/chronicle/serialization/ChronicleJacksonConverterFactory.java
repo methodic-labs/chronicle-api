@@ -1,7 +1,6 @@
 package com.openlattice.chronicle.serialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.google.common.base.Charsets;
@@ -30,13 +29,6 @@ public class ChronicleJacksonConverterFactory extends Factory {
 
     private static final Logger logger = LoggerFactory.getLogger( ChronicleJacksonConverterFactory.class );
     private final ObjectMapper objectMapper;
-
-    public ChronicleJacksonConverterFactory() {
-        this( new ObjectMapper()
-                .registerModule( new GuavaModule() )
-                .registerModule( new JodaModule() )
-                .registerModule( new AfterburnerModule() ) );
-    }
 
     public ChronicleJacksonConverterFactory( ObjectMapper mapper ) {
         this.objectMapper = mapper;
