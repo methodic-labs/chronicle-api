@@ -1,8 +1,6 @@
 package com.openlattice.chronicle.serialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.google.common.base.Charsets;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
