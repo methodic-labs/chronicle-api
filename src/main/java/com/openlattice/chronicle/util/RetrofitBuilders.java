@@ -21,6 +21,7 @@
 package com.openlattice.chronicle.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.openlattice.chronicle.serialization.ChronicleCallAdapterFactory;
@@ -38,6 +39,7 @@ public class RetrofitBuilders {
     static {
         mapper.registerModule( new GuavaModule() );
         mapper.registerModule( new JodaModule() );
+        mapper.configure( SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false );
 //        mapper.registerModule( new AfterburnerModule() );
     }
 
