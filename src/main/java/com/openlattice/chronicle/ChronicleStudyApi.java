@@ -2,11 +2,11 @@ package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
 import com.openlattice.chronicle.sources.Datasource;
+
 import java.util.UUID;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
+
+import com.openlattice.chronicle.sources.EntitySetData;
+import retrofit2.http.*;
 
 public interface ChronicleStudyApi {
 
@@ -19,11 +19,11 @@ public interface ChronicleStudyApi {
     String DATASOURCE_ID  = "datasourceId";
     String ENTITY_SET_ID  = "entitySetId";
 
+    String DATA_PATH           = "/data";
     String STUDY_ID_PATH       = "/{" + STUDY_ID + "}";
     String PARTICIPANT_ID_PATH = "/{" + PARTICIPANT_ID + "}";
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_SET_ID_PATH  = "/{" + ENTITY_SET_ID + "}";
-
 
     /**
      * Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device, though
@@ -32,11 +32,10 @@ public interface ChronicleStudyApi {
      * Due to privacy changes in Android the device id is not a reliable way of tracking devices.
      * we are leaving the study path in for now, because we don't know that participant's across studies are unique
      *
-     * @param studyId The id of the study with which to enroll the partipant's datasource.
+     * @param studyId       The id of the study with which to enroll the partipant's datasource.
      * @param participantId The participant id which the device will be associated with.
-     * @param datasourceId A datasource specific id.
-     * @param datasource Datasource specific information.
-     *
+     * @param datasourceId  A datasource specific id.
+     * @param datasource    Datasource specific information.
      * @return The internal chronicle id for a device. It can be used to track a single device across resets, app uninstalls,
      * etc.
      */
@@ -49,6 +48,7 @@ public interface ChronicleStudyApi {
 
     /**
      * Verifies that a participant in a study is associated with a specific data source.
+     *
      * @param studyId
      * @param participantId
      * @param datasourceId
@@ -63,6 +63,7 @@ public interface ChronicleStudyApi {
 
     /**
      * Verify that a participants is part of this study.
+     *
      * @param studyId
      * @param participantId
      * @return
@@ -71,4 +72,14 @@ public interface ChronicleStudyApi {
     Boolean isKnownParticipant(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId );
+
+    /**
+     * Downloads CSV containing all data collected for a specified study.
+     *
+     * @param studyId The id of the study to download data for.
+     * @param token The requesting user's JWT token.
+     * @return A CSV containing data for all participants of the requested study.
+     */
+    @GET( BASE + STUDY_ID_PATH + DATA_PATH )
+    EntitySetData getAllStudyData( @Path( STUDY_ID ) UUID studyId, String token );
 }
