@@ -25,6 +25,7 @@ public interface ChronicleApi {
     String ENTITY_SET_ID_PATH  = "/{" + ENTITY_SET_ID + "}";
 
     String EDM_PATH = "/edm";
+    String STATUS_PATH = "/status";
 
 
     /**
@@ -54,5 +55,6 @@ public interface ChronicleApi {
     @POST( BASE + EDM_PATH )
     Map<String, UUID> getPropertyTypeIds( @Body Set<String> propertyTypeFqns );
 
-
+    @GET( BASE + STATUS_PATH )
+    Boolean isRunning();
 }
