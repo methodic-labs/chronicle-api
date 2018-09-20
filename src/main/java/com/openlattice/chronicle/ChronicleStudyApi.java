@@ -83,10 +83,11 @@ public interface ChronicleStudyApi {
             @Path( PARTICIPANT_ID ) String participantId );
 
     /**
-     * Downloads a CSV file containing all participant data (including neighbor data)
+     * Returns a file download containing all participant data (including neighbor data).
      *
      * @param studyId             - the study id
      * @param participantEntityId - the participant entity id
+     * @param fileType            - the type of file (csv, json) to return as the download
      */
     @POST( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_ID_PATH )
     Iterable<SetMultimap<String, Object>> getAllParticipantData(
