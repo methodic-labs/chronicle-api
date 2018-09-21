@@ -19,7 +19,7 @@ public interface ChronicleStudyApi {
     String BASE       = SERVICE + CONTROLLER;
 
     String DATASOURCE_ID  = "datasourceId";
-    String ENTITY_ID      = "entityId";
+    String ENTITY_KEY_ID  = "entityKeyId";
     String ENTITY_SET_ID  = "entitySetId";
     String FILE_TYPE      = "fileType";
     String PARTICIPANT_ID = "participantId";
@@ -29,7 +29,7 @@ public interface ChronicleStudyApi {
     String PARTICIPANT_PATH = "/participant";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
-    String ENTITY_ID_PATH      = "/{" + ENTITY_ID + "}";
+    String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
     String ENTITY_SET_ID_PATH  = "/{" + ENTITY_SET_ID + "}";
     String PARTICIPANT_ID_PATH = "/{" + PARTICIPANT_ID + "}";
     String STUDY_ID_PATH       = "/{" + STUDY_ID + "}";
@@ -85,14 +85,14 @@ public interface ChronicleStudyApi {
     /**
      * Returns a file download containing all participant data (including neighbor data).
      *
-     * @param studyId             - the study id
-     * @param participantEntityId - the participant entity id
-     * @param fileType            - the type of file (csv, json) to return as the download
+     * @param studyId                - the study id
+     * @param participantEntityKeyId - the participant entity key id
+     * @param fileType               - the type of file (csv, json) to return as the download
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_ID_PATH )
+    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
     Iterable<SetMultimap<String, Object>> getAllParticipantData(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_ID ) UUID participantEntityId,
+            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
             @Query( FILE_TYPE ) FileType fileType
     );
 }
