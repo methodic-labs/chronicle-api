@@ -1,7 +1,6 @@
 package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
 import retrofit2.http.Body;
@@ -10,6 +9,8 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public interface ChronicleStudyApi {
@@ -90,7 +91,7 @@ public interface ChronicleStudyApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      */
     @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
-    Iterable<SetMultimap<String, Object>> getAllParticipantData(
+    Iterable<Map<String, Set<Object>>> getAllParticipantData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
             @Query( FILE_TYPE ) FileType fileType
