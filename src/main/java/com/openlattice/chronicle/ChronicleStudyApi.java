@@ -59,10 +59,10 @@ public interface ChronicleStudyApi {
     /**
      * Verifies that a participant in a study is associated with a specific data source.
      *
-     * @param studyId
-     * @param participantId
-     * @param datasourceId
-     * @return
+     * @param studyId       - the study id
+     * @param participantId - the participant id
+     * @param datasourceId  - the datasource (device) id
+     * @return Whether or not the datasource is tied to this participant in this study
      */
     //  we are leaving the study path in for now, because we don't know that participant's across studies are unique
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
@@ -74,9 +74,9 @@ public interface ChronicleStudyApi {
     /**
      * Verify that a participants is part of this study.
      *
-     * @param studyId
-     * @param participantId
-     * @return
+     * @param studyId       - the study id
+     * @param participantId - the participant id
+     * @return Whether or not this participant is in this study
      */
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Boolean isKnownParticipant(
@@ -89,6 +89,7 @@ public interface ChronicleStudyApi {
      * @param studyId                - the study id
      * @param participantEntityKeyId - the participant entity key id
      * @param fileType               - the type of file (csv, json) to return as the download
+     * @return All participant data
      */
     @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantData(
