@@ -34,7 +34,7 @@ public interface ChronicleApi {
      * @param studyId The study id to associate the data with.
      * @param participantId The participant id to associate the data with.
      * @param deviceId The device id logging the data.
-     * @param data
+     * @param data The data / entities to write
      * @return The total number of items persisted by the server.
      *
      */
