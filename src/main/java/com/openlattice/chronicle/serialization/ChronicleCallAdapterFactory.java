@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import org.apache.commons.io.IOUtils;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
@@ -23,7 +24,9 @@ public class ChronicleCallAdapterFactory extends CallAdapter.Factory {
                 return returnType;
             }
 
-            @Override public Object adapt( Call call ) {
+            @Override
+            @Nullable
+            public Object adapt( Call call ) {
                 try {
                     Response response = call.execute();
                     if ( response.code() >= 400 ) {
