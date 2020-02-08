@@ -129,8 +129,8 @@ public interface ChronicleStudyApi {
      */
     @POST ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
     public Integer updateAppsUsageAssociationData(
-            @Path  (STUDY_ID) UUID studyId,
-            @Path (PARTICIPANT_ID) String participantId,
+            @PathVariable  (STUDY_ID) UUID studyId,
+            @PathVariable (PARTICIPANT_ID) String participantId,
             @RequestBody Set<NeighborEntityDetails> neighborEntityDetails
     );
 

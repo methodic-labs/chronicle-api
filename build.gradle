@@ -126,7 +126,7 @@ dependencies {
         compile "com.openlattice:api:${api_version}"
         compile "com.openlattice:rhizome:${rhizome_version}"
     }
-    
+
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
 
     testCompile "junit:junit:${junit_version}"
