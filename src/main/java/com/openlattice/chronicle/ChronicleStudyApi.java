@@ -3,12 +3,16 @@ package com.openlattice.chronicle;
 import com.google.common.base.Optional;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
+import com.openlattice.data.requests.NeighborEntityDetails;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -29,6 +33,7 @@ public interface ChronicleStudyApi {
     String DATA_PATH        = "/data";
     String PARTICIPANT_PATH = "/participant";
     String PREPROCESSED_PATH = "/preprocessed";
+    String APPS = "/apps";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -113,4 +118,32 @@ public interface ChronicleStudyApi {
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
             @Query( FILE_TYPE ) FileType fileType
     );
+
+    /**
+     * Update chronicle_used_by associations when apps usage survey is submitted
+     *
+     * @param studyId               - the study id
+     * @param participantId         - participantId
+     * @param neighborEntityDetails - neighbor entities of participant
+     * @return number of updated associations
+     */
+    @POST ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    public Integer updateAppsUsageAssociationData(
+            @Path  (STUDY_ID) UUID studyId,
+            @Path (PARTICIPANT_ID) String participantId,
+            @RequestBody Set<NeighborEntityDetails> neighborEntityDetails
+    );
+
+    /**
+      * Get all apps usage data associated with a participant filtered by current date
+      * @param studyId              - the studyId
+      * @param participantId        - the participant
+      * @return a list of neighbor entities
+      */
+    @GET ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS)
+    List<NeighborEntityDetails> getParticipantAppsUsageData(
+            @PathVariable(STUDY_ID) UUID studyId,
+            @PathVariable (PARTICIPANT_ID) String participantId
+    );
+
 }
