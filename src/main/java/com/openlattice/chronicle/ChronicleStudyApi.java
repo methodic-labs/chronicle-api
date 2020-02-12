@@ -123,7 +123,7 @@ public interface ChronicleStudyApi {
      *
      * @param studyId               - the study id
      * @param participantId         - participantId
-     * @param associationDetails - mapping from association EKID -> association entity data
+     * @param associationDetails - mapping from association EKID to association entity data
      * @return number of updated associations
      */
     @POST ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
