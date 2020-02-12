@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
 import com.openlattice.data.requests.NeighborEntityDetails;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -124,14 +123,14 @@ public interface ChronicleStudyApi {
      *
      * @param studyId               - the study id
      * @param participantId         - participantId
-     * @param neighborEntityDetails - neighbor entities of participant
+     * @param associationDetails - mapping from association EKID -> association entity data
      * @return number of updated associations
      */
     @POST ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
     public Integer updateAppsUsageAssociationData(
-            @PathVariable  (STUDY_ID) UUID studyId,
-            @PathVariable (PARTICIPANT_ID) String participantId,
-            @RequestBody Set<NeighborEntityDetails> neighborEntityDetails
+            @Path  (STUDY_ID) UUID studyId,
+            @Path (PARTICIPANT_ID) String participantId,
+            @RequestBody Map<UUID, Map<UUID, Set<Object>>> associationDetails
     );
 
     /**
@@ -142,8 +141,7 @@ public interface ChronicleStudyApi {
       */
     @GET ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS)
     List<NeighborEntityDetails> getParticipantAppsUsageData(
-            @PathVariable(STUDY_ID) UUID studyId,
-            @PathVariable (PARTICIPANT_ID) String participantId
+            @Path(STUDY_ID) UUID studyId,
+            @Path (PARTICIPANT_ID) String participantId
     );
-
 }
