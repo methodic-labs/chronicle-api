@@ -1,9 +1,14 @@
+import com.github.spotbugs.SpotBugsTask
+
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
         classpath('io.swagger:swagger-codegen:3.0.0-rc0')
+    }
+    configurations.classpath {
+        exclude group: 'com.google.guava', module: 'guava'
     }
 }
 
@@ -16,6 +21,7 @@ plugins {
     id 'checkstyle'
     id "maven-publish"
     id 'signing'
+    id 'com.github.spotbugs' version '3.0.0'
 }
 
 description = "Chronicle REST APIs"
@@ -34,8 +40,13 @@ jacoco {
     toolVersion = "0.8.2"
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_10
-targetCompatibility = JavaVersion.VERSION_1_10
+spotbugs {
+    reportLevel = 'high'
+    toolVersion = "${spotbugs_annotations_version}"
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 def versions = [
         checkstyle: '7.4',
 ]
@@ -44,7 +55,7 @@ checkstyle {
     toolVersion = "${versions.checkstyle}"
 }
 
-tasks.withType(FindBugs) {
+tasks.withType(SpotBugsTask) {
     reports {
         xml.enabled = false
         html.enabled = true
@@ -108,6 +119,10 @@ clean.doFirst {
 }
 ext.jackson_version = '2.6.5'
 dependencies {
+    spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
+    compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs_annotations_version}"
+    testCompileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs_annotations_version}"
+
     compile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
 
     compile "com.squareup.retrofit2:retrofit:${retrofit2_version}"
@@ -162,11 +177,11 @@ eclipse {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.11"
+        jvmTarget = "1.7"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.11"
+        jvmTarget = "1.7"
     }
 }
