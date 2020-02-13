@@ -1,9 +1,9 @@
 package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
-import com.openlattice.data.requests.NeighborEntityDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -140,7 +140,7 @@ public interface ChronicleStudyApi {
       * @return a list of neighbor entities
       */
     @GET ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS)
-    List<NeighborEntityDetails> getParticipantAppsUsageData(
+    List<SetMultimap<UUID, Object>> getParticipantAppsUsageData(
             @Path(STUDY_ID) UUID studyId,
             @Path (PARTICIPANT_ID) String participantId
     );
