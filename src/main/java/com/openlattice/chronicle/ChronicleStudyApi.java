@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
-import org.springframework.web.bind.annotation.RequestBody;
 import retrofit2.http.*;
 
 import java.util.List;
@@ -29,6 +28,7 @@ public interface ChronicleStudyApi {
     String PARTICIPANT_PATH  = "/participant";
     String PREPROCESSED_PATH = "/preprocessed";
     String APPS              = "/apps";
+    String NOTIFICATIONS     = "/notifications";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -126,7 +126,7 @@ public interface ChronicleStudyApi {
     public Integer updateAppsUsageAssociationData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
-            @RequestBody Map<UUID, Map<UUID, Set<Object>>> associationDetails
+            @Body Map<UUID, Map<UUID, Set<Object>>> associationDetails
     );
 
     /**
@@ -140,5 +140,16 @@ public interface ChronicleStudyApi {
     List<SetMultimap<UUID, Object>> getParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId
+    );
+
+    /**
+     * Verify that daily push notifications are enabled for participant devices associated with a study
+     *
+     * @param studyId - study id
+     * @return true if all notifications are enabled
+     */
+    @GET( BASE + STUDY_ID_PATH + NOTIFICATIONS )
+    Boolean isNotificationsEnabled(
+            @Path( STUDY_ID ) UUID studyId
     );
 }

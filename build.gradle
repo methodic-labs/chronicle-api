@@ -108,15 +108,6 @@ clean.doFirst {
 }
 ext.jackson_version = '2.6.5'
 dependencies {
-    if (project.hasProperty('developmentMode') && project.developmentMode) {
-        logger.quiet(project.name + " using project dependencies.")
-        compile project(":rhizome")
-        compile project(":api")
-    } else {
-        logger.quiet(project.name + " using jar dependencies.")
-        compile "com.openlattice:api:${api_version}"
-        compile "com.openlattice:rhizome:${rhizome_version}"
-    }
     compile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
 
     compile "com.squareup.retrofit2:retrofit:${retrofit2_version}"
