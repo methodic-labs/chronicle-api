@@ -141,9 +141,11 @@ dependencies {
     }
 
     if (project.hasProperty('developmentMode') && project.developmentMode) {
+        logger.quiet(project.name + " using project dependencies")
         compile project(":rhizome")
         compile project(":api")
     } else{
+        logger.quiet(project.name + " using jar dependencies")
         compile "com.openlattice:api:${api_version}"
         compile "com.openlattice:rhizome:${rhizome_version}"
     }
