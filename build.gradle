@@ -106,6 +106,7 @@ task swaggerJava {
 clean.doFirst {
     delete(swaggerOutputDir)
 }
+ext.odata_version = '4.2.0'
 ext.jackson_version = '2.6.5'
 dependencies {
     compile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
@@ -123,6 +124,11 @@ dependencies {
     compile ("com.fasterxml.jackson.datatype:jackson-datatype-guava:${jackson_version}") {
         exclude module: 'guava'
     }
+
+    compile "org.apache.olingo:odata-server-api:${odata_version}"
+    compile "org.apache.olingo:odata-server-core:${odata_version}"
+    compile "org.apache.olingo:odata-commons-api:${odata_version}"
+    compile "org.apache.olingo:odata-commons-core:${odata_version}"
 
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
 

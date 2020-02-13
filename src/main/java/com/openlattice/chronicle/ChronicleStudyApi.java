@@ -2,6 +2,7 @@ package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
+import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
 import retrofit2.http.*;
@@ -137,7 +138,7 @@ public interface ChronicleStudyApi {
      * @return a list of neighbor entities and associations
      */
     @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
-    List<SetMultimap<UUID, Object>> getParticipantAppsUsageData(
+    List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId
     );
