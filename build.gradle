@@ -1,14 +1,9 @@
-import com.github.spotbugs.SpotBugsTask
-
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
         classpath('io.swagger:swagger-codegen:3.0.0-rc0')
-    }
-    configurations.classpath {
-        exclude group: 'com.google.guava', module: 'guava'
     }
 }
 
@@ -19,9 +14,9 @@ plugins {
     id 'idea'
     id 'jacoco'
     id 'checkstyle'
+    id 'findbugs'
     id "maven-publish"
     id 'signing'
-    id 'com.github.spotbugs' version '3.0.0'
 }
 
 description = "Chronicle REST APIs"
@@ -34,20 +29,8 @@ ext.developerConnectionUrl = 'scm:git:https://github.com/openlattice/chronicle-a
 apply from: "https://raw.githubusercontent.com/openlattice/gradles/master/openlattice.gradle"
 apply plugin: 'kotlin'
 
-apply plugin: 'jacoco'
-
-jacoco {
-    toolVersion = "0.8.2"
-}
-
-spotbugs {
-    reportLevel = 'high'
-    toolVersion = "${spotbugs_annotations_version}"
-}
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
 def versions = [
         checkstyle: '7.4',
 ]
@@ -56,7 +39,7 @@ checkstyle {
     toolVersion = "${versions.checkstyle}"
 }
 
-tasks.withType(SpotBugsTask) {
+tasks.withType(FindBugs) {
     reports {
         xml.enabled = false
         html.enabled = true
@@ -120,10 +103,6 @@ clean.doFirst {
 }
 ext.jackson_version = '2.6.5'
 dependencies {
-    spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
-    compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs_annotations_version}"
-    testCompileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs_annotations_version}"
-
     compile group: "org.slf4j", name: "slf4j-api", version: "${slf4j_version}"
 
     compile "com.squareup.retrofit2:retrofit:${retrofit2_version}"
@@ -138,14 +117,6 @@ dependencies {
     compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jackson_version}"
     compile ("com.fasterxml.jackson.datatype:jackson-datatype-guava:${jackson_version}") {
         exclude module: 'guava'
-    }
-
-    if (project.hasProperty('developmentMode') && project.developmentMode) {
-        logger.quiet(project.name + " using project dependencies")
-        compile project(":rhizome")
-    } else{
-        logger.quiet(project.name + " using jar dependencies")
-        compile "com.openlattice:rhizome:${rhizome_version}"
     }
 
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
@@ -178,11 +149,11 @@ eclipse {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "1.7"
     }
 }
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "1.7"
     }
 }

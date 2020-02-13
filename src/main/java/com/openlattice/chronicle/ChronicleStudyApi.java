@@ -5,11 +5,7 @@ import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
 import org.springframework.web.bind.annotation.RequestBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.util.List;
 import java.util.Map;
@@ -29,10 +25,10 @@ public interface ChronicleStudyApi {
     String PARTICIPANT_ID = "participantId";
     String STUDY_ID       = "studyId";
 
-    String DATA_PATH        = "/data";
-    String PARTICIPANT_PATH = "/participant";
+    String DATA_PATH         = "/data";
+    String PARTICIPANT_PATH  = "/participant";
     String PREPROCESSED_PATH = "/preprocessed";
-    String APPS = "/apps";
+    String APPS              = "/apps";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -121,27 +117,28 @@ public interface ChronicleStudyApi {
     /**
      * Update chronicle_used_by associations when apps usage survey is submitted
      *
-     * @param studyId               - the study id
-     * @param participantId         - participantId
+     * @param studyId            - the study id
+     * @param participantId      - participantId
      * @param associationDetails - mapping from association EKID to association entity data
      * @return number of updated associations
      */
-    @POST ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    @POST( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
     public Integer updateAppsUsageAssociationData(
-            @Path  (STUDY_ID) UUID studyId,
-            @Path (PARTICIPANT_ID) String participantId,
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
             @RequestBody Map<UUID, Map<UUID, Set<Object>>> associationDetails
     );
 
     /**
-      * Get all apps usage data associated with a participant filtered by current date
-      * @param studyId              - the studyId
-      * @param participantId        - the participant
-      * @return a list of neighbor entities
-      */
-    @GET ( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS)
+     * Get all apps usage data associated with a participant filtered by current date
+     *
+     * @param studyId       - the studyId
+     * @param participantId - the participant
+     * @return a list of neighbor entities and associations
+     */
+    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
     List<SetMultimap<UUID, Object>> getParticipantAppsUsageData(
-            @Path(STUDY_ID) UUID studyId,
-            @Path (PARTICIPANT_ID) String participantId
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId
     );
 }
