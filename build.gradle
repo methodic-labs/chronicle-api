@@ -150,6 +150,11 @@ dependencies {
         compile "com.openlattice:rhizome:${rhizome_version}"
     }
 
+    compile "org.apache.olingo:odata-server-api:${odata_version}"
+    compile "org.apache.olingo:odata-server-core:${odata_version}"
+    compile "org.apache.olingo:odata-commons-api:${odata_version}"
+    compile "org.apache.olingo:odata-commons-core:${odata_version}"
+
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
 
     testCompile "junit:junit:${junit_version}"
