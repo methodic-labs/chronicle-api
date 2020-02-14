@@ -1,14 +1,13 @@
 package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.SetMultimap;
+import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -26,9 +25,11 @@ public interface ChronicleStudyApi {
     String PARTICIPANT_ID = "participantId";
     String STUDY_ID       = "studyId";
 
-    String DATA_PATH        = "/data";
-    String PARTICIPANT_PATH = "/participant";
+    String DATA_PATH         = "/data";
+    String PARTICIPANT_PATH  = "/participant";
     String PREPROCESSED_PATH = "/preprocessed";
+    String APPS              = "/apps";
+    String NOTIFICATIONS     = "/notifications";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -112,5 +113,44 @@ public interface ChronicleStudyApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
             @Query( FILE_TYPE ) FileType fileType
+    );
+
+    /**
+     * Update chronicle_used_by associations when apps usage survey is submitted
+     *
+     * @param studyId            - the study id
+     * @param participantId      - participantId
+     * @param associationDetails - mapping from association EKID to association entity data
+     * @return number of updated associations
+     */
+    @POST( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    public Integer updateAppsUsageAssociationData(
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Body Map<UUID, Map<UUID, Set<Object>>> associationDetails
+    );
+
+    /**
+     * Get all apps usage data associated with a participant filtered by current date
+     *
+     * @param studyId       - the studyId
+     * @param participantId - the participant
+     * @return a list of neighbor entities and associations
+     */
+    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId
+    );
+
+    /**
+     * Verify that daily push notifications are enabled for participant devices associated with a study
+     *
+     * @param studyId - study id
+     * @return true if all notifications are enabled
+     */
+    @GET( BASE + STUDY_ID_PATH + NOTIFICATIONS )
+    Boolean isNotificationsEnabled(
+            @Path( STUDY_ID ) UUID studyId
     );
 }
