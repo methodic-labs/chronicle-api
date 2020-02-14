@@ -7,4 +7,6 @@ package com.openlattice.chronicle.data;
 public final class SerializationConstants {
     public static final String ASSOCIATION_DETAILS = "associationDetails";
     public static final String ENTITY_DETAILS = "entityDetails";
+
+    private SerializationConstants() {}
 }
