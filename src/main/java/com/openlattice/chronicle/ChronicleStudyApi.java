@@ -5,6 +5,7 @@ import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.sources.Datasource;
+import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
 
 import java.util.List;
@@ -127,7 +128,7 @@ public interface ChronicleStudyApi {
     public Integer updateAppsUsageAssociationData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
-            @Body Map<UUID, Map<UUID, Set<Object>>> associationDetails
+            @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> associationDetails
     );
 
     /**
@@ -147,7 +148,7 @@ public interface ChronicleStudyApi {
      * Verify that daily push notifications are enabled for participant devices associated with a study
      *
      * @param studyId - study id
-     * @return true if all notifications are enabled
+     * @return true if notifications are enabled for a given study
      */
     @GET( BASE + STUDY_ID_PATH + NOTIFICATIONS )
     Boolean isNotificationsEnabled(
