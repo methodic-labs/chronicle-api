@@ -1,9 +1,9 @@
 package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.FileType;
+import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
@@ -31,6 +31,7 @@ public interface ChronicleStudyApi {
     String PREPROCESSED_PATH = "/preprocessed";
     String APPS              = "/apps";
     String NOTIFICATIONS     = "/notifications";
+    String ENROLLMENT_STATUS = "/status";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -153,5 +154,18 @@ public interface ChronicleStudyApi {
     @GET( BASE + STUDY_ID_PATH + NOTIFICATIONS )
     Boolean isNotificationsEnabled(
             @Path( STUDY_ID ) UUID studyId
+    );
+
+    /**
+     * Query the enrollment status of a participant
+     *
+     * @param studyId       - studyId
+     * @param participantId - participantId
+     * @return one of { ENROLLED, NOT_ENROLLED, UNKNOWN }
+     */
+    @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENROLLMENT_STATUS )
+    ParticipationStatus getParticipationStatus(
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) UUID participantId
     );
 }
