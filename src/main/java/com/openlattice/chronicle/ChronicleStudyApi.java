@@ -166,6 +166,6 @@ public interface ChronicleStudyApi {
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENROLLMENT_STATUS )
     ParticipationStatus getParticipationStatus(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) UUID participantId
+            @Path( PARTICIPANT_ID ) String participantId
     );
 }
