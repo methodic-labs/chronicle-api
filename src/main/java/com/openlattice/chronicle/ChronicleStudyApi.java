@@ -25,6 +25,7 @@ public interface ChronicleStudyApi {
     String FILE_TYPE      = "fileType";
     String PARTICIPANT_ID = "participantId";
     String STUDY_ID       = "studyId";
+    String DATE           = "date";
 
     String DATA_PATH         = "/data";
     String PARTICIPANT_PATH  = "/participant";
@@ -143,7 +144,7 @@ public interface ChronicleStudyApi {
     List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
-            @Body String date
+            @Query( DATE ) String date
     );
 
     /**
