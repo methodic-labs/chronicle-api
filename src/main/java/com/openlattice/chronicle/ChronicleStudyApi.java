@@ -25,6 +25,7 @@ public interface ChronicleStudyApi {
     String FILE_TYPE      = "fileType";
     String PARTICIPANT_ID = "participantId";
     String STUDY_ID       = "studyId";
+    String DATE           = "date";
 
     String DATA_PATH         = "/data";
     String PARTICIPANT_PATH  = "/participant";
@@ -38,6 +39,7 @@ public interface ChronicleStudyApi {
     String ENTITY_SET_ID_PATH  = "/{" + ENTITY_SET_ID + "}";
     String PARTICIPANT_ID_PATH = "/{" + PARTICIPANT_ID + "}";
     String STUDY_ID_PATH       = "/{" + STUDY_ID + "}";
+    String DATE_PATH           = "/{" + DATE + "}";
 
     /**
      * Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device, though
@@ -139,10 +141,11 @@ public interface ChronicleStudyApi {
      * @param participantId - the participant
      * @return a list of neighbor entities and associations
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATE_PATH + APPS )
     List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Path( DATE ) String date
     );
 
     /**
