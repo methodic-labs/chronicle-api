@@ -127,7 +127,7 @@ public interface ChronicleStudyApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + USAGE_PATH)
+    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + USAGE_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
