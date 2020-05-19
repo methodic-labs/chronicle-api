@@ -2,6 +2,7 @@ package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
+import com.openlattice.chronicle.data.ChronicleQuestionnaire;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
@@ -34,6 +35,7 @@ public interface ChronicleStudyApi {
     String NOTIFICATIONS     = "/notifications";
     String ENROLLMENT_STATUS = "/status";
     String USAGE_PATH        = "/usage";
+    String QUESTIONNAIRE     = "/questionnaire";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -185,5 +187,17 @@ public interface ChronicleStudyApi {
     ParticipationStatus getParticipationStatus(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId
+    );
+
+    /**
+     * Retrieve questionnaire matching given entity key id
+     *
+     * @param studyId           - studyId
+     * @param questionnaireEKID - questionnaire entity key id
+     */
+    @GET( BASE + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + QUESTIONNAIRE )
+    ChronicleQuestionnaire getChronicleQuestionnaire(
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
     );
 }
