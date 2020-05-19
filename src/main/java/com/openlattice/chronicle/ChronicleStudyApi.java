@@ -195,7 +195,7 @@ public interface ChronicleStudyApi {
      * @param studyId           - studyId
      * @param questionnaireEKID - questionnaire entity key id
      */
-    @GET( BASE + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + QUESTIONNAIRE )
+    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRE + ENTITY_KEY_ID_PATH )
     ChronicleQuestionnaire getChronicleQuestionnaire(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
