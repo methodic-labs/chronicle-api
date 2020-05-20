@@ -15,7 +15,7 @@ import java.util.Set;
  */
 public class ChronicleQuestionnaire {
     private Map<FullQualifiedName, Set<Object>>          questionnaireDetails;
-    private List<SetMultimap<FullQualifiedName, Object>> questions;
+    private List<Map<FullQualifiedName, Set<Object>>> questions;
 
     @JsonCreator
     public ChronicleQuestionnaire() {
@@ -25,7 +25,7 @@ public class ChronicleQuestionnaire {
     public ChronicleQuestionnaire(
             @JsonProperty( SerializationConstants.QUESTIONNAIRE_DETAILS )
                     Map<FullQualifiedName, Set<Object>> questionnaireDetails,
-            @JsonProperty( SerializationConstants.QUESTIONS ) List<SetMultimap<FullQualifiedName, Object>> questions
+            @JsonProperty( SerializationConstants.QUESTIONS ) List<Map<FullQualifiedName, Set<Object>>> questions
     ) {
         this.questions = questions;
         this.questionnaireDetails = questionnaireDetails;
@@ -41,11 +41,11 @@ public class ChronicleQuestionnaire {
     }
 
     @JsonProperty( SerializationConstants.QUESTIONS )
-    public List<SetMultimap<FullQualifiedName, Object>> getQuestions() {
+    public List<Map<FullQualifiedName, Set<Object>>> getQuestions() {
         return questions;
     }
 
-    public void setQuestions( List<SetMultimap<FullQualifiedName, Object>> questions ) {
+    public void setQuestions( List<Map<FullQualifiedName, Set<Object>>> questions ) {
         this.questions = questions;
     }
 
