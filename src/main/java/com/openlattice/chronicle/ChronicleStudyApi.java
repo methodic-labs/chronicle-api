@@ -36,6 +36,7 @@ public interface ChronicleStudyApi {
     String ENROLLMENT_STATUS = "/status";
     String USAGE_PATH        = "/usage";
     String QUESTIONNAIRE     = "/questionnaire";
+    String QUESTIONNAIRES    = "/questionnaires";
     String ACTIVE            = "/active";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
@@ -225,7 +226,7 @@ public interface ChronicleStudyApi {
      * @return a mapping entityKeyId to entity details(name, description, cron etc)
      * or an empty Map if no active notifications are found.
      */
-    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRE + ACTIVE )
+    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES + ACTIVE )
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getActiveQuestionnaires(
             @Path( STUDY_ID ) UUID studyId
     );
