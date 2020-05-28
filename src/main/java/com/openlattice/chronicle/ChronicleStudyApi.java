@@ -6,9 +6,9 @@ import com.openlattice.chronicle.data.ChronicleQuestionnaire;
 import com.openlattice.chronicle.data.FileType;
 import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
+import com.openlattice.data.DeleteType;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +27,7 @@ public interface ChronicleStudyApi {
     String PARTICIPANT_ID = "participantId";
     String STUDY_ID       = "studyId";
     String DATE           = "date";
+    String TYPE           = "type";
 
     String DATA_PATH         = "/data";
     String PARTICIPANT_PATH  = "/participant";
@@ -90,6 +91,30 @@ public interface ChronicleStudyApi {
     Boolean isKnownParticipant(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId );
+
+    /**
+     * Delete a participant and their data.  Returns the number of entities removed.
+     *
+     * @param studyId                - studyId
+     * @param participantId          - participant id
+     */
+    @DELETE( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
+    Integer deleteParticipantAndAllNeighbors(
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Query( TYPE ) DeleteType deleteType
+    );
+
+    /**
+     * Delete a study and their attached neighbors.  Returns the number of entities removed.
+     *
+     * @param studyId                - studyId
+     */
+    @DELETE( BASE + STUDY_ID_PATH )
+    Integer deleteStudyAndAllNeighbors(
+            @Path( STUDY_ID ) UUID studyId,
+            @Query( TYPE ) DeleteType deleteType
+    );
 
     /**
      * Returns a file download containing all participant data (including neighbor data).
