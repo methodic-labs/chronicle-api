@@ -38,6 +38,8 @@ public interface ChronicleStudyApi {
     String ENROLLMENT_STATUS = "/status";
     String USAGE_PATH        = "/usage";
     String QUESTIONNAIRE     = "/questionnaire";
+    String QUESTIONNAIRES    = "/questionnaires";
+    String ACTIVE            = "/active";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -232,7 +234,7 @@ public interface ChronicleStudyApi {
      *
      * @param studyId                - studyId
      * @param participantId          - participant id
-     * @param questionnaireResponses mapping from questionEntityKeyId -> answer entity
+     * @param questionnaireResponses mapping from questionEntityKeyId to answer entity
      *                               return true if submission successful
      */
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE )
@@ -240,5 +242,18 @@ public interface ChronicleStudyApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> questionnaireResponses
+    );
+
+    /**
+     * Get active questionnaires for a given study
+     * Active questionnaires have ol.active property set to true
+     *
+     * @param studyId - studyId
+     * @return a mapping entityKeyId to entity details(name, description, cron etc)
+     * or an empty Map if no active notifications are found.
+     */
+    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES + ACTIVE )
+    Map<UUID, Map<FullQualifiedName, Set<Object>>> getActiveQuestionnaires(
+            @Path( STUDY_ID ) UUID studyId
     );
 }
