@@ -100,7 +100,7 @@ public interface ChronicleStudyApi {
      * @param participantId - participant id
      */
     @DELETE( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Integer deleteParticipantAndAllNeighbors(
+    Void deleteParticipantAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Query( TYPE ) DeleteType deleteType
@@ -112,7 +112,7 @@ public interface ChronicleStudyApi {
      * @param studyId - studyId
      */
     @DELETE( BASE + STUDY_ID_PATH )
-    Integer deleteStudyAndAllNeighbors(
+    Void deleteStudyAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Query( TYPE ) DeleteType deleteType
     );
