@@ -9,6 +9,7 @@ import com.openlattice.chronicle.sources.Datasource;
 import com.openlattice.data.DeleteType;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -95,8 +96,8 @@ public interface ChronicleStudyApi {
     /**
      * Delete a participant and their data.  Returns the number of entities removed.
      *
-     * @param studyId                - studyId
-     * @param participantId          - participant id
+     * @param studyId       - studyId
+     * @param participantId - participant id
      */
     @DELETE( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Integer deleteParticipantAndAllNeighbors(
@@ -108,7 +109,7 @@ public interface ChronicleStudyApi {
     /**
      * Delete a study and their attached neighbors.  Returns the number of entities removed.
      *
-     * @param studyId                - studyId
+     * @param studyId - studyId
      */
     @DELETE( BASE + STUDY_ID_PATH )
     Integer deleteStudyAndAllNeighbors(
