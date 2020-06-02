@@ -231,10 +231,9 @@ public interface ChronicleStudyApi {
      * @param studyId                - studyId
      * @param participantId          - participant id
      * @param questionnaireResponses mapping from questionEntityKeyId to answer entity
-     *                               return true if submission successful
      */
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE )
-    Boolean submitQuestionnaire(
+    void submitQuestionnaire(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> questionnaireResponses
