@@ -99,7 +99,7 @@ public final class ChronicleTestUtils {
 
     public static Retrofit createRetrofitAdapter( OkHttpClient httpClient ) {
         return RetrofitBuilders.decorateWithRhizomeFactories( RetrofitBuilders
-                .createBaseChronicleRetrofitBuilder( "http://localhost:8081/rhizome/api/", httpClient ) )
+                .createBaseChronicleRetrofitBuilder( "http://localhost:8090/rhizome/api/", httpClient ) )
                 .build();
     }
 
