@@ -131,7 +131,6 @@ dependencies {
     compile "org.apache.olingo:odata-commons-core:${odata_version}"
 
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
-    compile "com.openlattice:api:${api_version}"
 
     testCompile "junit:junit:${junit_version}"
 
