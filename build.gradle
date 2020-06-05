@@ -1,3 +1,23 @@
+/*
+ * Copyright (C) 2018. OpenLattice, Inc.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * You can contact the owner of the copyright at support@openlattice.com
+ *
+ */
+
 buildscript {
     repositories {
         mavenCentral()
@@ -13,11 +33,10 @@ plugins {
     id 'idea'
     id 'jacoco'
     id 'checkstyle'
-    id "maven-publish"
+    id 'maven-publish'
     id 'signing'
-    id 'com.github.spotbugs' version '3.0.0'
+    id 'com.github.spotbugs' version '4.0.0'
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
-    id 'org.jetbrains.kotlin.plugin.allopen' version '1.3.72'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.3.72'
 }
 
@@ -30,12 +49,19 @@ ext.developerConnectionUrl = 'scm:git:https://github.com/openlattice/chronicle-a
 
 apply from: "https://raw.githubusercontent.com/openlattice/gradles/master/openlattice.gradle"
 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += '-Xjvm-default=compatibility'
+    }
+}
+
 jacoco {
     toolVersion = "0.8.2"
 }
-
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 
 checkstyle {
     toolVersion = '7.4'
@@ -49,12 +75,13 @@ tasks.withType(Checkstyle) {
     }
 }
 
+ext.spotbugs_annotations_version = '4.0.0'
 spotbugs {
     reportLevel = 'high'
     toolVersion = "${spotbugs_annotations_version}"
 }
 
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
+spotbugsMain {
     reports {
         xml.enabled = false
         html.enabled = true
@@ -104,14 +131,14 @@ task swaggerJava {
     }
 }
 
-
-
 clean.doFirst {
     delete(swaggerOutputDir)
 }
 ext.odata_version = '4.2.0'
 ext.jackson_version = '2.6.5'
 dependencies {
+
+    spotbugs 'com.github.spotbugs:spotbugs:4.0.0'
 
     spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
     compileOnly "com.github.spotbugs:spotbugs-annotations:${spotbugs_annotations_version}"
@@ -165,12 +192,4 @@ eclipse {
     ext.downloadJavadoc = true
 
     ext.sourceCompatibility = JavaVersion.VERSION_11
-    ext.targetCompatibility = JavaVersion.VERSION_11
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs += '-Xjvm-default=compatibility'
-    }
 }
