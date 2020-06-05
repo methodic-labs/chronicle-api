@@ -134,8 +134,6 @@ task swaggerJava {
 clean.doFirst {
     delete(swaggerOutputDir)
 }
-ext.odata_version = '4.2.0'
-ext.jackson_version = '2.6.5'
 dependencies {
 
     spotbugs 'com.github.spotbugs:spotbugs:4.0.0'
