@@ -240,15 +240,14 @@ public interface ChronicleStudyApi {
     );
 
     /**
-     * Get active questionnaires for a given study
-     * Active questionnaires have ol.active property set to true
+     * Get all questionnaires for a given study
      *
      * @param studyId - studyId
      * @return a mapping entityKeyId to entity details(name, description, cron etc)
-     * or an empty Map if no active notifications are found.
+     * or an empty Map if no questionnaires are found.
      */
-    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES + ACTIVE )
-    Map<UUID, Map<FullQualifiedName, Set<Object>>> getActiveQuestionnaires(
+    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES )
+    Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( STUDY_ID ) UUID studyId
     );
 }
