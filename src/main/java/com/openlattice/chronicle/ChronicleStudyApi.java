@@ -180,12 +180,14 @@ public interface ChronicleStudyApi {
      *
      * @param studyId       - the studyId
      * @param participantId - the participant
+     * @param deviceId - device id (unique to each combination of app-signing key, user, and device)
      * @return a list of neighbor entities and associations
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + APPS )
     List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
+            @Path( DATASOURCE_ID ) String deviceId,
             @Query( DATE ) String date
     );
 
