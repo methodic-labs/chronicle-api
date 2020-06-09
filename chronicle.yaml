@@ -16,119 +16,76 @@ servers:
     - url: "https://api.staging.openlattice.com"
       description: "Staging Chronicle API"
 paths:
-  /data/ticket/{entitySetId}/{syncId}:
+  /chronicle/data/{studyId}/{participantId}/{dataSourceId}:
     post:
-      summary: "Acquires a sync ticket"
-      operationId: "acquireSyncTicket"
-      parameters:
-        - in: path
-          name: entitySetId
-          description: "The entity set id for which to acquire a sync ticket."
-          required: true
-          schema:
-            $ref: "#/components/schemas/EntitySetId"
-        - in: path
-          name: syncId
-          description: "The sync id for the entity being requested."
-          required: true
-          schema:
-            $ref: "#/components/schemas/SyncId"
-      responses:
-        200:
-          description: "A 128-bit random session id for synchronizing data."
-components:
-  securitySchemes:
-    petstore_auth:
-      type: "oauth2"
-      flows:
-        implicit:
-          authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
-          scopes:
-            write:pets: "modify pets in your account"
-            read:pets: "read your pets"
-    openlattice_auth:
-        type: "http"
-        scheme: "bearer"
-        bearerFormat: "JWT"
-    api_key:
-        type: "apiKey"
-        name: "api_key"
-        in: "header"
-  schemas:
-    SyncTicket:
-      type: "string"
-      format: "uuid"
-    EntitySetId:
-      type: "string"
-      format: "uuid"
-    SyncId:
-      type: "string"
-      format: "uuid"
-    FullQualifiedName:
-      type: "string"
-      format: "FullQualifiedName"
-    PropertyValues:
-      oneOf:
-        - type: string
-        - type: number
-        - type: boolean
-    Property:
-      type: "array"
-      items:
-        $ref: '#/components/schemas/PropertyValues'
-    Entity:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/Property'
-    User:
-      type: "object"
-      properties:
-        id:
-          type: "integer"
-          format: "int64"
-        username:
-          type: "string"
-        firstName:
-          type: "string"
-        lastName:
-          type: "string"
-        email:
-          type: "string"
-        password:
-          type: "string"
-        phone:
-          type: "string"
-        userStatus:
-          type: "integer"
-          format: "int32"
-          description: "User Status"
-      xml:
-        name: "User"
-    ApiResponse:
-      type: "object"
-      properties:
-        code:
-          type: "integer"
-          format: "int32"
-        type:
-          type: "string"
-        message:
-          type: "string"
+      summary: Writes log data for specific studyId and participantId using a specific deviceId to a specific entitySetId.
+      operationId: upload
+  /chronicle/data/edm:
+    post:
+      summary: Looks up property type ids for the requested property type FQNS (passed as Strings)
+      operationId: getPropertyTypeIds
+  /chronicle/data:
+    get:
+      summary: Check whether the server is running
+      operationId: isRunning
+  /chronicle/study/{studyId}/{participantId}/{dataSourceId}:
+    post:
+      summary: Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device, though that may change in the future.
+      operationId: enrollSource
+    get:
+      summary: Verifies that a participant in a study is associated with a specific data source.
+      operationId: isKnownDatasource
+  /chronicle/study/{studyId}/{participantId}:
+    get:
+      summary: Verify that a participants is part of this study.
+      operationId: isKnownParticipant
+  /chronicle/study/participant/data/{studyId}/{participantId}/apps:
+    post:
+      summary: Update chronicle_used_by associations when apps usage survey is submitted
+      operationId: updateAppsUsageAssociationData
+    get:
+      summary: Get all apps usage data associated with a participant filtered by current date
+      operationId: getParticipantAppsUsageData
+  /chronicle/study/{studyId}/notifications:
+    get:
+      summary: Verify that daily push notifications are enabled for participant devices associated with a study
+      operationId: isNotificationsEnabled
+  /chronicle/study/{studyId}/{participantId}/status:
+    get:
+      summary: Query the enrollment status of a participant
+      operationId: getParticipationStatus
+  /chronicle/study/questionnaire/{questionnaireId}:
+    get:
+      summary: Retrieve questionnaire matching given entity key id
+      operationId: getChronicleQuestionnaire
+  /chronicle/study/{studyId}/{participantId}/questionnaire:
+    post:
+      summary: Submit a questionnaire
+      operationId: submitQuestionnaire
+  /chronicle/study/{studyId}/questionnaire:
+    get:
+      summary: Get all questionnaires for a given study
+      operationId: getStudyQuestionnaires
 
+  # authenticated
+  /chronicle/authenticated/{studyId}/{participantId}:
+    delete:
+      summary: Delete a participant and their data.  Returns the number of entities removed.
+      operationId: deleteParticipantAndAllNeighbors
+  /chronicle/authenticated/{studyId}:
+    delete:
+      summary: Delete a study and their attached neighbors.  Returns the number of entities removed.
+      operationId: deleteStudyAndAllNeighbors
+  /chronicle/authenticated/participant/data/{studyId}/{participantEntityKeyId}:
+    get:
+      summary: Returns a file download containing all participant data (including neighbor data).
+      operationId: getAllParticipantData
+  /chronicle/authenticated/participant/data/{studyId}/{participantEntityKeyId}/preprocessed:
+    get:
+      summary: Returns a file download containing preprocessed data.
+      operationId: getAllPreprocessedParticipantData
+  /chronicle/authenticated/participant/data/{studyId}/{participantEntityKeyId}/usage:
+    get:
+      summary: Returns a file download containing user app usage data.
+      operationId: getAllParticipantAppsUsageData
 
-tags:
-- name: "pet"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
-- name: "store"
-  description: "Access to Petstore orders"
-- name: "user"
-  description: "Operations about user"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"

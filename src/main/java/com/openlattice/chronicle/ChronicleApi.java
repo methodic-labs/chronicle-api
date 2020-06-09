@@ -1,9 +1,12 @@
 package com.openlattice.chronicle;
 
 import com.google.common.collect.SetMultimap;
-import java.util.List;
-import retrofit2.http.*;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
