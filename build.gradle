@@ -49,6 +49,7 @@ ext.developerConnectionUrl = 'scm:git:https://github.com/openlattice/chronicle-a
 
 apply from: "https://raw.githubusercontent.com/openlattice/gradles/master/openlattice.gradle"
 
+// Still on java 8 as a compile target for android
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -189,5 +190,6 @@ eclipse {
     ext.downloadSources = true
     ext.downloadJavadoc = true
 
+// Still on java 8 as a compile target for android
     ext.sourceCompatibility = JavaVersion.VERSION_1_8
 }
