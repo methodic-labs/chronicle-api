@@ -17,6 +17,8 @@ public interface ChronicleStudyApi {
     String CONTROLLER = "/study";
     String BASE       = SERVICE + CONTROLLER;
 
+    String AUTHENTICATED = "/authenticated";
+
     String DATASOURCE_ID  = "datasourceId";
     String ENTITY_KEY_ID  = "entityKeyId";
     String ENTITY_SET_ID  = "entitySetId";
@@ -97,7 +99,7 @@ public interface ChronicleStudyApi {
      * @param studyId       - studyId
      * @param participantId - participant id
      */
-    @DELETE( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
+    @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Void deleteParticipantAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
@@ -109,7 +111,7 @@ public interface ChronicleStudyApi {
      *
      * @param studyId - studyId
      */
-    @DELETE( BASE + STUDY_ID_PATH )
+    @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH )
     Void deleteStudyAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Query( TYPE ) DeleteType deleteType
@@ -123,7 +125,7 @@ public interface ChronicleStudyApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
+    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
@@ -138,7 +140,7 @@ public interface ChronicleStudyApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
+    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
     Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
@@ -153,7 +155,7 @@ public interface ChronicleStudyApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + USAGE_PATH )
+    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + USAGE_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
@@ -240,15 +242,14 @@ public interface ChronicleStudyApi {
     );
 
     /**
-     * Get active questionnaires for a given study
-     * Active questionnaires have ol.active property set to true
+     * Get all questionnaires for a given study
      *
      * @param studyId - studyId
      * @return a mapping entityKeyId to entity details(name, description, cron etc)
-     * or an empty Map if no active notifications are found.
+     * or an empty Map if no questionnaires are found.
      */
-    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES + ACTIVE )
-    Map<UUID, Map<FullQualifiedName, Set<Object>>> getActiveQuestionnaires(
+    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES )
+    Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( STUDY_ID ) UUID studyId
     );
 }
