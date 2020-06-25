@@ -13,6 +13,7 @@ public final class ChronicleFields {
     public static final String OS_VERSION      = "osVersion";
     public static final String SDK_VERSION     = "sdkVersion";
     public static final String ADDITIONAL_INFO = "additionalInfo";
+    public static final String TYPE            = "type";
 
     private ChronicleFields() {
     }

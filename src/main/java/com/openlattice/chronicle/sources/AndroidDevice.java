@@ -1,39 +1,33 @@
 package com.openlattice.chronicle.sources;
 
-import static com.openlattice.chronicle.ChronicleFields.ADDITIONAL_INFO;
-import static com.openlattice.chronicle.ChronicleFields.BRAND;
-import static com.openlattice.chronicle.ChronicleFields.CODENAME;
-import static com.openlattice.chronicle.ChronicleFields.DEVICE;
-import static com.openlattice.chronicle.ChronicleFields.DEVICE_ID;
-import static com.openlattice.chronicle.ChronicleFields.MODEL;
-import static com.openlattice.chronicle.ChronicleFields.OS_VERSION;
-import static com.openlattice.chronicle.ChronicleFields.PRODUCT;
-import static com.openlattice.chronicle.ChronicleFields.SDK_VERSION;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.base.Optional;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static com.openlattice.chronicle.ChronicleFields.*;
 
 /**
  * Represents the information we collect about each device.
  *
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include= JsonTypeInfo.As.PROPERTY, property="@class")
 public class AndroidDevice implements Datasource {
     private final String              device;
     private final String              model;
     private final String              codename;
     private final String              brand;
-    private final String osVersion;
+    private final String              osVersion;
     private final String              sdkVersion;
     private final String              product;
     private final String              deviceId;
     private final Map<String, Object> additionalInfo;
+
+    @JsonProperty
+    private String className = this.getClass().getSimpleName();
 
     @JsonCreator
     public AndroidDevice(
@@ -50,7 +44,7 @@ public class AndroidDevice implements Datasource {
         this.model = model;
         this.codename = codename;
         this.brand = brand;
-        this.osVersion=osVersion;
+        this.osVersion = osVersion;
         this.sdkVersion = sdkVersion;
         this.product = product;
         this.deviceId = deviceId;
