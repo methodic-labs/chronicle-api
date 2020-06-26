@@ -6,14 +6,13 @@ import static com.openlattice.chronicle.ChronicleTestUtils.createHttpClient;
 import static com.openlattice.chronicle.ChronicleTestUtils.createRetrofitAdapter;
 import static com.openlattice.chronicle.ChronicleTestUtils.quote;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.net.HttpHeaders;
 import com.openlattice.chronicle.sources.AndroidDevice;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import javax.ws.rs.NotSupportedException;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor.Chain;
 import okhttp3.MediaType;
@@ -51,7 +50,7 @@ public class ChronicleStudyApiTests {
                         RandomStringUtils.random( 10 ) ) ) );
         UUID id = chronicleStudyApi
                 .enrollSource( UUID.randomUUID(),
-                        UUID.randomUUID(),
+                        RandomStringUtils.randomAlphanumeric( 16 ),
                         RandomStringUtils.randomAlphanumeric( 10 ),
                         Optional.of( datasource ) );
         Assert.assertNotNull( "Returned id cannot be null.", id );
@@ -79,7 +78,7 @@ public class ChronicleStudyApiTests {
                 .request( request );
 
         switch ( method ) {
-            case "PUT":
+            case "POST":
                 return responseBuilder
                         .header( HttpHeaders.CONTENT_TYPE, JSON_MIME_TYPE )
                         .body( ResponseBody
@@ -94,7 +93,7 @@ public class ChronicleStudyApiTests {
             default:
                 String errMsg = "Unsupported method: " + method;
                 logger.error( errMsg );
-                throw new NotSupportedException( errMsg );
+                throw new UnsupportedOperationException( errMsg );
 
         }
     }

@@ -7,12 +7,13 @@ import static com.openlattice.chronicle.ChronicleTestUtils.mapper;
 import static com.openlattice.chronicle.ChronicleTestUtils.readBody;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.google.common.collect.SetMultimap;
 import com.google.common.net.HttpHeaders;
+import com.openlattice.chronicle.util.RetrofitBuilders;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
-import javax.ws.rs.NotSupportedException;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor.Chain;
 import okhttp3.MediaType;
@@ -35,13 +36,16 @@ public class ChronicleApiTests {
     private static final Logger logger = LoggerFactory.getLogger( ChronicleApiTests.class );
 
     private static ChronicleApi chronicleApi;
+    static {
+        RetrofitBuilders.getMapper().registerModule( new GuavaModule() );
+    }
 
     @Test
     public void testSubmitData() {
         List<SetMultimap<UUID, Object>> data = ChronicleTestUtils.mockData( RandomUtils.nextInt( 10, 64 ) );
         final int uploadedCount = chronicleApi.upload(
                 UUID.randomUUID(),
-                UUID.randomUUID(),
+                RandomStringUtils.randomAlphanumeric( 16 ),
                 RandomStringUtils.randomAlphanumeric( 16 ),
                 data );
         Assert.assertEquals( "Uploaded count should match number of items uploaded.", data.size(), uploadedCount );
@@ -83,7 +87,7 @@ public class ChronicleApiTests {
             default:
                 String errMsg = "Unsupported method: " + method;
                 logger.error( errMsg );
-                throw new NotSupportedException( errMsg );
+                throw new UnsupportedOperationException( errMsg );
 
         }
 
