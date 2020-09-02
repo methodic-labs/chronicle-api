@@ -121,7 +121,7 @@ public interface ChronicleStudyApi {
      *
      * @param studyId - studyId
      */
-    @DELETE( BASE  + AUTHENTICATED + ORGANIZATION_ID_PATH + STUDY_ID_PATH )
+    @DELETE( BASE + AUTHENTICATED + ORGANIZATION_ID_PATH + STUDY_ID_PATH )
     Void deleteStudyAndAllNeighbors(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
