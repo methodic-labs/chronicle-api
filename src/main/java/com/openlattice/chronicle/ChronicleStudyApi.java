@@ -54,7 +54,6 @@ public interface ChronicleStudyApi {
      * Due to privacy changes in Android the device id is not a reliable way of tracking devices.
      * we are leaving the study path in for now, because we don't know that participant's across studies are unique
      *
-     * @param organizationId - Id of the organization to which the study belongs
      * @param studyId        The id of the study with which to enroll the partipant's datasource.
      * @param participantId  The participant id which the device will be associated with.
      * @param datasourceId   A datasource specific id.
@@ -65,7 +64,6 @@ public interface ChronicleStudyApi {
     @Deprecated( since = "apps v2" )
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     UUID enrollSource(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId,
@@ -94,7 +92,6 @@ public interface ChronicleStudyApi {
     /**
      * Verifies that a participant in a study is associated with a specific data source.
      *
-     * @param organizationId - id of organization to which study belongs
      * @param studyId        - the study id
      * @param participantId  - the participant id
      * @param datasourceId   - the datasource (device) id
@@ -104,7 +101,6 @@ public interface ChronicleStudyApi {
     @Deprecated( since = "apps v2" )
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     Boolean isKnownDatasource(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId );
@@ -263,7 +259,6 @@ public interface ChronicleStudyApi {
     @Deprecated( since = "apps v2" )
     @GET( BASE + STUDY_ID_PATH + NOTIFICATIONS )
     Boolean isNotificationsEnabled(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
     );
 
@@ -290,7 +285,6 @@ public interface ChronicleStudyApi {
     @Deprecated( since = "apps v2" )
     @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENROLLMENT_STATUS )
     ParticipationStatus getParticipationStatus(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId
     );
@@ -350,7 +344,6 @@ public interface ChronicleStudyApi {
     @Deprecated( since = "apps v2" )
     @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES )
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
     );
 
