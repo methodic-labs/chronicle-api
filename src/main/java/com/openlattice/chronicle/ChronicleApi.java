@@ -59,7 +59,6 @@ public interface ChronicleApi {
      * @param data           The data / entities to write
      * @return The total number of items persisted by the server.
      */
-    @Deprecated( since = "apps v2" )
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     Integer uploadV2(
             @Path( ORGANIZATION_ID ) UUID organizationId,
