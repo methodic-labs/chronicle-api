@@ -16,7 +16,7 @@ servers:
     - url: "https://api.staging.openlattice.com"
       description: "Staging Chronicle API"
 paths:
-  /chronicle/data/{studyId}/{participantId}/{dataSourceId}:
+  /chronicle/data/{organizationId}/{studyId}/{participantId}/{dataSourceId}:
     post:
       summary: Writes log data for specific studyId and participantId using a specific deviceId to a specific entitySetId.
       operationId: upload
@@ -28,63 +28,63 @@ paths:
     get:
       summary: Check whether the server is running
       operationId: isRunning
-  /chronicle/study/{studyId}/{participantId}/{dataSourceId}:
+  /chronicle/study/{organizationId}/{studyId}/{participantId}/{dataSourceId}:
     post:
       summary: Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device, though that may change in the future.
       operationId: enrollSource
     get:
       summary: Verifies that a participant in a study is associated with a specific data source.
       operationId: isKnownDatasource
-  /chronicle/study/{studyId}/{participantId}:
+  /chronicle/study/{organizationId}/{studyId}/{participantId}:
     get:
       summary: Verify that a participants is part of this study.
       operationId: isKnownParticipant
-  /chronicle/study/participant/data/{studyId}/{participantId}/apps:
+  /chronicle/study/{organizationId}/{studyId}/{participantId}/apps:
     post:
       summary: Update chronicle_used_by associations when apps usage survey is submitted
       operationId: updateAppsUsageAssociationData
     get:
       summary: Get all apps usage data associated with a participant filtered by current date
       operationId: getParticipantAppsUsageData
-  /chronicle/study/{studyId}/notifications:
+  /chronicle/study/{organizationId}/{studyId}/notifications:
     get:
       summary: Verify that daily push notifications are enabled for participant devices associated with a study
       operationId: isNotificationsEnabled
-  /chronicle/study/{studyId}/{participantId}/status:
+  /chronicle/study/{organizationId}/{studyId}/{participantId}/status:
     get:
       summary: Query the enrollment status of a participant
       operationId: getParticipationStatus
-  /chronicle/study/questionnaire/{questionnaireId}:
+  /chronicle/study/{organizationId}/questionnaire/{questionnaireId}:
     get:
       summary: Retrieve questionnaire matching given entity key id
       operationId: getChronicleQuestionnaire
-  /chronicle/study/{studyId}/{participantId}/questionnaire:
+  /chronicle/study/{organizationId}/{studyId}/{participantId}/questionnaire:
     post:
       summary: Submit a questionnaire
       operationId: submitQuestionnaire
-  /chronicle/study/{studyId}/questionnaire:
+  /chronicle/study/{organizationId}/{studyId}/questionnaire:
     get:
       summary: Get all questionnaires for a given study
       operationId: getStudyQuestionnaires
 
   # authenticated
-  /chronicle/authenticated/{studyId}/{participantId}:
+  /chronicle/authenticated/{organizationId}/{studyId}/{participantId}:
     delete:
       summary: Delete a participant and their data.  Returns the number of entities removed.
       operationId: deleteParticipantAndAllNeighbors
-  /chronicle/authenticated/{studyId}:
+  /chronicle/authenticated/{organizationId}/{studyId}:
     delete:
       summary: Delete a study and their attached neighbors.  Returns the number of entities removed.
       operationId: deleteStudyAndAllNeighbors
-  /chronicle/authenticated/participant/data/{studyId}/{participantEntityKeyId}:
+  /chronicle/authenticated/participant/data/{organizationId}/{studyId}/{participantEntityKeyId}:
     get:
       summary: Returns a file download containing all participant data (including neighbor data).
       operationId: getAllParticipantData
-  /chronicle/authenticated/participant/data/{studyId}/{participantEntityKeyId}/preprocessed:
+  /chronicle/authenticated/participant/data/{organizationId}/{studyId}/{participantEntityKeyId}/preprocessed:
     get:
       summary: Returns a file download containing preprocessed data.
       operationId: getAllPreprocessedParticipantData
-  /chronicle/authenticated/participant/data/{studyId}/{participantEntityKeyId}/usage:
+  /chronicle/authenticated/participant/data/{organizationId}/{studyId}/{participantEntityKeyId}/usage:
     get:
       summary: Returns a file download containing user app usage data.
       operationId: getAllParticipantAppsUsageData
