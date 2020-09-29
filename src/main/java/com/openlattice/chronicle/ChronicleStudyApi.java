@@ -17,33 +17,35 @@ public interface ChronicleStudyApi {
     String CONTROLLER = "/study";
     String BASE       = SERVICE + CONTROLLER;
 
-    String AUTHENTICATED = "/authenticated";
+    String DATASOURCE_ID   = "datasourceId";
+    String DATE            = "date";
+    String ENTITY_KEY_ID   = "entityKeyId";
+    String ENTITY_SET_ID   = "entitySetId";
+    String FILE_TYPE       = "fileType";
+    String ORGANIZATION_ID = "organizationId";
+    String PARTICIPANT_ID  = "participantId";
+    String STUDY_ID        = "studyId";
+    String TYPE            = "type";
 
-    String DATASOURCE_ID  = "datasourceId";
-    String ENTITY_KEY_ID  = "entityKeyId";
-    String ENTITY_SET_ID  = "entitySetId";
-    String FILE_TYPE      = "fileType";
-    String PARTICIPANT_ID = "participantId";
-    String STUDY_ID       = "studyId";
-    String DATE           = "date";
-    String TYPE           = "type";
-
+    String ACTIVE            = "/active";
+    String APPS              = "/apps";
+    String AUTHENTICATED     = "/authenticated";
     String DATA_PATH         = "/data";
+    String ENROLLMENT_STATUS = "/status";
+    String NOTIFICATIONS     = "/notifications";
     String PARTICIPANT_PATH  = "/participant";
     String PREPROCESSED_PATH = "/preprocessed";
-    String APPS              = "/apps";
-    String NOTIFICATIONS     = "/notifications";
-    String ENROLLMENT_STATUS = "/status";
-    String USAGE_PATH        = "/usage";
     String QUESTIONNAIRE     = "/questionnaire";
     String QUESTIONNAIRES    = "/questionnaires";
-    String ACTIVE            = "/active";
+    String USAGE_PATH        = "/usage";
+    String VALID             = "/valid";
 
-    String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
-    String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
-    String ENTITY_SET_ID_PATH  = "/{" + ENTITY_SET_ID + "}";
-    String PARTICIPANT_ID_PATH = "/{" + PARTICIPANT_ID + "}";
-    String STUDY_ID_PATH       = "/{" + STUDY_ID + "}";
+    String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
+    String ENTITY_KEY_ID_PATH   = "/{" + ENTITY_KEY_ID + "}";
+    String ENTITY_SET_ID_PATH   = "/{" + ENTITY_SET_ID + "}";
+    String ORGANIZATION_ID_PATH = "/{" + ORGANIZATION_ID + "}";
+    String PARTICIPANT_ID_PATH  = "/{" + PARTICIPANT_ID + "}";
+    String STUDY_ID_PATH        = "/{" + STUDY_ID + "}";
 
     /**
      * Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device, though
@@ -80,18 +82,6 @@ public interface ChronicleStudyApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId );
-
-    /**
-     * Verify that a participants is part of this study.
-     *
-     * @param studyId       - the study id
-     * @param participantId - the participant id
-     * @return Whether or not this participant is in this study
-     */
-    @GET( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Boolean isKnownParticipant(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId );
 
     /**
      * Delete a participant and their data.  Returns the number of entities removed.
