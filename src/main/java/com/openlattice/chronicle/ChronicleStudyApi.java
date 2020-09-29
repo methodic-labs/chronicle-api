@@ -78,7 +78,7 @@ public interface ChronicleStudyApi {
      */
 
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
-    UUID enrollSourceV2(
+    UUID enrollDataSourceInOrgStudy(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
@@ -100,36 +100,6 @@ public interface ChronicleStudyApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId );
-
-    /**
-     * Apps v2: Verifies that a participant in a study is associated with a specific data source.
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - the study id
-     * @param participantId  - the participant id
-     * @param datasourceId   - the datasource (device) id
-     * @return Whether or not the datasource is tied to this participant in this study
-     */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
-    Boolean isKnownDataSourceV2(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Path( DATASOURCE_ID ) String datasourceId );
-
-    /**
-     * Verify that a participants is part of this study.
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - the study id
-     * @param participantId  - the participant id
-     * @return Whether or not this participant is in this study
-     */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Boolean isKnownParticipant(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId );
 
     /**
      * Delete a participant and their data.  Returns the number of entities removed.
@@ -266,7 +236,7 @@ public interface ChronicleStudyApi {
      * @return true if notifications are enabled for a given study
      */
     @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + NOTIFICATIONS )
-    Boolean isNotificationsEnabledV2(
+    Boolean isOrgStudyNotificationsEnabled(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
     );
@@ -294,7 +264,7 @@ public interface ChronicleStudyApi {
      * @return one of { ENROLLED, NOT_ENROLLED, UNKNOWN }
      */
     @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENROLLMENT_STATUS )
-    ParticipationStatus getParticipationStatusV2(
+    ParticipationStatus getOrgStudyParticipationStatus(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId
@@ -352,7 +322,7 @@ public interface ChronicleStudyApi {
      * or an empty Map if no questionnaires are found.
      */
     @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRES )
-    Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnairesV2(
+    Map<UUID, Map<FullQualifiedName, Set<Object>>> getOrgStudyQuestionnaires(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
     );
