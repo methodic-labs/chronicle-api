@@ -22,12 +22,10 @@ public interface ChronicleStudyApi {
     String ENTITY_KEY_ID   = "entityKeyId";
     String ENTITY_SET_ID   = "entitySetId";
     String FILE_TYPE       = "fileType";
-    String ORGANIZATION_ID = "organizationId";
     String PARTICIPANT_ID  = "participantId";
     String STUDY_ID        = "studyId";
     String TYPE            = "type";
 
-    String ACTIVE            = "/active";
     String APPS              = "/apps";
     String AUTHENTICATED     = "/authenticated";
     String DATA_PATH         = "/data";
@@ -38,12 +36,10 @@ public interface ChronicleStudyApi {
     String QUESTIONNAIRE     = "/questionnaire";
     String QUESTIONNAIRES    = "/questionnaires";
     String USAGE_PATH        = "/usage";
-    String VALID             = "/valid";
 
     String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH   = "/{" + ENTITY_KEY_ID + "}";
     String ENTITY_SET_ID_PATH   = "/{" + ENTITY_SET_ID + "}";
-    String ORGANIZATION_ID_PATH = "/{" + ORGANIZATION_ID + "}";
     String PARTICIPANT_ID_PATH  = "/{" + PARTICIPANT_ID + "}";
     String STUDY_ID_PATH        = "/{" + STUDY_ID + "}";
 
