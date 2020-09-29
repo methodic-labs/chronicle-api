@@ -60,7 +60,7 @@ public interface ChronicleApi {
      * @return The total number of items persisted by the server.
      */
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
-    Integer uploadV2(
+    Integer uploadOrgStudyParticipantData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
