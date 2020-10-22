@@ -33,6 +33,7 @@ public interface ChronicleApi {
     String AUTHENTICATED     = "/authenticated";
     String DATA_PATH         = "/data";
     String EDM_PATH          = "/edm";
+    String ENROLL_PATH       = "/enroll";
     String ENROLLMENT_STATUS = "/status";
     String NOTIFICATIONS     = "/notifications";
     String PARTICIPANT_PATH  = "/participant";
@@ -41,6 +42,7 @@ public interface ChronicleApi {
     String QUESTIONNAIRES    = "/questionnaires";
     String STATUS_PATH       = "/status";
     String USAGE_PATH        = "/usage";
+    String UPLOAD_PATH       = "/upload";
 
     String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH   = "/{" + ENTITY_KEY_ID + "}";
@@ -64,7 +66,7 @@ public interface ChronicleApi {
      * etc.
      */
 
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + ENROLL_PATH )
     UUID enrollSource(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -155,13 +157,12 @@ public interface ChronicleApi {
     );
 
     /**
-     * Update chronicle_used_by associations when apps usage survey is submitted
+     * Submit app usage survey.
      *
      * @param organizationId     - Id of the organization to which study belongs
      * @param studyId            - the study id
      * @param participantId      - participantId
      * @param associationDetails - mapping from association EKID to association entity data
-     * @return number of updated associations
      */
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
     public void submitAppUsageSurvey(
@@ -269,7 +270,7 @@ public interface ChronicleApi {
      * @param data           The data / entities to write
      * @return The total number of items persisted by the server.
      */
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH )
     Integer upload(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,

@@ -147,12 +147,11 @@ public interface ChronicleStudyApi {
     );
 
     /**
-     * Update chronicle_used_by associations when apps usage survey is submitted
+     * Submit app usage survey
      *
      * @param studyId            - the study id
      * @param participantId      - participantId
      * @param associationDetails - mapping from association EKID to association entity data
-     * @return number of updated associations
      */
     @POST( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
     public void submitAppUsageSurvey(
