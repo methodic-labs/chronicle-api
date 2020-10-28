@@ -41,6 +41,7 @@ public interface ChronicleApi {
     String QUESTIONNAIRE     = "/questionnaire";
     String QUESTIONNAIRES    = "/questionnaires";
     String STATUS_PATH       = "/status";
+    String TIME_USE_DIARY    = "/time-use-diary";
     String USAGE_PATH        = "/usage";
     String UPLOAD_PATH       = "/upload";
 
@@ -258,6 +259,35 @@ public interface ChronicleApi {
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
+    );
+
+    /**
+     * Submit responses for time use diary survey
+     *
+     * @param organizationId - Id of the organization to which study belongs
+     * @param studyId       - studyId
+     * @param participantId - participantId
+     *
+     * @apiNote Each element of the surveyResponses array represents a question/answer instance
+     * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
+     * and ol.datetimeend & ol.datetimestart values to define a time range.
+     * For example, the response to the question "What was the child doing between 08:00 and 10:00"
+     * could be represented in the array as this object:
+     * {
+     * ol.code: primaryActivity
+     * ol.title: 'Primary Activity,
+     * ol.values: ['Napping'],
+     * ol.datetimestart: <Date + 08:00>
+     * ol.datetimeend: <Date + 10:00>
+     * }
+     * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + TIME_USE_DIARY )
+    void submitTimeUseDiarySurvey(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Body List<Map<FullQualifiedName, Set<Object>>> surveyResponses
     );
 
     /**
