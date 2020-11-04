@@ -2,7 +2,9 @@ package com.openlattice.chronicle.api;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
-import com.openlattice.chronicle.data.*;
+import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
+import com.openlattice.chronicle.data.ChronicleQuestionnaire;
+import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
@@ -23,25 +25,18 @@ public interface ChronicleApi {
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
-    String FILE_TYPE       = "fileType";
     String PARTICIPANT_ID  = "participantId";
     String STUDY_ID        = "studyId";
-    String TYPE            = "type";
     String ORGANIZATION_ID = "organizationId";
 
     String APPS_PATH              = "/apps";
-    String AUTHENTICATED_PATH     = "/authenticated";
-    String DATA_PATH              = "/data";
     String EDM_PATH               = "/edm";
     String ENROLL_PATH            = "/enroll";
     String ENROLLMENT_STATUS_PATH = "/status";
     String NOTIFICATIONS_PATH     = "/notifications";
-    String PARTICIPANT_PATH       = "/participant";
-    String PREPROCESSED_PATH      = "/preprocessed";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
     String STATUS_PATH            = "/status";
-    String USAGE_PATH             = "/usage";
     String UPLOAD_PATH            = "/upload";
 
     String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
@@ -73,88 +68,6 @@ public interface ChronicleApi {
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId,
             @Body Optional<Datasource> datasource );
-
-    /**
-     * Delete a participant and their data.  Returns the number of entities removed.
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - studyId
-     * @param participantId  - participant id
-     */
-    @DELETE( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Void deleteParticipantAndAllNeighbors(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Query( TYPE ) DeleteType deleteType
-    );
-
-    /**
-     * Delete a study and their attached neighbors.  Returns the number of entities removed.
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - studyId
-     */
-    @DELETE( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH )
-    Void deleteStudyAndAllNeighbors(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Query( TYPE ) DeleteType deleteType
-    );
-
-    /**
-     * Returns a file download containing all participant data (including neighbor data).
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED_PATH + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH )
-    Iterable<Map<String, Set<Object>>> getAllParticipantData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
-     * Returns a file download containing preprocessed data.
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED_PATH + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
-    Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
-     * Returns a file download containing user app usage data.
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED_PATH + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH + USAGE_PATH )
-    Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
 
     /**
      * Submit app usage survey.
@@ -266,7 +179,7 @@ public interface ChronicleApi {
      * @param organizationId Id of the organization to which study belongs
      * @param studyId        The study id to associate the data with.
      * @param participantId  The participant id to associate the data with.
-     * @param datasourceId       The device id logging the data.
+     * @param datasourceId   The device id logging the data.
      * @param data           The data / entities to write
      * @return The total number of items persisted by the server.
      */
