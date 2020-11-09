@@ -1,6 +1,6 @@
 package com.openlattice.chronicle;
 
-import com.openlattice.chronicle.data.DeleteType;
+import com.openlattice.chronicle.data.ChronicleDeleteType;
 import com.openlattice.chronicle.data.FileType;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
@@ -45,7 +45,7 @@ public interface UserAuthenticatedApi {
     Void deleteParticipantAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
-            @Query( TYPE ) DeleteType deleteType
+            @Query( TYPE ) ChronicleDeleteType chronicleDeleteType
     );
 
     /**
@@ -56,7 +56,7 @@ public interface UserAuthenticatedApi {
     @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH )
     Void deleteStudyAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
-            @Query( TYPE ) DeleteType deleteType
+            @Query( TYPE ) ChronicleDeleteType chronicleDeleteType
     );
 
     /**

@@ -198,7 +198,7 @@ public interface ChronicleApi {
      * @return A map from property type FQNs to their corresponding ids
      */
     @POST( BASE + EDM_PATH )
-    Map<String, UUID> getPropertyTypeIds( @Body Set<String> propertyTypeFqns );
+    Map<FullQualifiedName, UUID> getPropertyTypeIds( @Body Set<FullQualifiedName> propertyTypeFqns );
 
     @GET( BASE + STATUS_PATH )
     Boolean isRunning();
