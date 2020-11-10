@@ -37,7 +37,7 @@ public interface ChronicleApi {
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
     String STATUS_PATH            = "/status";
-    String TIME_USE_DIARY    = "/time-use-diary";
+    String TIME_USE_DIARY         = "/time-use-diary";
     String UPLOAD_PATH            = "/upload";
 
     String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
@@ -178,9 +178,8 @@ public interface ChronicleApi {
      * Submit responses for time use diary survey
      *
      * @param organizationId - Id of the organization to which study belongs
-     * @param studyId       - studyId
-     * @param participantId - participantId
-     *
+     * @param studyId        - studyId
+     * @param participantId  - participantId
      * @apiNote Each element of the surveyResponses array represents a question/answer instance
      * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
      * and ol.datetimeend & ol.datetimestart values to define a time range.
