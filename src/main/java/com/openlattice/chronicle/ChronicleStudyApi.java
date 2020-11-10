@@ -1,7 +1,9 @@
 package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
-import com.openlattice.chronicle.data.*;
+import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
+import com.openlattice.chronicle.data.ChronicleQuestionnaire;
+import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
@@ -20,18 +22,14 @@ public interface ChronicleStudyApi {
     String DATASOURCE_ID  = "datasourceId";
     String DATE           = "date";
     String ENTITY_KEY_ID  = "entityKeyId";
-    String FILE_TYPE      = "fileType";
     String PARTICIPANT_ID = "participantId";
     String STUDY_ID       = "studyId";
-    String TYPE           = "type";
 
     String APPS              = "/apps";
-    String AUTHENTICATED     = "/authenticated";
     String DATA_PATH         = "/data";
     String ENROLLMENT_STATUS = "/status";
     String NOTIFICATIONS     = "/notifications";
     String PARTICIPANT_PATH  = "/participant";
-    String PREPROCESSED_PATH = "/preprocessed";
     String QUESTIONNAIRE     = "/questionnaire";
     String QUESTIONNAIRES    = "/questionnaires";
     String TIME_USE_DIARY    = "/time-use-diary";
@@ -77,75 +75,6 @@ public interface ChronicleStudyApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId );
-
-    /**
-     * Delete a participant and their data.  Returns the number of entities removed.
-     *
-     * @param studyId       - studyId
-     * @param participantId - participant id
-     */
-    @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Void deleteParticipantAndAllNeighbors(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Query( TYPE ) DeleteType deleteType
-    );
-
-    /**
-     * Delete a study and their attached neighbors.  Returns the number of entities removed.
-     *
-     * @param studyId - studyId
-     */
-    @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH )
-    Void deleteStudyAndAllNeighbors(
-            @Path( STUDY_ID ) UUID studyId,
-            @Query( TYPE ) DeleteType deleteType
-    );
-
-    /**
-     * Returns a file download containing all participant data (including neighbor data).
-     *
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
-    Iterable<Map<String, Set<Object>>> getAllParticipantData(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
-     * Returns a file download containing preprocessed data.
-     *
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
-    Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
-     * Returns a file download containing user app usage data.
-     *
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + USAGE_PATH )
-    Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
 
     /**
      * Submit app usage survey

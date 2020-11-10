@@ -2,7 +2,9 @@ package com.openlattice.chronicle.api;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
-import com.openlattice.chronicle.data.*;
+import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
+import com.openlattice.chronicle.data.ChronicleQuestionnaire;
+import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
@@ -23,27 +25,20 @@ public interface ChronicleApi {
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
-    String FILE_TYPE       = "fileType";
     String PARTICIPANT_ID  = "participantId";
     String STUDY_ID        = "studyId";
-    String TYPE            = "type";
     String ORGANIZATION_ID = "organizationId";
 
-    String APPS              = "/apps";
-    String AUTHENTICATED     = "/authenticated";
-    String DATA_PATH         = "/data";
-    String EDM_PATH          = "/edm";
-    String ENROLL_PATH       = "/enroll";
-    String ENROLLMENT_STATUS = "/status";
-    String NOTIFICATIONS     = "/notifications";
-    String PARTICIPANT_PATH  = "/participant";
-    String PREPROCESSED_PATH = "/preprocessed";
-    String QUESTIONNAIRE     = "/questionnaire";
-    String QUESTIONNAIRES    = "/questionnaires";
-    String STATUS_PATH       = "/status";
+    String APPS_PATH              = "/apps";
+    String EDM_PATH               = "/edm";
+    String ENROLL_PATH            = "/enroll";
+    String ENROLLMENT_STATUS_PATH = "/status";
+    String NOTIFICATIONS_PATH     = "/notifications";
+    String QUESTIONNAIRE_PATH     = "/questionnaire";
+    String QUESTIONNAIRES_PATH    = "/questionnaires";
+    String STATUS_PATH            = "/status";
     String TIME_USE_DIARY    = "/time-use-diary";
-    String USAGE_PATH        = "/usage";
-    String UPLOAD_PATH       = "/upload";
+    String UPLOAD_PATH            = "/upload";
 
     String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH   = "/{" + ENTITY_KEY_ID + "}";
@@ -76,88 +71,6 @@ public interface ChronicleApi {
             @Body Optional<Datasource> datasource );
 
     /**
-     * Delete a participant and their data.  Returns the number of entities removed.
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - studyId
-     * @param participantId  - participant id
-     */
-    @DELETE( BASE + AUTHENTICATED + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
-    Void deleteParticipantAndAllNeighbors(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Query( TYPE ) DeleteType deleteType
-    );
-
-    /**
-     * Delete a study and their attached neighbors.  Returns the number of entities removed.
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - studyId
-     */
-    @DELETE( BASE + AUTHENTICATED + ORGANIZATION_ID_PATH + STUDY_ID_PATH )
-    Void deleteStudyAndAllNeighbors(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Query( TYPE ) DeleteType deleteType
-    );
-
-    /**
-     * Returns a file download containing all participant data (including neighbor data).
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH )
-    Iterable<Map<String, Set<Object>>> getAllParticipantData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
-     * Returns a file download containing preprocessed data.
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
-    Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
-     * Returns a file download containing user app usage data.
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
-     * @param fileType               - the type of file (csv, json) to return as the download
-     * @return All participant data
-     */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH + USAGE_PATH )
-    Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
-            @Query( FILE_TYPE ) FileType fileType
-    );
-
-    /**
      * Submit app usage survey.
      *
      * @param organizationId     - Id of the organization to which study belongs
@@ -165,7 +78,7 @@ public interface ChronicleApi {
      * @param participantId      - participantId
      * @param associationDetails - mapping from association EKID to association entity data
      */
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS_PATH )
     public void submitAppUsageSurvey(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -181,7 +94,7 @@ public interface ChronicleApi {
      * @param participantId  - the participant
      * @return a list of neighbor entities and associations
      */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
+    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS_PATH )
     List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -196,7 +109,7 @@ public interface ChronicleApi {
      * @param studyId        - study id
      * @return true if notifications are enabled for a given study
      */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + NOTIFICATIONS )
+    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + NOTIFICATIONS_PATH )
     Boolean isNotificationsEnabled(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
@@ -210,7 +123,7 @@ public interface ChronicleApi {
      * @param participantId  - participantId
      * @return one of { ENROLLED, NOT_ENROLLED, UNKNOWN }
      */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENROLLMENT_STATUS )
+    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + ENROLLMENT_STATUS_PATH )
     ParticipationStatus getParticipationStatus(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -224,7 +137,7 @@ public interface ChronicleApi {
      * @param studyId           - studyId
      * @param questionnaireEKID - questionnaire entity key id
      */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRE + ENTITY_KEY_ID_PATH )
+    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRE_PATH + ENTITY_KEY_ID_PATH )
     ChronicleQuestionnaire getChronicleQuestionnaire(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -239,7 +152,7 @@ public interface ChronicleApi {
      * @param participantId          - participant id
      * @param questionnaireResponses mapping from questionEntityKeyId to answer entity
      */
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE )
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE_PATH )
     void submitQuestionnaire(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -255,7 +168,7 @@ public interface ChronicleApi {
      * @return a mapping entityKeyId to entity details(name, description, cron etc)
      * or an empty Map if no questionnaires are found.
      */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRES )
+    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRES_PATH )
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
@@ -296,7 +209,7 @@ public interface ChronicleApi {
      * @param organizationId Id of the organization to which study belongs
      * @param studyId        The study id to associate the data with.
      * @param participantId  The participant id to associate the data with.
-     * @param deviceId       The device id logging the data.
+     * @param datasourceId   The device id logging the data.
      * @param data           The data / entities to write
      * @return The total number of items persisted by the server.
      */
@@ -305,7 +218,7 @@ public interface ChronicleApi {
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
-            @Path( DATASOURCE_ID ) String deviceId,
+            @Path( DATASOURCE_ID ) String datasourceId,
             @Body List<SetMultimap<UUID, Object>> data );
 
     /**
@@ -315,7 +228,7 @@ public interface ChronicleApi {
      * @return A map from property type FQNs to their corresponding ids
      */
     @POST( BASE + EDM_PATH )
-    Map<String, UUID> getPropertyTypeIds( @Body Set<String> propertyTypeFqns );
+    Map<FullQualifiedName, UUID> getPropertyTypeIds( @Body Set<FullQualifiedName> propertyTypeFqns );
 
     @GET( BASE + STATUS_PATH )
     Boolean isRunning();
