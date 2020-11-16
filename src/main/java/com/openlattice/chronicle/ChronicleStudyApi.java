@@ -33,7 +33,6 @@ public interface ChronicleStudyApi {
     String QUESTIONNAIRE     = "/questionnaire";
     String QUESTIONNAIRES    = "/questionnaires";
     String TIME_USE_DIARY    = "/time-use-diary";
-    String USAGE_PATH        = "/usage";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
