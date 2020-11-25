@@ -74,8 +74,7 @@ public interface UserAuthenticatedApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + AUTHENTICATED_PATH + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH )
+    @GET( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + DATA_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -92,8 +91,7 @@ public interface UserAuthenticatedApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + AUTHENTICATED_PATH + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
+    @GET( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + DATA_PATH + PREPROCESSED_PATH )
     Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
@@ -110,8 +108,7 @@ public interface UserAuthenticatedApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + AUTHENTICATED_PATH + PARTICIPANT_PATH + DATA_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH
-            + ENTITY_KEY_ID_PATH + USAGE_PATH )
+    @GET( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + DATA_PATH + USAGE_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,

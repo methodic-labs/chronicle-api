@@ -63,7 +63,7 @@ public interface ChronicleApi {
      */
 
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + ENROLL_PATH )
-    UUID enrollSource(
+    UUID enroll(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
