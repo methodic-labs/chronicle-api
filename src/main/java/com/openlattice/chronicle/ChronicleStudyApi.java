@@ -32,6 +32,7 @@ public interface ChronicleStudyApi {
     String PARTICIPANT_PATH  = "/participant";
     String QUESTIONNAIRE     = "/questionnaire";
     String QUESTIONNAIRES    = "/questionnaires";
+    String TIME_USE_DIARY    = "/time-use-diary";
 
     String DATASOURCE_ID_PATH  = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH  = "/{" + ENTITY_KEY_ID + "}";
@@ -162,5 +163,31 @@ public interface ChronicleStudyApi {
     @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES )
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( STUDY_ID ) UUID studyId
+    );
+
+    /**
+     * Submit responses for time use diary survey
+     *
+     * @param studyId       - studyId
+     * @param participantId - participantId
+     * @apiNote Each element of the surveyResponses array represents a question/answer instance
+     * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
+     * and ol.datetimeend & ol.datetimestart values to define a time range.
+     * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
+     * could be represented in the array as this object:
+     * {
+     *      ol.code: primaryActivity
+     *      ol.title: 'Primary Activity,
+     *      ol.values: ['Napping'],
+     *      ol.datetimestart: <Date + 08:00>
+     *      ol.datetimeend: <Date + 10:00>
+     * }
+     * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
+     */
+    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + TIME_USE_DIARY )
+    void submitTimeUseDiarySurvey(
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Body List<Map<FullQualifiedName, Set<Object>>> surveyResponses
     );
 }
