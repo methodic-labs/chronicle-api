@@ -28,7 +28,7 @@ buildscript {
 }
 
 plugins {
-    id 'java'
+    id 'java-library'
     id 'eclipse'
     id 'idea'
     id 'jacoco'
@@ -167,16 +167,16 @@ dependencies {
 
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
 
-    testCompile "junit:junit:${junit_version}"
+    testImplementation "junit:junit:${junit_version}"
 
     /*
      * TESTING
      */
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j_version}"
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j_version}"
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j_version}"
-    testCompile group: 'org.apache.logging.log4j', name: 'log4j-web', version: "${log4j_version}"
-    testCompile("org.mockito:mockito-all:${mockito_version}") {
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j_version}"
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j_version}"
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j_version}"
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-web', version: "${log4j_version}"
+    testImplementation("org.mockito:mockito-all:${mockito_version}") {
         exclude module: 'hamcrest'
         exclude module: 'hamcrest-core'
     }
