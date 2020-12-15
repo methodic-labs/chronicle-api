@@ -47,7 +47,7 @@ ext.scmUrl = 'scm:git:https://github.com/openlattice/chronicle-api.git'
 ext.connectionUrl = 'scm:git:https://github.com/openlattice/chronicle-api.git'
 ext.developerConnectionUrl = 'scm:git:https://github.com/openlattice/chronicle-api.git'
 
-apply from: "https://raw.githubusercontent.com/openlattice/gradles/master/openlattice.gradle"
+apply from: "https://raw.githubusercontent.com/openlattice/openlattice/fix/build/gradles/openlattice.gradle"
 
 // Still on java 8 as a compile target for android
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -66,7 +66,7 @@ jacoco {
 
 checkstyle {
     toolVersion = '7.4'
-    config project.resources.text.fromUri('https://raw.githubusercontent.com/openlattice/gradles/master/checkstyle.xml')
+    config project.resources.text.fromUri('https://raw.githubusercontent.com/openlattice/openlattice/develop/gradles/checkstyle.xml')
 }
 
 tasks.withType(Checkstyle) {
