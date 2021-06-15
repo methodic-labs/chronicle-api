@@ -15,6 +15,7 @@ public final class SerializationConstants {
     public static final String QUESTIONNAIRE_DETAILS = "questionnaireDetails";
     public static final String QUESTIONS             = "questions";
     public static final String SRC                   = "src";
+    public static final String ENTITY_SET_IDS        = "entitySetIds";
 
     private SerializationConstants() {
     }
