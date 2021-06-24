@@ -61,6 +61,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     }
 }
 
+javadoc {
+    options.tags =[ "apiNote:a:API Note:", "implSpec:a:Implementation Requirements:","implNote:a:Implementation Note:"]
+}
+
 jacoco {
     toolVersion = "0.8.2"
 }
@@ -68,7 +72,7 @@ jacoco {
 checkstyle {
     toolVersion = '7.4'
     showViolations = false
-    config project.resources.text.fromUri('https://raw.githubusercontent.com/openlattice/openlattice/develop/gradles/checkstyle.xml')
+    config project.resources.text.fromUri('https://raw.githubusercontent.com/openlattice/openlattice/main/gradles/checkstyle.xml')
 }
 
 tasks.withType(Checkstyle) {
