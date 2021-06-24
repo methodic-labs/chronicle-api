@@ -43,6 +43,7 @@ public interface UserAuthenticatedApi {
      * @param organizationId - Id of the organization to which study belongs
      * @param studyId        - studyId
      * @param participantId  - participant id
+     * @param chronicleDeleteType TODO: Alfonce to fill this in
      */
     @DELETE( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Void deleteParticipantAndAllNeighbors(
@@ -57,6 +58,7 @@ public interface UserAuthenticatedApi {
      *
      * @param organizationId - Id of the organization to which study belongs
      * @param studyId        - studyId
+     * @param chronicleDeleteType TODO: Alfonce to fill this in
      */
     @DELETE( BASE + AUTHENTICATED_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH )
     Void deleteStudyAndAllNeighbors(

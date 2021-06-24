@@ -182,15 +182,15 @@ public interface ChronicleApi {
      * @param participantId  - participantId
      * @apiNote Each element of the surveyResponses array represents a question/answer instance
      * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
-     * and ol.datetimeend & ol.datetimestart values to define a time range.
+     * and ol.datetimeend &amp; ol.datetimestart values to define a time range.
      * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
      * could be represented in the array as this object:
      * {
      *      ol.code: primaryActivity
      *      ol.title: 'Primary Activity,
      *      ol.values: ['Napping'],
-     *      ol.datetimestart: <Date + 08:00>
-     *      ol.datetimeend: <Date + 10:00>
+     *      ol.datetimestart: &lt;Date + 08:00&gt;
+     *      ol.datetimeend: &lt;Date + 10:00&gt;
      * }
      * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
      */
