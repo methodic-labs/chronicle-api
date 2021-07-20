@@ -22,6 +22,7 @@ public interface ChronicleApi {
     String CONTROLLER = "/v2";
     String BASE       = SERVICE + CONTROLLER;
 
+    String APP_NAME = "appName";
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
@@ -36,6 +37,7 @@ public interface ChronicleApi {
     String NOTIFICATIONS_PATH     = "/notifications";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
+    String SETTINGS_PATH          = "/settings";
     String STATUS_PATH            = "/status";
     String TIME_USE_DIARY         = "/time-use-diary";
     String UPLOAD_PATH            = "/upload";
@@ -228,6 +230,12 @@ public interface ChronicleApi {
      */
     @POST( BASE + EDM_PATH )
     Map<FullQualifiedName, UUID> getPropertyTypeIds( @Body Set<FullQualifiedName> propertyTypeFqns );
+
+    @GET( BASE + ORGANIZATION_ID_PATH + SETTINGS_PATH )
+    Map<String, Object> getAppSettings(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Query( APP_NAME ) String appName
+    );
 
     @GET( BASE + STATUS_PATH )
     Boolean isRunning();
