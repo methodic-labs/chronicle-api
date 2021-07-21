@@ -22,6 +22,7 @@ public interface ChronicleApi {
     String CONTROLLER = "/v2";
     String BASE       = SERVICE + CONTROLLER;
 
+    String APP_NAME = "appName";
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
@@ -36,6 +37,7 @@ public interface ChronicleApi {
     String NOTIFICATIONS_PATH     = "/notifications";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
+    String SETTINGS_PATH          = "/settings";
     String STATUS_PATH            = "/status";
     String TIME_USE_DIARY         = "/time-use-diary";
     String UPLOAD_PATH            = "/upload";
@@ -182,15 +184,15 @@ public interface ChronicleApi {
      * @param participantId  - participantId
      * @apiNote Each element of the surveyResponses array represents a question/answer instance
      * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
-     * and ol.datetimeend & ol.datetimestart values to define a time range.
+     * and ol.datetimeend &amp; ol.datetimestart values to define a time range.
      * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
      * could be represented in the array as this object:
      * {
      *      ol.code: primaryActivity
      *      ol.title: 'Primary Activity,
      *      ol.values: ['Napping'],
-     *      ol.datetimestart: <Date + 08:00>
-     *      ol.datetimeend: <Date + 10:00>
+     *      ol.datetimestart: &lt;Date + 08:00&gt;
+     *      ol.datetimeend: &lt;Date + 10:00&gt;
      * }
      * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
      */
@@ -228,6 +230,12 @@ public interface ChronicleApi {
      */
     @POST( BASE + EDM_PATH )
     Map<FullQualifiedName, UUID> getPropertyTypeIds( @Body Set<FullQualifiedName> propertyTypeFqns );
+
+    @GET( BASE + ORGANIZATION_ID_PATH + SETTINGS_PATH )
+    Map<String, Object> getAppSettings(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Query( APP_NAME ) String appName
+    );
 
     @GET( BASE + STATUS_PATH )
     Boolean isRunning();
