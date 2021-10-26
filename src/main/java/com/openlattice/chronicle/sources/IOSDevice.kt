@@ -14,12 +14,12 @@ import java.util.*
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 class IOSDevice @JsonCreator constructor(
-        @param:JsonProperty(IOSDeviceFields.NAME) val name: String,
-        @param:JsonProperty(IOSDeviceFields.SYSTEM_NAME) val systemName: String,
-        @param:JsonProperty(IOSDeviceFields.MODEL) val model: String,
-        @param:JsonProperty(IOSDeviceFields.LOCALIZED_MODEL) val localizedModel: String,
-        @param:JsonProperty(IOSDeviceFields.VERSION) val version: String,
-        @param:JsonProperty(IOSDeviceFields.DEVICE_ID) val deviceId: String,
+        @JsonProperty(IOSDeviceFields.NAME) val name: String,
+        @JsonProperty(IOSDeviceFields.SYSTEM_NAME) val systemName: String,
+        @JsonProperty(IOSDeviceFields.MODEL) val model: String,
+        @JsonProperty(IOSDeviceFields.LOCALIZED_MODEL) val localizedModel: String,
+        @JsonProperty(IOSDeviceFields.VERSION) val version: String,
+        @JsonProperty(IOSDeviceFields.DEVICE_ID) val deviceId: String,
 ) : Datasource {
 
     override fun equals(other: Any?): Boolean {
