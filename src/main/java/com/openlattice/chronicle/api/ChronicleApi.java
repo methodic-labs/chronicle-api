@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.ChronicleQuestionnaire;
+import com.openlattice.chronicle.data.MessageDetails;
 import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
@@ -28,12 +29,14 @@ public interface ChronicleApi {
     String ENTITY_KEY_ID   = "entityKeyId";
     String PARTICIPANT_ID  = "participantId";
     String STUDY_ID        = "studyId";
+    String TYPE            = "type";
     String ORGANIZATION_ID = "organizationId";
 
     String APPS_PATH              = "/apps";
     String EDM_PATH               = "/edm";
     String ENROLL_PATH            = "/enroll";
     String ENROLLMENT_STATUS_PATH = "/status";
+    String MESSAGE_PATH           = "/message";
     String NOTIFICATIONS_PATH     = "/notifications";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
@@ -47,6 +50,7 @@ public interface ChronicleApi {
     String ORGANIZATION_ID_PATH = "/{" + ORGANIZATION_ID + "}";
     String PARTICIPANT_ID_PATH  = "/{" + PARTICIPANT_ID + "}";
     String STUDY_ID_PATH        = "/{" + STUDY_ID + "}";
+    String TYPE_PATH        = "/{" + TYPE + "}";
 
     /**
      * Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device,
@@ -71,6 +75,21 @@ public interface ChronicleApi {
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId,
             @Body Optional<Datasource> datasource );
+
+    /**
+     * Send Message to participant.
+     *
+     * @param organizationId    - Id of the organization to which study belongs
+     * @param studyId           - the studyId
+     * @param messageDetails    - mapping from field to details
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + MESSAGE_PATH )
+    public void sendMessage(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Body Map<String, String> messageDetails
+    );
 
     /**
      * Submit app usage survey.
