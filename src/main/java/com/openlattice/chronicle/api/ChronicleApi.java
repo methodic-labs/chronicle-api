@@ -34,6 +34,7 @@ public interface ChronicleApi {
     String EDM_PATH               = "/edm";
     String ENROLL_PATH            = "/enroll";
     String ENROLLMENT_STATUS_PATH = "/status";
+    String MESSAGE_PATH           = "/message";
     String NOTIFICATIONS_PATH     = "/notifications";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
@@ -145,6 +146,22 @@ public interface ChronicleApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
     );
+
+    /**
+     * Send Message to participant.
+     *
+     * @param organizationId    - Id of the organization to which study belongs
+     * @param studyId           - the studyId
+     * @param messageDetails    - mapping from field to details
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + MESSAGE_PATH )
+    public void sendMessage(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Body Map<String, String> messageDetails
+    );
+
 
     /**
      * Submit a questionnaire
