@@ -154,7 +154,7 @@ public interface ChronicleApi {
      * @param organizationId    - Id of the organization to which study belongs
      * @param messageDetailsList    - a list of message details
      */
-    @POST( BASE + ORGANIZATION_ID_PATH +  MESSAGE_PATH )
+    @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH )
     void sendMessages(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Body List<MessageDetails> messageDetailsList
