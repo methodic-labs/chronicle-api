@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.ChronicleQuestionnaire;
+import com.openlattice.chronicle.data.MessageDetails;
 import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
@@ -34,6 +35,7 @@ public interface ChronicleApi {
     String EDM_PATH               = "/edm";
     String ENROLL_PATH            = "/enroll";
     String ENROLLMENT_STATUS_PATH = "/status";
+    String MESSAGE_PATH           = "/message";
     String NOTIFICATIONS_PATH     = "/notifications";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
@@ -145,6 +147,19 @@ public interface ChronicleApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
     );
+
+    /**
+     * Send Message to participant.
+     *
+     * @param organizationId    - Id of the organization to which study belongs
+     * @param messageDetailsList    - a list of message details
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH )
+    void sendMessages(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Body List<MessageDetails> messageDetailsList
+    );
+
 
     /**
      * Submit a questionnaire
