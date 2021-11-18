@@ -9,5 +9,5 @@ data class MessageDetails(
     val participantId: String,
     val phoneNumber: String,
     val url: String,
-    val studyId: UUID,
+    val studyId: UUID
 )
