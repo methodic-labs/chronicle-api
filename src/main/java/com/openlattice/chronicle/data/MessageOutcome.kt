@@ -11,5 +11,5 @@ data class MessageOutcome(
     val url: String,
     var isSuccess: Boolean,
     val sid: String,
-    val studyId :UUID,
+    val studyId: UUID
 )
