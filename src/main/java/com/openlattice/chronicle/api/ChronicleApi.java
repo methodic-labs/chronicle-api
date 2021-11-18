@@ -22,7 +22,7 @@ public interface ChronicleApi {
     String CONTROLLER = "/v2";
     String BASE       = SERVICE + CONTROLLER;
 
-    String APP_NAME = "appName";
+    String APP_NAME        = "appName";
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
@@ -34,6 +34,7 @@ public interface ChronicleApi {
     String EDM_PATH               = "/edm";
     String ENROLL_PATH            = "/enroll";
     String ENROLLMENT_STATUS_PATH = "/status";
+    String IOS_PATH               = "/ios";
     String NOTIFICATIONS_PATH     = "/notifications";
     String QUESTIONNAIRE_PATH     = "/questionnaire";
     String QUESTIONNAIRES_PATH    = "/questionnaires";
@@ -188,11 +189,11 @@ public interface ChronicleApi {
      * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
      * could be represented in the array as this object:
      * {
-     *      ol.code: primaryActivity
-     *      ol.title: 'Primary Activity,
-     *      ol.values: ['Napping'],
-     *      ol.datetimestart: &lt;Date + 08:00&gt;
-     *      ol.datetimeend: &lt;Date + 10:00&gt;
+     * ol.code: primaryActivity
+     * ol.title: 'Primary Activity,
+     * ol.values: ['Napping'],
+     * ol.datetimestart: &lt;Date + 08:00&gt;
+     * ol.datetimeend: &lt;Date + 10:00&gt;
      * }
      * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
      */
@@ -202,6 +203,33 @@ public interface ChronicleApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Body List<Map<FullQualifiedName, Set<Object>>> surveyResponses
+    );
+
+    /**
+     * Uploads sensor data from iOS device
+     * @param organizationId - organizationId
+     * @param studyId - studyId
+     * @param participantId - participantId
+     * @param deviceId - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param data - A list of SensorData objects. Each object represents a sample recorded at a particular time. The keys in each object are Ids of property types:
+     *             {
+     *                  [ol.name] - a string representation of the sensor type. possible values: 'visits', 'deviceUsage' etc
+     *                  [ol.values] - an array of [ol.variable, ol.values] pairs
+     *                  [ol.id] - unique id of sample
+     *                  [ol.datetimestart]: lower bound for date sample was collected
+     *                  [ol.datetimeend]: upper bound for date sample was collected
+     *                  [ol.timezone]: timezone identifier e.g "America/Sao_Paulo"
+     *                  [ol.datelogged]: date when sample was recorded
+     *             }
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH
+            + IOS_PATH )
+    void uploadIOSSensorData(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Path( STUDY_ID ) UUID studyId,
+            @Path( PARTICIPANT_ID ) String participantId,
+            @Path( DATASOURCE_ID ) String deviceId,
+            @Body List<Map<UUID, String>> data
     );
 
     /**
