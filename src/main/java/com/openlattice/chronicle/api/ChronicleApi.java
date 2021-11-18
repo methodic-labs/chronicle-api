@@ -5,6 +5,7 @@ import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.ChronicleQuestionnaire;
 import com.openlattice.chronicle.data.ParticipationStatus;
+import com.openlattice.chronicle.data.SensorDataSample;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
@@ -207,20 +208,13 @@ public interface ChronicleApi {
 
     /**
      * Uploads sensor data from iOS device
+     *
      * @param organizationId - organizationId
-     * @param studyId - studyId
-     * @param participantId - participantId
-     * @param deviceId - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
-     * @param data - A list of SensorData objects. Each object represents a sample recorded at a particular time. The keys in each object are Ids of property types:
-     *             {
-     *                  [ol.name] - a string representation of the sensor type. possible values: 'visits', 'deviceUsage' etc
-     *                  [ol.values] - an array of [ol.variable, ol.values] pairs
-     *                  [ol.id] - unique id of sample
-     *                  [ol.datetimestart]: lower bound for date sample was collected
-     *                  [ol.datetimeend]: upper bound for date sample was collected
-     *                  [ol.timezone]: timezone identifier e.g "America/Sao_Paulo"
-     *                  [ol.datelogged]: date when sample was recorded
-     *             }
+     * @param studyId        - studyId
+     * @param participantId  - participantId
+     * @param deviceId       - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param data           - A list of SensorDataSample objects.
+     *
      */
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH
             + IOS_PATH )
@@ -229,7 +223,7 @@ public interface ChronicleApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String deviceId,
-            @Body List<Map<UUID, String>> data
+            @Body List<SensorDataSample> data
     );
 
     /**
