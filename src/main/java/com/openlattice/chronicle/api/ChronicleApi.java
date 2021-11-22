@@ -10,10 +10,12 @@ import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
@@ -159,6 +161,16 @@ public interface ChronicleApi {
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Body List<MessageDetails> messageDetailsList
     );
+
+    /**
+     * Update staus for messages sent to partipants.
+     * @param organizationId - Id of the organization to which study belongs
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH + STATUS_PATH)
+    void updateMessageStatus(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            HttpServletRequest request
+    ) throws ExecutionException;
 
 
     /**
