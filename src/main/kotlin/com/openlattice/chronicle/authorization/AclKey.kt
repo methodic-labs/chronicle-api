@@ -41,6 +41,7 @@ class AclKey(ids: List<UUID>) : List<UUID> by ids {
         return hashCode() == uuids.hashCode()
     }
 
+    //TODO: Make sure hashcode correctly works in kotlin.
     override fun hashCode(): Int {
         if (h == 0) {
             h = super.hashCode()

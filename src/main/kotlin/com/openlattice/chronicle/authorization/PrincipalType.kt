@@ -15,11 +15,10 @@
  *
  * You can contact the owner of the copyright at support@openlattice.com
  */
+package com.openlattice.chronicle.authorization
 
-package com.openlattice.chronicle.authorization;
-
-public enum PrincipalType {
-    GROUP, //Group principals will come from synchronizing with AD/LDAP and won't be editable in OpenLattice system.
+enum class PrincipalType {
+    GROUP,  //Group principals will come from synchronizing with AD/LDAP and won't be editable in OpenLattice system.
     ORGANIZATION,
     ROLE,
     USER,

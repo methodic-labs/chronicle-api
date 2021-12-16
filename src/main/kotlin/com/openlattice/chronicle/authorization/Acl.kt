@@ -20,7 +20,7 @@ package com.openlattice.chronicle.authorization
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.util.JsonFields
 
-class Acl constructor(
+data class Acl constructor(
         @JsonProperty(JsonFields.ACL_OBJECT_PATH) val aclKey: AclKey,
         @JsonProperty(JsonFields.ACES) val aces: Iterable<Ace>
 ) {
