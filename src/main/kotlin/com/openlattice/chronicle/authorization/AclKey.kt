@@ -6,6 +6,8 @@ import java.util.*
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
 class AclKey(ids: List<UUID>) : List<UUID> by ids {
+    constructor(vararg ids: UUID) : this(ids.asList())
+
     @Transient
     private var h: Int = 0
     operator fun compareTo(o: AclKey): Int {

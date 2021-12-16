@@ -30,7 +30,7 @@ enum class SystemRole(principalId: String) {
     AUTHENTICATED_USER("AuthenticatedUser"),
     OPENLATTICE("openlatticeRole");
 
-    private val principal: Principal
+    val principal: Principal
 
     companion object {
         private var allRoles: Set<String> = values().map { obj: SystemRole -> obj.getName() }.toSet()
