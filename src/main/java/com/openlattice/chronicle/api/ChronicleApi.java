@@ -7,7 +7,6 @@ import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
