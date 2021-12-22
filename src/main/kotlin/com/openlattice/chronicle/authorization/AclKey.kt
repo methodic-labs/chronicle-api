@@ -8,8 +8,19 @@ import java.util.*
 class AclKey(ids: List<UUID>) : List<UUID> by ids {
     constructor(vararg ids: UUID) : this(ids.asList())
 
+    val index: String
+
     @Transient
-    private var h: Int = 0
+    private val h: Int = super.hashCode()
+
+    init {
+        val joiner = StringJoiner(",")
+        for (uuid in this) {
+            joiner.add(uuid.toString())
+        }
+        index = joiner.toString()
+    }
+
     operator fun compareTo(o: AclKey): Int {
         var result = 0
         var i = 0
@@ -43,11 +54,5 @@ class AclKey(ids: List<UUID>) : List<UUID> by ids {
         return hashCode() == uuids.hashCode()
     }
 
-    //TODO: Make sure hashcode correctly works in kotlin.
-    override fun hashCode(): Int {
-        if (h == 0) {
-            h = super.hashCode()
-        }
-        return h
-    }
+    override fun hashCode(): Int = h
 }
