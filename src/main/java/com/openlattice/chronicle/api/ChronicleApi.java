@@ -2,10 +2,7 @@ package com.openlattice.chronicle.api;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.SetMultimap;
-import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
-import com.openlattice.chronicle.data.ChronicleQuestionnaire;
-import com.openlattice.chronicle.data.MessageDetails;
-import com.openlattice.chronicle.data.ParticipationStatus;
+import com.openlattice.chronicle.data.*;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
@@ -27,6 +24,8 @@ public interface ChronicleApi {
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
+    String MESSAGE_ID      = "MessageSid";
+    String MESSAGE_STATUS  = "MessageStatus";
     String PARTICIPANT_ID  = "participantId";
     String STUDY_ID        = "studyId";
     String ORGANIZATION_ID = "organizationId";
@@ -158,6 +157,19 @@ public interface ChronicleApi {
     void sendMessages(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Body List<MessageDetails> messageDetailsList
+    );
+
+    /**
+     * Update staus for messages sent to partipants.
+     * @param organizationId - Id of the organization to which study belongs
+     * @param messageId - String Identifier (SID) - a unique key that is used to identify specific resources.
+     * @param messageStatus - Finalized Message Delivery Status
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH + STATUS_PATH)
+    void updateMessageStatus(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Query( MESSAGE_ID ) String messageId,
+            @Query( MESSAGE_STATUS ) MessageStatus messageStatus
     );
 
 
