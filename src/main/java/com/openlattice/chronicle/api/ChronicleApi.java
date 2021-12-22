@@ -163,13 +163,15 @@ public interface ChronicleApi {
     /**
      * Update staus for messages sent to partipants.
      * @param organizationId - Id of the organization to which study belongs
+     * @param messageId - String Identifier (SID) - a unique key that is used to identify specific resources.
+     * @param messageStatus - Finalized Message Delivery Status
      */
     @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH + STATUS_PATH)
     void updateMessageStatus(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Query( MESSAGE_ID ) String messageId,
             @Query( MESSAGE_STATUS ) MessageStatus messageStatus
-    ) throws ExecutionException;
+    );
 
 
     /**
