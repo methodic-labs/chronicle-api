@@ -1,12 +1,13 @@
 package com.openlattice.chronicle.api
 
-import com.openlattice.chronicle.tud.TudResponse
 import com.openlattice.chronicle.tud.TudDownloadDataType
+import com.openlattice.chronicle.tud.TudResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -32,6 +33,8 @@ interface TimeUseDiaryApi {
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
+
+        const val STATUS_PATH = "/status"
     }
 
     // @formatter:off
@@ -116,7 +119,10 @@ interface TimeUseDiaryApi {
             @Path(ORGANIZATION_ID) organizationId: UUID,
             @Path(STUDY_ID) studyId: UUID,
             @Path(PARTICIPANT_ID) participantId: String,
-            @Query(START_DATE) startDateTime: OffsetDateTime,
+            @Query(START_DATE) startDateTime: OffsetDateTime, // TODO: Datetime? OffsetDateTime?
             @Query(END_DATE) endDateTime: OffsetDateTime
-    ): Map<Date, Set<UUID>>
+    ): Map<LocalDate, Set<UUID>>
+
+    @GET(BASE + STATUS_PATH)
+    fun isRunning(): Boolean
 }
