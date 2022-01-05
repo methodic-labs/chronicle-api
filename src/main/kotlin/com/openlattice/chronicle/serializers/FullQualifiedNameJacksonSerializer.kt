@@ -15,74 +15,65 @@
  *
  * You can contact the owner of the copyright at support@openlattice.com
  */
+package com.openlattice.chronicle.serializers
 
-package com.openlattice.chronicle.serializers;
+import com.fasterxml.jackson.core.JsonGenerator
+import com.fasterxml.jackson.core.JsonParser
+import com.fasterxml.jackson.databind.DeserializationContext
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializerProvider
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer
+import com.fasterxml.jackson.databind.module.SimpleModule
+import com.fasterxml.jackson.databind.ser.std.StdSerializer
+import kotlin.jvm.JvmOverloads
+import org.apache.olingo.commons.api.edm.FullQualifiedName
+import kotlin.Throws
+import java.io.IOException
+import com.openlattice.chronicle.util.JsonFields
 
-import static com.openlattice.chronicle.util.JsonFields.NAMESPACE_FIELD;
-import static com.openlattice.chronicle.util.JsonFields.NAME_FIELD;
+class FullQualifiedNameJacksonSerializer {
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import java.io.IOException;
-import org.apache.olingo.commons.api.edm.FullQualifiedName;
-
-public class FullQualifiedNameJacksonSerializer {
-    private static final SimpleModule module           =
-            new SimpleModule( FullQualifiedNameJacksonSerializer.class.getName() );
-
-    static {
-        module.addSerializer( FullQualifiedName.class, new Serializer() );
-        module.addDeserializer( FullQualifiedName.class, new Deserializer() );
-    }
-
-    public static void registerWithMapper( ObjectMapper mapper ) {
-        mapper.registerModule( module );
-    }
-
-    public static class Serializer extends StdSerializer<FullQualifiedName> {
-
-        public Serializer() {
-            this( FullQualifiedName.class );
-        }
-
-        public Serializer( Class<FullQualifiedName> clazz ) {
-            super( clazz );
-        }
-
-        @Override
-        public void serialize( FullQualifiedName value, JsonGenerator jgen, SerializerProvider provider )
-                throws IOException {
-            jgen.writeStartObject();
-            jgen.writeStringField( NAMESPACE_FIELD, value.getNamespace() );
-            jgen.writeStringField( NAME_FIELD, value.getName() );
-            jgen.writeEndObject();
+    companion object {
+        private val module = SimpleModule(
+            FullQualifiedNameJacksonSerializer::class.java.name
+        )
+        fun registerWithMapper(mapper: ObjectMapper) {
+            mapper.registerModule(module)
         }
     }
 
-    public static class Deserializer extends StdDeserializer<FullQualifiedName> {
-
-        public Deserializer() {
-            this( FullQualifiedName.class );
+    class Serializer @JvmOverloads constructor(clazz: Class<FullQualifiedName> = FullQualifiedName::class.java) :
+        StdSerializer<FullQualifiedName>(clazz) {
+        @Throws(IOException::class)
+        override fun serialize(value: FullQualifiedName, jgen: JsonGenerator, provider: SerializerProvider) {
+            jgen.writeStartObject()
+            jgen.writeStringField(JsonFields.NAMESPACE_FIELD, value.namespace)
+            jgen.writeStringField(JsonFields.NAME_FIELD, value.name)
+            jgen.writeEndObject()
         }
+    }
 
-        protected Deserializer( Class<FullQualifiedName> clazz ) {
-            super( clazz );
+    class Deserializer protected constructor(clazz: Class<FullQualifiedName>) :
+        StdDeserializer<FullQualifiedName>(clazz) {
+        constructor() : this(FullQualifiedName::class.java) {}
+
+        @Throws(IOException::class)
+        override fun deserialize(jp: JsonParser, ctxt: DeserializationContext): FullQualifiedName {
+            val node = jp.codec.readTree<JsonNode>(jp)
+            return FullQualifiedName(
+                node[JsonFields.NAMESPACE_FIELD].asText(),
+                node[JsonFields.NAME_FIELD].asText()
+            )
         }
+    }
 
-        @Override
-        public FullQualifiedName deserialize( JsonParser jp, DeserializationContext ctxt ) throws IOException {
-            JsonNode node = jp.getCodec().readTree( jp );
-            return new FullQualifiedName(
-                    node.get( NAMESPACE_FIELD ).asText(),
-                    node.get( NAME_FIELD ).asText() );
-        }
-
+    init {
+        module.addSerializer(
+            FullQualifiedName::class.java, Serializer()
+        )
+        module.addDeserializer(
+            FullQualifiedName::class.java, Deserializer()
+        )
     }
 }
