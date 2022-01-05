@@ -119,8 +119,8 @@ interface TimeUseDiaryApi {
             @Path(ORGANIZATION_ID) organizationId: UUID,
             @Path(STUDY_ID) studyId: UUID,
             @Path(PARTICIPANT_ID) participantId: String,
-            @Query(START_DATE) startDateTime: LocalDate, // TODO: Datetime? OffsetDateTime?
-            @Query(END_DATE) endDateTime: LocalDate
+            @Query(START_DATE) startDateTime: OffsetDateTime,
+            @Query(END_DATE) endDateTime: OffsetDateTime
     ): Map<LocalDate, Set<UUID>>
 
     @GET(BASE + STATUS_PATH)
