@@ -1,7 +1,7 @@
 package com.openlattice.chronicle.api
 
-import com.openlattice.chronicle.tud.TudDownloadDataType
-import com.openlattice.chronicle.tud.TudResponse
+import com.openlattice.chronicle.tud.TimeUseDiaryDownloadDataType
+import com.openlattice.chronicle.tud.TimeUseDiaryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -73,7 +73,7 @@ interface TimeUseDiaryApi {
                     "startDateTime": ["2021-12-16T19:00:18.422+03:00"],
                     "endDateTime": ["2021-12-16T18:00:18.422+03:00"]
             }
-     * ]
+      ]
      */
     // @formatter:on
 
@@ -82,7 +82,7 @@ interface TimeUseDiaryApi {
             @Path(ORGANIZATION_ID) organizationId: UUID,
             @Path(STUDY_ID) studyId: UUID,
             @Path(PARTICIPANT_ID) participantId: String,
-            @Body responses: List<TudResponse>
+            @Body responses: List<TimeUseDiaryResponse>
     ): UUID
 
     /**
@@ -96,11 +96,11 @@ interface TimeUseDiaryApi {
      */
     @GET(BASE + DOWNLOAD_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun downloadTimeUseDiaryData(
-            @Path(ORGANIZATION_ID) organizationId: UUID,
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Query(DATA_TYPE) type: TudDownloadDataType,
-            @Body submissionIds: Set<UUID>
+        @Path(ORGANIZATION_ID) organizationId: UUID,
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Query(DATA_TYPE) type: TimeUseDiaryDownloadDataType,
+        @Body submissionIds: Set<UUID>
     )
 
     /**
