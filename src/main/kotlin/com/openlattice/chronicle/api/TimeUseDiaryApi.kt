@@ -17,7 +17,7 @@ import java.util.*
 interface TimeUseDiaryApi {
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/time-use-diary"
+        const val CONTROLLER = "/v3/time-use-diary"
         const val BASE = SERVICE + CONTROLLER
 
         const val DATA_TYPE = "dataType"
