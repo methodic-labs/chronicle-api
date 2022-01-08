@@ -5,13 +5,13 @@ import java.util.*
 /**
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-class AclKey(ids: List<UUID>) : List<UUID> by ids {
+data class AclKey(private val ids: List<UUID>) : List<UUID> by ids {
     constructor(vararg ids: UUID) : this(ids.asList())
 
     val index: String
 
     @Transient
-    private val h: Int = super.hashCode()
+    private val h: Int = ids.hashCode()
 
     init {
         val joiner = StringJoiner(",")
@@ -40,19 +40,17 @@ class AclKey(ids: List<UUID>) : List<UUID> by ids {
         return result
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) {
-            return true
-        }
-        if (o == null || javaClass != o.javaClass) {
-            return false
-        }
-        if (!super.equals(o)) {
-            return false
-        }
-        val uuids = o as AclKey
-        return hashCode() == uuids.hashCode()
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as AclKey
+
+        if (ids != other.ids) return false
+
+        return true
     }
 
     override fun hashCode(): Int = h
+
 }
