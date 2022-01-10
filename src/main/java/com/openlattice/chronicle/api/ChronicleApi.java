@@ -5,11 +5,16 @@ import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.ChronicleQuestionnaire;
 import com.openlattice.chronicle.data.MessageDetails;
+import com.openlattice.chronicle.data.MessageStatus;
 import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.data.SensorDataSample;
 import com.openlattice.chronicle.sources.Datasource;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
-import retrofit2.http.*;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +33,8 @@ public interface ChronicleApi {
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
+    String MESSAGE_ID      = "MessageSid";
+    String MESSAGE_STATUS  = "MessageStatus";
     String PARTICIPANT_ID  = "participantId";
     String STUDY_ID        = "studyId";
     String ORGANIZATION_ID = "organizationId";
@@ -153,8 +160,8 @@ public interface ChronicleApi {
     /**
      * Send Message to participant.
      *
-     * @param organizationId    - Id of the organization to which study belongs
-     * @param messageDetailsList    - a list of message details
+     * @param organizationId     - Id of the organization to which study belongs
+     * @param messageDetailsList - a list of message details
      */
     @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH )
     void sendMessages(
@@ -162,6 +169,19 @@ public interface ChronicleApi {
             @Body List<MessageDetails> messageDetailsList
     );
 
+    /**
+     * Update staus for messages sent to partipants.
+     *
+     * @param organizationId - Id of the organization to which study belongs
+     * @param messageId      - String Identifier (SID) - a unique key that is used to identify specific resources.
+     * @param messageStatus  - Finalized Message Delivery Status
+     */
+    @POST( BASE + ORGANIZATION_ID_PATH + MESSAGE_PATH + STATUS_PATH )
+    void updateMessageStatus(
+            @Path( ORGANIZATION_ID ) UUID organizationId,
+            @Query( MESSAGE_ID ) String messageId,
+            @Query( MESSAGE_STATUS ) MessageStatus messageStatus
+    );
 
     /**
      * Submit a questionnaire
@@ -229,7 +249,6 @@ public interface ChronicleApi {
      * @param participantId  - participantId
      * @param deviceId       - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
      * @param data           - A list of SensorDataSample objects.
-     *
      */
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH
             + IOS_PATH )

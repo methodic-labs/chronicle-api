@@ -193,3 +193,7 @@ eclipse {
 // Still on java 8 as a implementation target for android
     ext.sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
+javadoc {
+    options.tags = [ "apiNote" ]
+}
