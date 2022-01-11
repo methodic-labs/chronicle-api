@@ -190,11 +190,3 @@ dependencies {
         exclude module: 'hamcrest-core'
     }
 }
-
-eclipse {
-    ext.downloadSources = true
-    ext.downloadJavadoc = true
-
-// Still on java 8 as a implementation target for android
-    ext.sourceCompatibility = JavaVersion.VERSION_1_8
-}
