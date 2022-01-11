@@ -94,6 +94,7 @@ public interface ChronicleApi {
      * @param organizationId - Id of the organization to which study belongs
      * @param studyId        - the studyId
      * @param participantId  - the participant
+     * @param date  - The date of something
      * @return a list of neighbor entities and associations
      */
     @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS_PATH )
@@ -138,6 +139,7 @@ public interface ChronicleApi {
      * @param organizationId    - Id of the organization to which study belongs
      * @param studyId           - studyId
      * @param questionnaireEKID - questionnaire entity key id
+     * @return A chronicle questionnaire.
      */
     @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRE_PATH + ENTITY_KEY_ID_PATH )
     ChronicleQuestionnaire getChronicleQuestionnaire(
@@ -182,6 +184,7 @@ public interface ChronicleApi {
      * @param organizationId - Id of the organization to which study belongs
      * @param studyId        - studyId
      * @param participantId  - participantId
+     * @param surveyResponses  - survey responses.
      * @apiNote Each element of the surveyResponses array represents a question/answer instance
      * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
      * and ol.datetimeend &amp; ol.datetimestart values to define a time range.
