@@ -34,10 +34,10 @@ data class Principal(
     @Transient
     private var h = 0
 
-    override fun compareTo(o: Principal): Int {
-        var result = type.compareTo(o.type)
+    override fun compareTo(other: Principal): Int {
+        var result = type.compareTo(other.type)
         if (result == 0) {
-            result = id.compareTo(o.id)
+            result = id.compareTo(other.id)
         }
         return result
     }

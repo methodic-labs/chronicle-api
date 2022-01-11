@@ -122,8 +122,8 @@ abstract class AbstractSecurableObject private constructor(
     override fun hashCode(): Int {
         var result = id.hashCode()
         result = 31 * result + idPresent.hashCode()
-        result = 31 * result + (title?.hashCode() ?: 0)
-        result = 31 * result + (description?.hashCode() ?: 0)
+        result = 31 * result + title.hashCode()
+        result = 31 * result + description.hashCode()
         result = 31 * result + category.hashCode()
         return result
     }
