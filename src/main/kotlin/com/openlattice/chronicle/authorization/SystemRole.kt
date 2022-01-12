@@ -29,10 +29,11 @@ enum class SystemRole(principalId: String) {
     USER("user"),
     AUTHENTICATED_USER("AuthenticatedUser"),
     OPENLATTICE("openlatticeRole");
+    val principal : Principal = Principal( PrincipalType.ROLE, principalId)
 
-    val principal: Principal
 
     companion object {
+        val adminRole: Principal = ADMIN.principal
         private var allRoles: Set<String> = values().map { obj: SystemRole -> obj.getName() }.toSet()
 
         operator fun contains(role: String): Boolean {
@@ -46,8 +47,4 @@ enum class SystemRole(principalId: String) {
     }
 
     fun getName() : String = principal.id
-
-    init {
-        principal = Principal(PrincipalType.ROLE, principalId)
-    }
 }
