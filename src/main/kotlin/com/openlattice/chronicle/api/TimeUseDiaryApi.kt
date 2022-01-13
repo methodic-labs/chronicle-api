@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.time.LocalDate
-import java.time.OffsetDateTime
+import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -86,6 +86,25 @@ interface TimeUseDiaryApi {
     ): UUID
 
     /**
+     * Returns TUD survey submissionIds grouped by date for a given date range
+     *
+     * @param organizationId - Organization ID
+     * @param studyId - Study ID
+     * @param participantId - Participant ID
+     * @param startDateTime - lower bound submission date
+     * @param endDateTime - upper bound submission date
+     * @return A set of submissionIds grouped by Date
+     */
+    @GET(BASE + IDS_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
+    fun getSubmissionsByDate(
+        @Path(ORGANIZATION_ID) organizationId: UUID,
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Query(START_DATE) startDateTime: LocalDateTime,
+        @Query(END_DATE) endDateTime: LocalDateTime
+    ): Map<LocalDate, Set<UUID>>
+
+    /**
      * Fetches data corresponding to the given submissionIds and writes the result in a csv file
      *
      * @param organizationId - Organization ID
@@ -102,26 +121,6 @@ interface TimeUseDiaryApi {
         @Query(DATA_TYPE) type: TimeUseDiaryDownloadDataType,
         @Body submissionIds: Set<UUID>
     )
-
-    /**
-     * Returns TUD survey submissionIds grouped by date for a given date range
-     *
-     * @param organizationId - Organization ID
-     * @param studyId - Study ID
-     * @param participantId - Participant ID
-     * @param startDateTime - lower bound submission date
-     * @param endDateTime - upper bound submission date
-     * @return A set of submissionIds grouped by Date
-     */
-
-    @GET(BASE + IDS_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
-    fun getSubmissionsByDate(
-            @Path(ORGANIZATION_ID) organizationId: UUID,
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Query(START_DATE) startDateTime: OffsetDateTime,
-            @Query(END_DATE) endDateTime: OffsetDateTime
-    ): Map<LocalDate, Set<UUID>>
 
     @GET(BASE + STATUS_PATH)
     fun isRunning(): Boolean
