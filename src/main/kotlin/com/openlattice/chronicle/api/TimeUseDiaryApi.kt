@@ -9,6 +9,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 
 /**
@@ -26,6 +27,7 @@ interface TimeUseDiaryApi {
         const val PARTICIPANT_ID = "participantId"
         const val START_DATE = "startDate"
         const val STUDY_ID = "studyId"
+        const val ZONE_OFFSET = "zoneOffset"
 
         const val DOWNLOAD_PATH = "/download"
         const val IDS_PATH = "/ids"
@@ -101,7 +103,8 @@ interface TimeUseDiaryApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(START_DATE) startDateTime: LocalDateTime,
-        @Query(END_DATE) endDateTime: LocalDateTime
+        @Query(END_DATE) endDateTime: LocalDateTime,
+        @Query(ZONE_OFFSET) zoneOffset: ZoneOffset
     ): Map<LocalDate, Set<UUID>>
 
     /**
