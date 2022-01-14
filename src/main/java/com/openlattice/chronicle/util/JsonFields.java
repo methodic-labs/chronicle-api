@@ -108,7 +108,6 @@ public final class JsonFields {
     public static final String EMAILS_FIELD                     = "emails";
     public static final String EMAIL_DOMAINS                    = "emailDomains";
     public static final String END                              = "end";
-    public static final String ENTITIES                         = "entities";
     public static final String ENTITY_COUNT                     = "entityCount";
     public static final String ENTITY_DEFINITIONS_FIELD         = "entityDefinitions";
     public static final String ENTITY_FIELD                     = "entity";
@@ -272,6 +271,8 @@ public final class JsonFields {
     public static final String STATUS                           = "status";
     public static final String STORAGE_DESTINATION              = "storageDest";
     public static final String STORAGE_TYPE                     = "storageType";
+    public static final String STUDY                            = "study";
+    public static final String STUDY_ID                            = "study";
     public static final String SYNC_ID                          = "syncId";
     public static final String SYNC_IDS                         = "syncIds";
     public static final String SYNC_TICKETS                     = "syncTickets";
