@@ -12,7 +12,7 @@ interface StudyApi {
     companion object {
         const val SERVICE = "/chronicle"
         const val VERSION = "/v3"
-        const val CONTROLLER = "/studies"
+        const val CONTROLLER = "/study"
         const val BASE = SERVICE + VERSION + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"
