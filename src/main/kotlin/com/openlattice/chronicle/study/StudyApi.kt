@@ -12,7 +12,6 @@ import java.util.UUID
 interface StudyApi {
     companion object {
         const val SERVICE = "/chronicle"
-        const val VERSION = "/v3"
         const val CONTROLLER = "/study"
         const val BASE = SERVICE + CONTROLLER
 
@@ -35,15 +34,14 @@ interface StudyApi {
     fun createStudy(@Body study: Study): UUID
 
     /**
-     * Creates a new study. A study may be associated with one or more organizations and will be assigned an id
-     * at creation time.
+     * Retrieves an existing study based on id.
      *
-     * @param study The study to create.
-     * @return The id assigned to the study.
+     * @param studyId The id of the study to retrieve.
+     * @return The study corresponding to the provided id.
      * etc.
      */
     @GET(BASE + STUDY_ID_PATH)
-    fun getStudy(studyId: UUID): Study
+    fun getStudy(@Path(STUDY_ID) studyId: UUID): Study
 
 
 }

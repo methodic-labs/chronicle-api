@@ -42,4 +42,41 @@ class Study @JsonCreator constructor(
 //                   settings: Map<String, Any>
 //    ) : this( studyId, title, description, createdAt, updatedAt, startedAt, endedAt, lat, lon, group, version, organizationIds, settings)
     override val category: SecurableObjectType = SecurableObjectType.Study
+
+    override fun equals(other: Any?): Boolean {1
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        if (!super.equals(other)) return false
+
+        other as Study
+
+        if (createdAt != other.createdAt) return false
+        if (updatedAt != other.updatedAt) return false
+        if (startedAt != other.startedAt) return false
+        if (endedAt != other.endedAt) return false
+        if (lat != other.lat) return false
+        if (lon != other.lon) return false
+        if (group != other.group) return false
+        if (version != other.version) return false
+        if (organizationIds != other.organizationIds) return false
+        if (settings != other.settings) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = super.hashCode()
+        result = 31 * result + createdAt.hashCode()
+        result = 31 * result + updatedAt.hashCode()
+        result = 31 * result + startedAt.hashCode()
+        result = 31 * result + endedAt.hashCode()
+        result = 31 * result + lat.hashCode()
+        result = 31 * result + lon.hashCode()
+        result = 31 * result + group.hashCode()
+        result = 31 * result + version.hashCode()
+        result = 31 * result + organizationIds.hashCode()
+        result = 31 * result + settings.hashCode()
+        return result
+    }
+
 }
