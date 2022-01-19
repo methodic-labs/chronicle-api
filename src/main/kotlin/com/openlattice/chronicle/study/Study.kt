@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
+import com.openlattice.chronicle.ids.IdConstants
 import org.joda.time.DateTime
 import java.time.OffsetDateTime
 import java.util.*
@@ -12,7 +13,7 @@ import java.util.*
  * @author Solomon Tang <solomon@openlattice.com>
  */
 class Study @JsonCreator constructor(
-    @JsonProperty("studyId") studyId: UUID = UUID(0,0),
+    @JsonProperty("studyId") studyId: UUID = IdConstants.UNINITIALIZED.id,
     @JsonProperty("title") title : String,
     @JsonProperty("description") description :String = "",
     @JsonProperty("createdAt") val createdAt: OffsetDateTime = OffsetDateTime.now(),

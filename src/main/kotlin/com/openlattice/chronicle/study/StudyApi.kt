@@ -14,7 +14,7 @@ interface StudyApi {
         const val SERVICE = "/chronicle"
         const val VERSION = "/v3"
         const val CONTROLLER = "/study"
-        const val BASE = SERVICE + VERSION + CONTROLLER
+        const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"
         const val STUDY_ID = "studyId"

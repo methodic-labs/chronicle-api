@@ -1,6 +1,9 @@
 package com.openlattice.chronicle.organizations
 
 import com.openlattice.chronicle.settings.AppComponent
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
 import java.util.*
 
 /**
@@ -14,11 +17,19 @@ interface OrganizationsApi {
         const val  CONTROLLER = "/organizations"
         const val  BASE = SERVICE + CONTROLLER
         // @formatter:on
+
+        const val ORGANIZATION_ID = "organizationId"
+        const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
     }
 
-    fun createOrganization(organizationPrincipal: OrganizationPrincipal): UUID
-    fun searchOrganizations(): Collection<OrganizationPrincipal>
-    fun getOrganizations(): Collection<OrganizationPrincipal>
+    @POST(BASE)
+    fun createOrganization(organizationPrincipal: Organization): UUID
+
+    @GET(BASE + ORGANIZATION_ID_PATH)
+    fun getOrganization(@Path(ORGANIZATION_ID) organizationId: UUID): Organization
+
+    fun searchOrganizations(): Collection<Organization>
+    fun getOrganizations(): Collection<Organization>
 
     fun getOrganizationSettings(): OrganizationSettings
     fun getChronicleDataCollectionSettings(organizationId: UUID): ChronicleDataCollectionSettings
@@ -26,8 +37,9 @@ interface OrganizationsApi {
 
     fun setOrganizationSettings(organizationId: UUID, orgSettings: OrganizationSettings)
     fun setChronicleDataCollectionSettings(
-            organizationId: UUID,
-            dataCollectionSettings: ChronicleDataCollectionSettings
+        organizationId: UUID,
+        dataCollectionSettings: ChronicleDataCollectionSettings
     )
+
     fun setAppComponentSettings(organizationId: UUID, appComponent: AppComponent, settings: Map<String, Any>)
 }
