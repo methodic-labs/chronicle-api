@@ -8,7 +8,7 @@ import java.util.*
  */
 data class AppUsage(
         var id: UUID,
-        var timeStamp: OffsetDateTime,
+        var appPackageName: String,
         var appLabel: String,
-        var appPackageName: String
+        var timeStamp: OffsetDateTime,
 )

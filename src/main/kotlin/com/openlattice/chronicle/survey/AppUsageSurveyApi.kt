@@ -13,7 +13,7 @@ import java.util.*
 interface AppUsageSurveyApi {
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/appUsage"
+        const val CONTROLLER = "/app-usage"
         const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"
