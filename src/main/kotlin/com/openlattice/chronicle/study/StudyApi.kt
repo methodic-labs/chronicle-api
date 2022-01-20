@@ -3,6 +3,7 @@ package com.openlattice.chronicle.study
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.DELETE
 import retrofit2.http.Path
 import java.util.UUID
 
@@ -44,4 +45,12 @@ interface StudyApi {
     fun getStudy(@Path(STUDY_ID) studyId: UUID): Study
 
 
+    /**
+     * Deletes an existing study based on id.
+     *
+     * @param studyId The id of the study to be destroyed.
+     * @return An integer corresponding to the number of destroyed studies
+     */
+    @DELETE(BASE + STUDY_ID_PATH)
+    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): Int
 }

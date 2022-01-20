@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
-import org.joda.time.DateTime
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -43,7 +42,7 @@ class Study @JsonCreator constructor(
 //    ) : this( studyId, title, description, createdAt, updatedAt, startedAt, endedAt, lat, lon, group, version, organizationIds, settings)
     override val category: SecurableObjectType = SecurableObjectType.Study
 
-    override fun equals(other: Any?): Boolean {1
+    override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         if (!super.equals(other)) return false
