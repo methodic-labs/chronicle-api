@@ -52,5 +52,5 @@ interface StudyApi {
      * @return An integer corresponding to the number of destroyed studies
      */
     @DELETE(BASE + STUDY_ID_PATH)
-    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): Int
+    fun destroyStudy(@Path(STUDY_ID) studyId: UUID)
 }
