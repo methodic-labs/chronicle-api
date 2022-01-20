@@ -1,7 +1,5 @@
 package com.openlattice.chronicle.survey
 
-import com.openlattice.chronicle.api.ChronicleApi
-import com.openlattice.chronicle.data.ChronicleAppsUsageDetails
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -26,7 +24,6 @@ interface AppUsageSurveyApi {
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_ID_PATH = "/{${PARTICIPANT_ID}}"
-
     }
 
     /**
