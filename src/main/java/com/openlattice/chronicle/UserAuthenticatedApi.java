@@ -40,6 +40,7 @@ public interface UserAuthenticatedApi {
      *
      * @param studyId       - studyId
      * @param participantId - participant id
+     * @param chronicleDeleteType - delete type
      */
     @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Void deleteParticipantAndAllNeighbors(
@@ -52,6 +53,7 @@ public interface UserAuthenticatedApi {
      * Delete a study and their attached neighbors.  Returns the number of entities removed.
      *
      * @param studyId - studyId
+     * @param chronicleDeleteType - delete type
      */
     @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH )
     Void deleteStudyAndAllNeighbors(

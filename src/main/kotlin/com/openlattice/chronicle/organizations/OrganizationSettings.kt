@@ -1,0 +1,17 @@
+package com.openlattice.chronicle.organizations
+
+import com.openlattice.chronicle.settings.AppComponent
+import com.openlattice.chronicle.settings.AppUsageFrequency
+
+/**
+ *
+ * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
+ */
+data class ChronicleDataCollectionSettings(
+        val appUsageFrequency: AppUsageFrequency = AppUsageFrequency.DAILY
+)
+
+data class OrganizationSettings(
+        val chronicleDataCollection: ChronicleDataCollectionSettings,
+        val appSettings: Map<AppComponent,Map<String,Any>> = mutableMapOf()
+)

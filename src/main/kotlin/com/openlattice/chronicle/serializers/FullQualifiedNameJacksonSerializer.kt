@@ -26,21 +26,27 @@ import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
-import kotlin.jvm.JvmOverloads
 import org.apache.olingo.commons.api.edm.FullQualifiedName
-import kotlin.Throws
 import java.io.IOException
 import com.openlattice.chronicle.util.JsonFields
 
-class FullQualifiedNameJacksonSerializer {
+object FullQualifiedNameJacksonSerializer {
+    private val module = SimpleModule(
+        FullQualifiedNameJacksonSerializer::class.java.name
+    )
 
-    companion object {
-        private val module = SimpleModule(
-            FullQualifiedNameJacksonSerializer::class.java.name
+    init {
+        module.addSerializer(
+            FullQualifiedName::class.java, Serializer()
         )
-        fun registerWithMapper(mapper: ObjectMapper) {
-            mapper.registerModule(module)
-        }
+        module.addDeserializer(
+            FullQualifiedName::class.java, Deserializer()
+        )
+    }
+
+    @JvmStatic
+    fun registerWithMapper(mapper: ObjectMapper) {
+        mapper.registerModule(module)
     }
 
     class Serializer @JvmOverloads constructor(clazz: Class<FullQualifiedName> = FullQualifiedName::class.java) :
@@ -66,14 +72,5 @@ class FullQualifiedNameJacksonSerializer {
                 node[JsonFields.NAME_FIELD].asText()
             )
         }
-    }
-
-    init {
-        module.addSerializer(
-            FullQualifiedName::class.java, Serializer()
-        )
-        module.addDeserializer(
-            FullQualifiedName::class.java, Deserializer()
-        )
     }
 }

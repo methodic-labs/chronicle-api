@@ -36,8 +36,8 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'com.github.spotbugs' version '4.6.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
-    id 'org.jetbrains.kotlin.plugin.spring' version '1.5.10'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.spring'
 }
 
 description = "Chronicle REST APIs"
@@ -50,12 +50,12 @@ ext.developerConnectionUrl = 'scm:git:https://github.com/openlattice/chronicle-a
 apply from: "https://raw.githubusercontent.com/openlattice/openlattice/main/gradles/openlattice.gradle"
 
 // Still on java 8 as a implementation target for android
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
         freeCompilerArgs += '-Xjvm-default=compatibility'
     }
 }
@@ -70,6 +70,11 @@ checkstyle {
     config project.resources.text.fromUri('https://raw.githubusercontent.com/openlattice/openlattice/develop/gradles/checkstyle.xml')
 }
 
+tasks.withType(Javadoc) {
+    options.tags('apiNote:a:API Note:')
+    options.tags('implSpec:a:Implementation Requirements:')
+    options.tags('implNote:a:Implementation Note:')
+}
 tasks.withType(Checkstyle) {
     reports {
         xml.enabled = false
@@ -140,7 +145,7 @@ test {
     ignoreFailures = true
 }
 
-ext.jackson_version = '2.6.5'
+ext.jackson_version = '2.13.1'
 
 dependencies {
     spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
@@ -170,6 +175,7 @@ dependencies {
     implementation "org.apache.olingo:odata-commons-core:${odata_version}"
 
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-smile:${jackson_version}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson_version}"
 
     testImplementation "junit:junit:${junit_version}"
 
@@ -184,12 +190,4 @@ dependencies {
         exclude module: 'hamcrest'
         exclude module: 'hamcrest-core'
     }
-}
-
-eclipse {
-    ext.downloadSources = true
-    ext.downloadJavadoc = true
-
-// Still on java 8 as a implementation target for android
-    ext.sourceCompatibility = JavaVersion.VERSION_1_8
 }

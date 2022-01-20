@@ -26,41 +26,35 @@ import org.slf4j.LoggerFactory
 import java.util.*
 import java.util.function.Supplier
 
-class Role : SecurablePrincipal {
-    private val organizationId: UUID
+class Role constructor(
+    aclKey: AclKey,
+    val organizationId: UUID,
+    principal: Principal,
+    title: String,
+    description: Optional<String>
+) : SecurablePrincipal(aclKey, principal, title, description) {
+
+    init {
+        Preconditions.checkArgument(principal.type == PrincipalType.ROLE)
+    }
 
     @JsonCreator
     constructor(
-            @JsonProperty(JsonFields.ID_FIELD) id: Optional<UUID>,
-            @JsonProperty(JsonFields.ORGANIZATION_ID) organizationId: UUID,
-            @JsonProperty(JsonFields.PRINCIPAL) principal: Principal,
-            @JsonProperty(JsonFields.TITLE_FIELD) title: String,
-            @JsonProperty(JsonFields.DESCRIPTION_FIELD) description: Optional<String>
-    ) : super(AclKey(organizationId, id.orElseGet { UUID.randomUUID() }), principal, title, description) {
-        Preconditions.checkArgument(
-                principal.type == PrincipalType.ROLE
-        )
-        this.organizationId = Preconditions.checkNotNull(organizationId, "Organization id cannot be null.")
-    }
-
+        @JsonProperty(JsonFields.ID_FIELD) id: Optional<UUID>,
+        @JsonProperty(JsonFields.ORGANIZATION_ID) organizationId: UUID,
+        @JsonProperty(JsonFields.PRINCIPAL) principal: Principal,
+        @JsonProperty(JsonFields.TITLE_FIELD) title: String,
+        @JsonProperty(JsonFields.DESCRIPTION_FIELD) description: Optional<String>
+    ) : this(AclKey(organizationId, id.orElseGet { UUID.randomUUID() }), principal, title, description)
     constructor(
-            aclKey: AclKey,
-            principal: Principal,
-            title: String,
-            description: Optional<String>
-    ) : super(aclKey, principal, title, description) {
-        organizationId = aclKey[0]
-    }
+        aclKey: AclKey,
+        principal: Principal,
+        title: String,
+        description: Optional<String>
+    ) : this(aclKey,aclKey.first(), principal, title, description)
 
-    @JsonProperty(JsonFields.ORGANIZATION_ID)
-    fun getOrganizationId(): UUID {
-        return organizationId
-    }
-
-
-    override val category: SecurableObjectType
-        @JsonIgnore
-        get() = SecurableObjectType.Role
+    @JsonIgnore
+    override val category: SecurableObjectType = SecurableObjectType.Role
 
     override fun toString(): String {
         return "RoleKey { " +

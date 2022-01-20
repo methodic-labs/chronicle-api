@@ -32,7 +32,7 @@ import java.util.*
         value = JsonInclude.Include.NON_ABSENT
 ) //This means empty collections will not be included in generated JSON.
 abstract class AbstractSecurableObject private constructor(
-        @JsonProperty(JsonFields.ID_FIELD) val id: UUID,
+        @JsonProperty(JsonFields.ID_FIELD) var id: UUID,
         @JsonProperty(JsonFields.TITLE_FIELD) var title: String,
         @JsonProperty(JsonFields.DESCRIPTION_FIELD) var description: String,
         @JsonIgnore private val idPresent: Boolean
@@ -122,8 +122,8 @@ abstract class AbstractSecurableObject private constructor(
     override fun hashCode(): Int {
         var result = id.hashCode()
         result = 31 * result + idPresent.hashCode()
-        result = 31 * result + (title?.hashCode() ?: 0)
-        result = 31 * result + (description?.hashCode() ?: 0)
+        result = 31 * result + title.hashCode()
+        result = 31 * result + description.hashCode()
         result = 31 * result + category.hashCode()
         return result
     }

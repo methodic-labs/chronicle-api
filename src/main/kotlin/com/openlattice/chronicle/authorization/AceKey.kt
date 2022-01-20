@@ -23,7 +23,7 @@ import java.util.UUID
 /**
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-data class AceKey( val key: AclKey, val principal: Principal) {
+data class AceKey(val aclKey: AclKey, val principal: Principal) {
 
     /**
      * Creates an ace key keeping the order of the key arguments
@@ -34,6 +34,6 @@ data class AceKey( val key: AclKey, val principal: Principal) {
     constructor(principal: Principal, vararg key: UUID) : this(AclKey(key.asList()), principal)
 
     init {
-        Preconditions.checkArgument(key.size > 0, "At least one key must be provided.")
+        Preconditions.checkArgument(aclKey.size > 0, "At least one key must be provided.")
     }
 }

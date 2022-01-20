@@ -9,7 +9,7 @@ import retrofit2.http.Query
  *
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-open interface AuthorizationsApi {
+interface AuthorizationsApi {
     companion object {
         /*
         * These determine the service routing for the LB
