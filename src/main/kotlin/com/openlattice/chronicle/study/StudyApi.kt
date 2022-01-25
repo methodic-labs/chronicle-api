@@ -49,7 +49,6 @@ interface StudyApi {
      * Deletes an existing study based on id.
      *
      * @param studyId The id of the study to be destroyed.
-     * @return An integer corresponding to the number of destroyed studies
      */
     @DELETE(BASE + STUDY_ID_PATH)
     fun destroyStudy(@Path(STUDY_ID) studyId: UUID)
