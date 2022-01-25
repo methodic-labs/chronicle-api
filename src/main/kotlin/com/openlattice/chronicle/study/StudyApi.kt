@@ -4,6 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.PUT
 import java.util.UUID
 
 /**
@@ -43,5 +44,12 @@ interface StudyApi {
     @GET(BASE + STUDY_ID_PATH)
     fun getStudy(@Path(STUDY_ID) studyId: UUID): Study
 
-
+    /**
+     * Updates an existing study based on id
+     */
+    @PUT(BASE + STUDY_ID_PATH)
+    fun updateStudy(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body study: Study
+    )
 }
