@@ -20,11 +20,11 @@ data class StudyUpdate(
 ) {
     init {
         Preconditions.checkArgument(
-            title == null || title.isNotEmpty(),
+            title == null || title.isNotBlank(),
             "Title cannot be blank."
         )
         Preconditions.checkArgument(
-            contact == null || contact.isNotEmpty(),
+            contact == null || contact.isNotBlank(),
             "Contact cannot be blank."
         )
     }
