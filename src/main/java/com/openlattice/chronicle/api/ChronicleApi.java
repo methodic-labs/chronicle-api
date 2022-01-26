@@ -249,10 +249,11 @@ public interface ChronicleApi {
      * @param participantId  - participantId
      * @param deviceId       - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
      * @param data           - A list of SensorDataSample objects.
+     * @return Total number of items persisted by server
      */
     @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH
             + IOS_PATH )
-    void uploadIOSSensorData(
+    Integer uploadIOSSensorData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
