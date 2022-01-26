@@ -8,7 +8,7 @@ import java.util.*
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
-interface SensorKitApi {
+interface IOSSensorApi {
     companion object {
         const val SERVICE = "/chronicle"
         const val CONTROLLER = "/sensor-kit"
