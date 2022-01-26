@@ -42,7 +42,7 @@ interface StudyApi {
 
     /**
      * Updates an existing study based on id
-     * @param studyId The id of the study to retrieve.
+     * @param studyId The id of the study to update.
      * @param study The changes to the study. Excludes non-user specifiable fields such as studyId, createdAt, updatedAt
      * Does not accept changes to associated organizations.
      */
