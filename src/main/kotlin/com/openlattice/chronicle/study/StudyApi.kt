@@ -1,7 +1,10 @@
 package com.openlattice.chronicle.study
 
+import com.openlattice.chronicle.api.ChronicleApi
+import com.openlattice.chronicle.sources.Datasource
 import retrofit2.http.*
-import java.util.UUID
+import java.util.*
+
 
 /**
  * @author Solomon Tang <solomon@openlattice.com>
@@ -14,10 +17,39 @@ interface StudyApi {
 
         const val ORGANIZATION_ID = "organizationId"
         const val STUDY_ID = "studyId"
+        const val PARTICIPANT_ID = "participantId"
+        const val DATA_SOURCE_ID = "dataSourceId"
 
+        const val ENROLL_PATH = "/enroll"
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
+        const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
+        const val DATA_SOURCE_ID_PATH = "/{$DATA_SOURCE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
     }
+
+
+    /**
+     * Enrolls a participant's data datasource in a study. Currently the only supported datasource is an Android device,
+     * though that may change in the future.
+     *
+     *
+     * Due to privacy changes in Android the device id is not a reliable way of tracking devices.
+     * we are leaving the study path in for now, because we don't know that participant's across studies are unique
+     *
+     * @param studyId        The id of the study with which to enroll the partipant's datasource.
+     * @param participantId  The participant id which the device will be associated with.
+     * @param datasourceId   A datasource specific id.
+     * @param datasource     Datasource specific information.
+     * @return The internal chronicle id for a device. It can be used to track a single device across resets, app uninstalls,
+     * etc.
+     */
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + ENROLL_PATH)
+    fun enroll(
+        @Path(ChronicleApi.STUDY_ID) studyId: UUID,
+        @Path(ChronicleApi.PARTICIPANT_ID) participantId: String,
+        @Path(ChronicleApi.DATASOURCE_ID) datasourceId: String,
+        @Body datasource: Datasource
+    ): UUID
 
     /**
      * Creates a new study. A study may be associated with one or more organizations and will be assigned an id
