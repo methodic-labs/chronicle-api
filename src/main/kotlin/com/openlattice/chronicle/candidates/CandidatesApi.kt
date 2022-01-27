@@ -12,5 +12,5 @@ interface CandidatesApi {
     }
 
     @POST(BASE)
-    fun createCandidate(candidate: Candidate): UUID
+    fun registerCandidate(candidate: Candidate): UUID
 }
