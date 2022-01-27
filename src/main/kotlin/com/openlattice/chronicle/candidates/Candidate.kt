@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.candidates
 
 import com.openlattice.chronicle.ids.IdConstants
+import java.time.LocalDate
 import java.util.UUID
 
 data class Candidate(
@@ -8,5 +9,5 @@ data class Candidate(
     val firstName: String?,
     val lastName: String?,
     val name: String?,
-    val dob: String?
+    val dob: LocalDate?
 )
