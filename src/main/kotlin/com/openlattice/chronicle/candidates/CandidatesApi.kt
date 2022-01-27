@@ -1,16 +1,16 @@
-package com.openlattice.chronicle.people
+package com.openlattice.chronicle.candidates
 
 import retrofit2.http.POST
 import java.util.UUID
 
-interface PeopleApi {
+interface CandidatesApi {
 
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/people"
+        const val CONTROLLER = "/candidates"
         const val BASE = SERVICE + CONTROLLER
     }
 
     @POST(BASE)
-    fun createPerson(person: Person): UUID
+    fun createCandidate(candidate: Candidate): UUID
 }

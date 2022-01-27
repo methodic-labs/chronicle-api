@@ -1,10 +1,10 @@
-package com.openlattice.chronicle.people
+package com.openlattice.chronicle.candidates
 
 import com.openlattice.chronicle.ids.IdConstants
 import java.util.UUID
 
-data class Person(
-    var personId: UUID = IdConstants.UNINITIALIZED.id,
+data class Candidate(
+    var candidateId: UUID = IdConstants.UNINITIALIZED.id,
     val friendlyId: String,
     val firstName: String?,
     val lastName: String?,
