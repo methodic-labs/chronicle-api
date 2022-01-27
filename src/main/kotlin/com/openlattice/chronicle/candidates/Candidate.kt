@@ -5,7 +5,6 @@ import java.util.UUID
 
 data class Candidate(
     var candidateId: UUID = IdConstants.UNINITIALIZED.id,
-    val friendlyId: String,
     val firstName: String?,
     val lastName: String?,
     val name: String?,
