@@ -7,6 +7,7 @@ package com.openlattice.chronicle.authorization
 enum class SecurableObjectType {
     Organization,
     Study,
+    TimeUseDiary,
     Datasource,
     Module,
     Principal,

@@ -1,4 +1,4 @@
-package com.openlattice.chronicle.tud
+package com.openlattice.chronicle.timeusediary
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;

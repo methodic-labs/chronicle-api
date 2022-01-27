@@ -1,8 +1,7 @@
-package com.openlattice.chronicle.tud
+package com.openlattice.chronicle.timeusediary
 
 import java.time.OffsetDateTime
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
+
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  *

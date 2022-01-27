@@ -1,7 +1,7 @@
 package com.openlattice.chronicle.api
 
-import com.openlattice.chronicle.tud.TimeUseDiaryDownloadDataType
-import com.openlattice.chronicle.tud.TimeUseDiaryResponse
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
