@@ -23,7 +23,7 @@ interface OrganizationsApi {
     }
 
     @POST(BASE)
-    fun createOrganization(organizationPrincipal: Organization): UUID
+    fun createOrganization(organization: Organization): UUID
 
     @GET(BASE + ORGANIZATION_ID_PATH)
     fun getOrganization(@Path(ORGANIZATION_ID) organizationId: UUID): Organization
