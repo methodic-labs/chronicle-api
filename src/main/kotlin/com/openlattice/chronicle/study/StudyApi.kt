@@ -1,9 +1,6 @@
 package com.openlattice.chronicle.study
 
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 import java.util.UUID
 
 /**
@@ -43,5 +40,15 @@ interface StudyApi {
     @GET(BASE + STUDY_ID_PATH)
     fun getStudy(@Path(STUDY_ID) studyId: UUID): Study
 
-
+    /**
+     * Updates an existing study based on id
+     * @param studyId The id of the study to update.
+     * @param study The changes to the study. Excludes non-user specifiable fields such as studyId, createdAt, updatedAt
+     * Does not accept changes to associated organizations.
+     */
+    @PATCH(BASE + STUDY_ID_PATH)
+    fun updateStudy(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body study: StudyUpdate
+    )
 }

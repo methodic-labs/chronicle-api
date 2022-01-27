@@ -24,6 +24,7 @@ class Study @JsonCreator constructor(
     @JsonProperty("lon") val lon: Double = 0.0,
     @JsonProperty("group") val group: String = "",
     @JsonProperty("version") val version: String = "",
+    @JsonProperty("contact") val contact: String,
     @JsonProperty("organizationIds") val organizationIds: Set<UUID> = setOf(),
     @JsonProperty("settings") val settings: Map<String, Any> = mapOf(),
 ) :  AbstractSecurableObject(studyId, title, description) {
@@ -38,12 +39,13 @@ class Study @JsonCreator constructor(
 //                   lon: Double,
 //                   group: String,
 //                   version: String,
+//                   contact :String,
 //                   organizationIds: Set<UUID>,
 //                   settings: Map<String, Any>
 //    ) : this( studyId, title, description, createdAt, updatedAt, startedAt, endedAt, lat, lon, group, version, organizationIds, settings)
     override val category: SecurableObjectType = SecurableObjectType.Study
 
-    override fun equals(other: Any?): Boolean {1
+    override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         if (!super.equals(other)) return false
@@ -58,6 +60,7 @@ class Study @JsonCreator constructor(
         if (lon != other.lon) return false
         if (group != other.group) return false
         if (version != other.version) return false
+        if (contact != other.contact) return false
         if (organizationIds != other.organizationIds) return false
         if (settings != other.settings) return false
 
@@ -74,6 +77,7 @@ class Study @JsonCreator constructor(
         result = 31 * result + lon.hashCode()
         result = 31 * result + group.hashCode()
         result = 31 * result + version.hashCode()
+        result = 31 * result + contact.hashCode()
         result = 31 * result + organizationIds.hashCode()
         result = 31 * result + settings.hashCode()
         return result
