@@ -17,9 +17,9 @@ interface CandidatesApi {
         const val CANDIDATE_ID_PATH = "/{$CANDIDATE_ID_PARAM}"
     }
 
-    @POST(BASE)
-    fun registerCandidate(@Body candidate: Candidate): UUID
-
     @GET(BASE + CANDIDATE_ID_PATH)
     fun getCandidate(@Path(CANDIDATE_ID_PARAM) candidateId: UUID): Candidate
+
+    @POST(BASE)
+    fun registerCandidate(@Body candidate: Candidate): UUID
 }
