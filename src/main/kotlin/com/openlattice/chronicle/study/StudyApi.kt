@@ -1,7 +1,7 @@
 package com.openlattice.chronicle.study
 
 import com.openlattice.chronicle.api.ChronicleApi
-import com.openlattice.chronicle.sources.Datasource
+import com.openlattice.chronicle.sources.SourceDevice
 import retrofit2.http.*
 import java.util.*
 
@@ -48,7 +48,7 @@ interface StudyApi {
         @Path(ChronicleApi.STUDY_ID) studyId: UUID,
         @Path(ChronicleApi.PARTICIPANT_ID) participantId: String,
         @Path(ChronicleApi.DATASOURCE_ID) datasourceId: String,
-        @Body datasource: Datasource
+        @Body datasource: SourceDevice
     ): UUID
 
     /**
