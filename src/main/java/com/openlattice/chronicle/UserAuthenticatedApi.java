@@ -43,6 +43,7 @@ public interface UserAuthenticatedApi {
      * @param chronicleDeleteType - delete type
      */
     @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
+    @Deprecated(forRemoval = true)
     Void deleteParticipantAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
@@ -56,6 +57,7 @@ public interface UserAuthenticatedApi {
      * @param chronicleDeleteType - delete type
      */
     @DELETE( BASE + AUTHENTICATED + STUDY_ID_PATH )
+    @Deprecated(forRemoval = true)
     Void deleteStudyAndAllNeighbors(
             @Path( STUDY_ID ) UUID studyId,
             @Query( TYPE ) ChronicleDeleteType chronicleDeleteType
@@ -69,10 +71,10 @@ public interface UserAuthenticatedApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH )
+    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantData(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
+            @Path( ENTITY_KEY_ID ) String participantId,
             @Query( FILE_TYPE ) FileType fileType
     );
 
@@ -84,10 +86,10 @@ public interface UserAuthenticatedApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + PREPROCESSED_PATH )
+    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + PREPROCESSED_PATH )
     Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
+            @Path( ENTITY_KEY_ID ) String participantId,
             @Query( FILE_TYPE ) FileType fileType
     );
 
@@ -99,10 +101,10 @@ public interface UserAuthenticatedApi {
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
-    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + ENTITY_KEY_ID_PATH + USAGE_PATH )
+    @GET( BASE + AUTHENTICATED + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + USAGE_PATH )
     Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
+            @Path( ENTITY_KEY_ID ) String participantId,
             @Query( FILE_TYPE ) FileType fileType
     );
 }

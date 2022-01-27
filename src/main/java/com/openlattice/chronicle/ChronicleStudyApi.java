@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.ChronicleQuestionnaire;
 import com.openlattice.chronicle.data.ParticipationStatus;
-import com.openlattice.chronicle.sources.Datasource;
+import com.openlattice.chronicle.sources.SourceDevice;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import retrofit2.http.*;
 
@@ -58,7 +58,7 @@ public interface ChronicleStudyApi {
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId,
-            @Body Optional<Datasource> datasource );
+            @Body Optional<SourceDevice> datasource );
 
     /**
      * Verifies that a participant in a study is associated with a specific data source.
