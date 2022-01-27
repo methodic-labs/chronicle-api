@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.candidates
 
+import retrofit2.http.Body
 import retrofit2.http.POST
 import java.util.UUID
 
@@ -12,5 +13,5 @@ interface CandidatesApi {
     }
 
     @POST(BASE)
-    fun registerCandidate(candidate: Candidate): UUID
+    fun registerCandidate(@Body candidate: Candidate): UUID
 }
