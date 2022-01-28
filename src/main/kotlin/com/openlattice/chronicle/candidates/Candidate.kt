@@ -9,5 +9,7 @@ data class Candidate(
     val firstName: String? = null,
     val lastName: String? = null,
     val name: String? = null,
-    val dob: LocalDate? = null
+    val dateOfBirth: LocalDate? = null,
+    val email: String? = null,
+    val phoneNumber: String? = null
 )
