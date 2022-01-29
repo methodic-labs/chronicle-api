@@ -14,7 +14,6 @@ interface CandidatesApi {
         const val BASE = SERVICE + CONTROLLER
 
         const val BULK_PATH = "/bulk"
-
         const val CANDIDATE_ID_PARAM = "candidateId"
         const val CANDIDATE_ID_PATH = "/{$CANDIDATE_ID_PARAM}"
     }
