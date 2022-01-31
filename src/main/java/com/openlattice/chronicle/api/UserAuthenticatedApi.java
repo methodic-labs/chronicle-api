@@ -72,7 +72,7 @@ public interface UserAuthenticatedApi {
      *
      * @param organizationId         - Id of the organization to which study belongs
      * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
+     * @param participantId - the participant entity key id
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
@@ -80,7 +80,7 @@ public interface UserAuthenticatedApi {
     Iterable<Map<String, Set<Object>>> getAllParticipantData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
+            @Path( ENTITY_KEY_ID ) String participantId,
             @Query( FILE_TYPE ) FileType fileType
     );
 
@@ -89,7 +89,7 @@ public interface UserAuthenticatedApi {
      *
      * @param organizationId         - Id of the organization to which study belongs
      * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
+     * @param participantId - the participant entity key id
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
@@ -97,7 +97,7 @@ public interface UserAuthenticatedApi {
     Iterable<Map<String, Set<Object>>> getAllPreprocessedParticipantData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
+            @Path( ENTITY_KEY_ID ) String participantId,
             @Query( FILE_TYPE ) FileType fileType
     );
 
@@ -106,7 +106,7 @@ public interface UserAuthenticatedApi {
      *
      * @param organizationId         - Id of the organization to which study belongs
      * @param studyId                - the study id
-     * @param participantEntityKeyId - the participant entity key id
+     * @param participantId - the participant entity key id
      * @param fileType               - the type of file (csv, json) to return as the download
      * @return All participant data
      */
@@ -114,7 +114,7 @@ public interface UserAuthenticatedApi {
     Iterable<Map<String, Set<Object>>> getAllParticipantAppsUsageData(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID participantEntityKeyId,
+            @Path( ENTITY_KEY_ID ) String participantId,
             @Query( FILE_TYPE ) FileType fileType
     );
 
