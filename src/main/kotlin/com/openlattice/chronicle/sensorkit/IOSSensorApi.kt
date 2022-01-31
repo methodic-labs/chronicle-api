@@ -11,7 +11,7 @@ import java.util.*
 interface IOSSensorApi {
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/sensor-kit"
+        const val CONTROLLER = "/ios-sensor"
         const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"

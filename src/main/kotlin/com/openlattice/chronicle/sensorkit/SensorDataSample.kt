@@ -10,7 +10,7 @@ data class SensorDataSample (
         val dateRecorded: OffsetDateTime,
         val startDate: OffsetDateTime,
         val endDate: OffsetDateTime,
-        val data: List<Map<UUID, String>>,
+        val data: Map<String, Any>,
         val timezone: String,
         val id: UUID,
         val sensorName: String
