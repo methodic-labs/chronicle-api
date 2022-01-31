@@ -22,7 +22,7 @@ interface IOSSensorApi {
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val DATASOURCE_ID_PATH = "/{$DATASOURCE_ID}"
-        const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID }"
+        const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
 
     }
 
