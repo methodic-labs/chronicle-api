@@ -34,6 +34,7 @@ interface IOSSensorApi {
      * @param participantId  - participantId
      * @param deviceId       - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
      * @param data           - A list of SensorDataSample objects.
+     * @return number of rows written
      */
     @POST(BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH )
     fun uploadIOSSensorData(
@@ -42,7 +43,7 @@ interface IOSSensorApi {
             @Path(PARTICIPANT_ID) participantId: String,
             @Path(DATASOURCE_ID) deviceId: String,
             @Body data: List<SensorDataSample>
-    )
+    ): Int
 
     // TODO: add download endpoint
 }
