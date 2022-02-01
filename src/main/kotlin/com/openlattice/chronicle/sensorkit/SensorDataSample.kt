@@ -5,7 +5,10 @@ import java.util.*
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
+ *
+ * An instance of this class encapsulates a sample recorded by SensorKit framework
  */
+
 data class SensorDataSample (
         val id: UUID,
         val dateRecorded: OffsetDateTime,
