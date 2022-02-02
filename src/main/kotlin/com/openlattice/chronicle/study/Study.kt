@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
+import com.openlattice.chronicle.storage.ChronicleStorage
 import org.joda.time.DateTime
 import java.time.OffsetDateTime
 import java.util.*
@@ -27,6 +28,7 @@ class Study @JsonCreator constructor(
     val contact: String,
     val organizationIds: Set<UUID> = setOf(),
     val notificationsEnabled: Boolean = false,
+    var storage: String = ChronicleStorage.CHRONICLE.id,
     val settings: Map<String, Any> = mapOf(),
 ) : AbstractSecurableObject(studyId, title, description) {
     //    constructor(   studyId: UUID,
