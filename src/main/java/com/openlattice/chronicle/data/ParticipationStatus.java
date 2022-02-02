@@ -6,5 +6,6 @@ package com.openlattice.chronicle.data;
 public enum ParticipationStatus {
     ENROLLED,
     NOT_ENROLLED,
+    PAUSED,
     UNKNOWN
 }

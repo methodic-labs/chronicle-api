@@ -6,7 +6,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import java.util.UUID
 
-interface CandidatesApi {
+interface CandidateApi {
 
     companion object {
         const val SERVICE = "/chronicle"

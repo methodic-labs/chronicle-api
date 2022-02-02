@@ -12,6 +12,6 @@ data class ChronicleDataCollectionSettings(
 )
 
 data class OrganizationSettings(
-        val chronicleDataCollection: ChronicleDataCollectionSettings,
+        val chronicleDataCollection: ChronicleDataCollectionSettings = ChronicleDataCollectionSettings(),
         val appSettings: Map<AppComponent,Map<String,Any>> = mutableMapOf()
 )

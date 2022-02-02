@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
+import com.openlattice.chronicle.storage.ChronicleStorage
 import org.joda.time.DateTime
 import java.time.OffsetDateTime
 import java.util.*
@@ -13,22 +14,24 @@ import java.util.*
  * @author Solomon Tang <solomon@openlattice.com>
  */
 class Study @JsonCreator constructor(
-    @JsonProperty("studyId") studyId: UUID = IdConstants.UNINITIALIZED.id,
-    @JsonProperty("title") title : String,
-    @JsonProperty("description") description :String = "",
-    @JsonProperty("createdAt") val createdAt: OffsetDateTime = OffsetDateTime.now(),
-    @JsonProperty("updatedAt") val updatedAt: OffsetDateTime = OffsetDateTime.now(),
-    @JsonProperty("startedAt") val startedAt: OffsetDateTime = OffsetDateTime.now(),
-    @JsonProperty("endedAt") val endedAt: OffsetDateTime = OffsetDateTime.MAX,
-    @JsonProperty("lat") val lat: Double = 0.0,
-    @JsonProperty("lon") val lon: Double = 0.0,
-    @JsonProperty("group") val group: String = "",
-    @JsonProperty("version") val version: String = "",
-    @JsonProperty("contact") val contact: String,
-    @JsonProperty("organizationIds") val organizationIds: Set<UUID> = setOf(),
-    @JsonProperty("settings") val settings: Map<String, Any> = mapOf(),
-) :  AbstractSecurableObject(studyId, title, description) {
-//    constructor(   studyId: UUID,
+    studyId: UUID = IdConstants.UNINITIALIZED.id,
+    title: String,
+    description: String = "",
+    val createdAt: OffsetDateTime = OffsetDateTime.now(),
+    val updatedAt: OffsetDateTime = OffsetDateTime.now(),
+    val startedAt: OffsetDateTime = OffsetDateTime.now(),
+    val endedAt: OffsetDateTime = OffsetDateTime.MAX,
+    val lat: Double = 0.0,
+    val lon: Double = 0.0,
+    val group: String = "",
+    val version: String = "",
+    val contact: String,
+    val organizationIds: Set<UUID> = setOf(),
+    val notificationsEnabled: Boolean = false,
+    var storage: String = ChronicleStorage.CHRONICLE.id,
+    val settings: Map<String, Any> = mapOf(),
+) : AbstractSecurableObject(studyId, title, description) {
+    //    constructor(   studyId: UUID,
 //                   title: String,
 //                   description :String,
 //                   createdAt: DateTime,
