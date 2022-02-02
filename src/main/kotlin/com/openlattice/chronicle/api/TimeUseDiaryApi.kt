@@ -123,7 +123,7 @@ interface TimeUseDiaryApi {
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(DATA_TYPE) type: TimeUseDiaryDownloadDataType,
         @Body submissionIds: Set<UUID>
-    )
+    ): Iterable<Map<String, Set<Any>>>
 
     @GET(BASE + STATUS_PATH)
     fun isRunning(): Boolean

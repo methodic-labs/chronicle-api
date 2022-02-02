@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.timeusediary
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.OffsetDateTime
 
 /**
@@ -8,8 +9,8 @@ import java.time.OffsetDateTime
  */
 
 data class TimeUseDiaryResponse(
-        val questionCode: Set<String>,
-        val response: Set<String>,
-        val startDateTime: Set<OffsetDateTime> = setOf(),
-        val endDateTime: Set<OffsetDateTime> = setOf()
+        @JsonProperty("questionCode") val questionCode: Set<String>,
+        @JsonProperty("response") val response: Set<String>,
+        @JsonProperty("startDateTime") val startDateTime: Set<OffsetDateTime> = setOf(),
+        @JsonProperty("endDateTime") val endDateTime: Set<OffsetDateTime> = setOf()
 )
