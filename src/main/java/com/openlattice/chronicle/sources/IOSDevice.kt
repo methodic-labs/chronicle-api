@@ -9,7 +9,7 @@ import java.util.*
  *
  * Describes an iOS device: https://developer.apple.com/documentation/uikit/uidevice
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 class IOSDevice @JsonCreator constructor(
         val name: String,
         val systemName: String,
