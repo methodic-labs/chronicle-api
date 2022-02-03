@@ -14,8 +14,7 @@ import java.util.*
 /**
  * @author Solomon Tang <solomon@openlattice.com>
  */
-class Study @JsonCreator constructor(
-    studyId: UUID = IdConstants.UNINITIALIZED.id,
+class Study @JsonCreator constructor(studyId: UUID = IdConstants.UNINITIALIZED.id,
     title: String,
     description: String = "",
     val createdAt: OffsetDateTime = OffsetDateTime.now(),
