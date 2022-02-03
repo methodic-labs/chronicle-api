@@ -28,6 +28,8 @@ interface StudyApi {
         const val DATA_SOURCE_ID_PATH = "/{$DATA_SOURCE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_PATH = "/participant"
+
+        const val RETRIEVE = "retrieve"
     }
 
 
@@ -79,13 +81,15 @@ interface StudyApi {
      * Updates an existing study based on id
      * @param studyId The id of the study to update.
      * @param study The changes to the study. Excludes non-user specifiable fields such as studyId, createdAt, updatedAt
+     * @param retrieve
      * Does not accept changes to associated organizations.
      */
     @PATCH(BASE + STUDY_ID_PATH)
     fun updateStudy(
         @Path(STUDY_ID) studyId: UUID,
-        @Body study: StudyUpdate
-    )
+        @Body study: StudyUpdate,
+        @Query(RETRIEVE) retrieve: Boolean = false
+    ): Study?
 
     /**
      * Registers a participant in a study and creates the corresponding candidate if they do not exist.
