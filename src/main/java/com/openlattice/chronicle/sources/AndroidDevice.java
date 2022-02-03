@@ -24,7 +24,7 @@ import java.util.Objects;
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
 @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include= JsonTypeInfo.As.PROPERTY, property="@class")
-public class AndroidDevice implements Datasource {
+public class AndroidDevice implements SourceDevice {
     private final String              device;
     private final String              model;
     private final String              codename;

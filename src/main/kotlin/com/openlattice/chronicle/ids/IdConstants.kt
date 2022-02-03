@@ -26,6 +26,7 @@ import java.util.UUID
 enum class IdConstants(val id: UUID) {
 
     UNINITIALIZED(UUID(0L, 0L)),
+    SYSTEM(UUID(0,1)),
 
     /* Organizations */
 
