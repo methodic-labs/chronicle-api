@@ -8,6 +8,7 @@ enum class SecurableObjectType {
     Organization,
     Study,
     TimeUseDiary,
+    Candidate,
     Datasource,
     Module,
     Principal,

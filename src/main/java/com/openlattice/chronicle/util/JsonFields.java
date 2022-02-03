@@ -65,6 +65,7 @@ public final class JsonFields {
     public static final String CALCULATIONS                     = "calculations";
     public static final String CALCULATION_TYPE                 = "calculationType";
     public static final String CALLBACK                         = "callback";
+    public static final String CANDIDATE                        = "candidate";
     public static final String CATEGORY                         = "category";
     public static final String CHILD_CLAUSES                    = "childClauses";
     public static final String CHILD_QUERIES                    = "childQueries";
@@ -212,6 +213,8 @@ public final class JsonFields {
     public static final String ORIENTATION                      = "orientation";
     public static final String PAGING_TOKEN                     = "pagingToken";
     public static final String PARENT_TYPE_FIELD                = "parentType";
+    public static final String PARTICIPANT_ID                   = "participantId";
+    public static final String PARTICIPATION_STATUS             = "participationStatus";
     public static final String PARTITIONS                       = "partitions";
     public static final String PASSWORD                         = "password";
     public static final String PATH                             = "path";
@@ -272,7 +275,7 @@ public final class JsonFields {
     public static final String STORAGE_DESTINATION              = "storageDest";
     public static final String STORAGE_TYPE                     = "storageType";
     public static final String STUDY                            = "study";
-    public static final String STUDY_ID                            = "study";
+    public static final String STUDY_ID                         = "study";
     public static final String SYNC_ID                          = "syncId";
     public static final String SYNC_IDS                         = "syncIds";
     public static final String SYNC_TICKETS                     = "syncTickets";

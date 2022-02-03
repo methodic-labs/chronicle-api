@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.study
 
 import com.openlattice.chronicle.api.ChronicleApi
+import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.sources.SourceDevice
 import retrofit2.http.*
 import java.util.*
@@ -20,11 +21,13 @@ interface StudyApi {
         const val PARTICIPANT_ID = "participantId"
         const val DATA_SOURCE_ID = "dataSourceId"
 
+
         const val ENROLL_PATH = "/enroll"
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
         const val DATA_SOURCE_ID_PATH = "/{$DATA_SOURCE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
+        const val PARTICIPANT_PATH = "/participant"
     }
 
 
@@ -41,13 +44,13 @@ interface StudyApi {
      * @param datasourceId   A datasource specific id.
      * @param datasource     Datasource specific information.
      * @return The internal chronicle id for a device. It can be used to track a single device across resets, app uninstalls,
-     * etc.
+     * etc. It is not perfect due to privacy obfuscation implemented by mobile operating systems.
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + ENROLL_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + ENROLL_PATH)
     fun enroll(
-        @Path(ChronicleApi.STUDY_ID) studyId: UUID,
-        @Path(ChronicleApi.PARTICIPANT_ID) participantId: String,
-        @Path(ChronicleApi.DATASOURCE_ID) datasourceId: String,
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Path(DATA_SOURCE_ID) datasourceId: String,
         @Body datasource: SourceDevice
     ): UUID
 
@@ -83,4 +86,15 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Body study: StudyUpdate
     )
+
+    /**
+     * Registers a participant in a study and creates the corresponding candidate if they do not exist.
+     * @param participant The participant to register
+     * @return The id of the candidate that is created.
+     */
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH)
+    fun registerParticipant(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body participant: Participant
+    ): UUID
 }
