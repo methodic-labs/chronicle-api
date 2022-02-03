@@ -8,8 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import java.time.OffsetDateTime
 import java.util.*
 
 /**
@@ -102,9 +101,8 @@ interface TimeUseDiaryApi {
         @Path(ORGANIZATION_ID) organizationId: UUID,
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Query(START_DATE) startDateTime: LocalDateTime,
-        @Query(END_DATE) endDateTime: LocalDateTime,
-        @Query(ZONE_OFFSET) zoneOffset: ZoneOffset
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime,
     ): Map<LocalDate, Set<UUID>>
 
     /**
