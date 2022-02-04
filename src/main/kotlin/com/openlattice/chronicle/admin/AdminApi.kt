@@ -4,12 +4,11 @@ import com.openlattice.chronicle.authorization.Principal
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-
 interface AdminApi {
     companion object {
         // @formatter:off
-        const val SERVICE = "/datastore"
-        const val CONTROLLER = "/admin"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/admin"
         const val BASE = SERVICE + CONTROLLER
         // @formatter:on
 

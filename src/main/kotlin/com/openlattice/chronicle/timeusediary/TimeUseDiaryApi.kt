@@ -1,4 +1,4 @@
-package com.openlattice.chronicle.api
+package com.openlattice.chronicle.timeusediary
 
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryResponse
@@ -26,7 +26,6 @@ interface TimeUseDiaryApi {
         const val PARTICIPANT_ID = "participantId"
         const val START_DATE = "startDate"
         const val STUDY_ID = "studyId"
-        const val ZONE_OFFSET = "zoneOffset"
 
         const val DOWNLOAD_PATH = "/download"
         const val IDS_PATH = "/ids"
@@ -80,10 +79,10 @@ interface TimeUseDiaryApi {
 
     @POST(BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun submitTimeUseDiary(
-            @Path(ORGANIZATION_ID) organizationId: UUID,
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Body responses: List<TimeUseDiaryResponse>
+        @Path(ORGANIZATION_ID) organizationId: UUID,
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Body responses: List<TimeUseDiaryResponse>
     ): UUID
 
     /**

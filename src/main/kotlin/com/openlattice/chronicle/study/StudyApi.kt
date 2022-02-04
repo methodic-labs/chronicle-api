@@ -13,7 +13,7 @@ import java.util.*
 interface StudyApi {
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/study"
+        const val CONTROLLER = "/v3/study"
         const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"
@@ -28,6 +28,7 @@ interface StudyApi {
         const val DATA_SOURCE_ID_PATH = "/{$DATA_SOURCE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_PATH = "/participant"
+        const val ORGANIZATION_PATH = "/organization"
 
         const val RETRIEVE = "retrieve"
     }
@@ -76,6 +77,15 @@ interface StudyApi {
      */
     @GET(BASE + STUDY_ID_PATH)
     fun getStudy(@Path(STUDY_ID) studyId: UUID): Study
+
+    /**
+     * Retrieves all studies that belong to an organization
+     *
+     * @param organizationId The id of the organization to retrieve from.
+     * @return A list of studies that belong to the provided organization.
+     */
+    @GET(BASE + ORGANIZATION_PATH + ORGANIZATION_ID_PATH)
+    fun getOrgStudies(@Path(ORGANIZATION_ID) organizationId: UUID): Iterable<Study>
 
     /**
      * Updates an existing study based on id
