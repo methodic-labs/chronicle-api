@@ -14,7 +14,8 @@ data class SensorDataSample (
         val dateRecorded: OffsetDateTime,
         val duration: Double,
         val data: String,
-        val device: String,
         val timezone: String,
-        val sensor: String
+        val sensor: String,
+        val startDate: OffsetDateTime,
+        val endDate: OffsetDateTime
 )
