@@ -234,7 +234,6 @@ public interface ChronicleApi {
     /**
      * Uploads sensor data from iOS device
      *
-     * @param organizationId - organizationId
      * @param studyId        - studyId
      * @param participantId  - participantId
      * @param datasourceId   - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
@@ -243,7 +242,6 @@ public interface ChronicleApi {
      */
     @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH + SENSOR_PATH )
     Integer uploadSensorData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId,
             @Path( PARTICIPANT_ID ) String participantId,
             @Path( DATASOURCE_ID ) String datasourceId,
