@@ -7,8 +7,8 @@ import retrofit2.http.Path
 interface AdminApi {
     companion object {
         // @formatter:off
-        const val SERVICE = "/chronicle/v3"
-        const val CONTROLLER = "/admin"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/admin"
         const val BASE = SERVICE + CONTROLLER
         // @formatter:on
 

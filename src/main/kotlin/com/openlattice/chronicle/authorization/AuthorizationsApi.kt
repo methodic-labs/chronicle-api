@@ -14,8 +14,8 @@ interface AuthorizationsApi {
         /*
         * These determine the service routing for the LB
         */
-        const val SERVICE = "/chronicle/v3"
-        const val CONTROLLER = "/authorizations"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/authorizations"
         const val BASE = SERVICE + CONTROLLER
 
         const val OBJECT_TYPE = "objectType"

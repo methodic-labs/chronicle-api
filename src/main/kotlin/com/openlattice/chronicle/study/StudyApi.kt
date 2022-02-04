@@ -12,8 +12,8 @@ import java.util.*
  */
 interface StudyApi {
     companion object {
-        const val SERVICE = "/chronicle/v3"
-        const val CONTROLLER = "/study"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/study"
         const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"

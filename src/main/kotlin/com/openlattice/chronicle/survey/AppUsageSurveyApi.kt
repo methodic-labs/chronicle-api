@@ -12,8 +12,8 @@ import java.util.UUID
  */
 interface AppUsageSurveyApi {
     companion object {
-        const val SERVICE = "/chronicle/v3"
-        const val CONTROLLER = "/app-usage"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/app-usage"
         const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"

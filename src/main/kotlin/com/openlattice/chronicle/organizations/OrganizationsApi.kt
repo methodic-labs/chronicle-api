@@ -13,8 +13,8 @@ import java.util.UUID
 interface OrganizationsApi {
     companion object {
         // @formatter:off
-        const val SERVICE = "/chronicle/v3"
-        const val CONTROLLER = "/organizations"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/organizations"
         const val BASE = SERVICE + CONTROLLER
         // @formatter:on
 

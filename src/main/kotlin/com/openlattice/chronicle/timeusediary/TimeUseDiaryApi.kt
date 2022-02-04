@@ -15,8 +15,8 @@ import java.util.UUID
  */
 interface TimeUseDiaryApi {
     companion object {
-        const val SERVICE = "/chronicle/v3"
-        const val CONTROLLER = "/time-use-diary"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/time-use-diary"
         const val BASE = SERVICE + CONTROLLER
 
         const val DATA_TYPE = "dataType"
