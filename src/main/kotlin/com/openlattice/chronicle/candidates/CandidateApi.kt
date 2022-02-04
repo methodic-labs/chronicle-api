@@ -9,7 +9,7 @@ import java.util.UUID
 interface CandidateApi {
 
     companion object {
-        const val SERVICE = "/chronicle"
+        const val SERVICE = "/chronicle/v3"
         const val CONTROLLER = "/candidates"
         const val BASE = SERVICE + CONTROLLER
 

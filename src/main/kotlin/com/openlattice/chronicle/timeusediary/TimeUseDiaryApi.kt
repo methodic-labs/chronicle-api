@@ -1,7 +1,5 @@
-package com.openlattice.chronicle.api
+package com.openlattice.chronicle.timeusediary
 
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -10,15 +8,15 @@ import retrofit2.http.Query
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-import java.util.*
+import java.util.UUID
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
 interface TimeUseDiaryApi {
     companion object {
-        const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/v3/time-use-diary"
+        const val SERVICE = "/chronicle/v3"
+        const val CONTROLLER = "/time-use-diary"
         const val BASE = SERVICE + CONTROLLER
 
         const val DATA_TYPE = "dataType"
@@ -81,10 +79,10 @@ interface TimeUseDiaryApi {
 
     @POST(BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun submitTimeUseDiary(
-            @Path(ORGANIZATION_ID) organizationId: UUID,
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Body responses: List<TimeUseDiaryResponse>
+        @Path(ORGANIZATION_ID) organizationId: UUID,
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Body responses: List<TimeUseDiaryResponse>
     ): UUID
 
     /**
