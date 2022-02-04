@@ -4,7 +4,7 @@ import com.openlattice.chronicle.settings.AppComponent
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
-import java.util.*
+import java.util.UUID
 
 /**
  *
@@ -13,9 +13,9 @@ import java.util.*
 interface OrganizationsApi {
     companion object {
         // @formatter:off
-        const val  SERVICE = "/chronicle"
-        const val  CONTROLLER = "/organizations"
-        const val  BASE = SERVICE + CONTROLLER
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/organizations"
+        const val BASE = SERVICE + CONTROLLER
         // @formatter:on
 
         const val ORGANIZATION_ID = "organizationId"
