@@ -85,7 +85,7 @@ interface StudyApi {
      * @return A list of studies that belong to the provided organization.
      */
     @GET(BASE + ORGANIZATION_PATH + ORGANIZATION_ID_PATH)
-    fun getOrgStudies(@Path(ORGANIZATION_ID) organizationId: UUID): Iterable<Study>
+    fun getOrgStudies(@Path(ORGANIZATION_ID) organizationId: UUID): List<Study>
 
     /**
      * Updates an existing study based on id
