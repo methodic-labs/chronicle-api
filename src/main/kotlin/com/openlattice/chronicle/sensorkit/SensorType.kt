@@ -6,10 +6,9 @@ package com.openlattice.chronicle.sensorkit
  * Describes supported sensor types
  */
 
-
-enum class SensorType(sensorType: String){
-    DEVICE_USAGE("deviceUsage"),
-    KEYBOARD_METRICS("keyboardMetrics"),
-    MESSAGES_USAGE("messagesUpdate"),
-    PHONE_USAGE("phoneUsage")
+enum class SensorType {
+    deviceUsage,
+    keyboardMetrics,
+    messagesUpdate,
+    phoneUsage
 }

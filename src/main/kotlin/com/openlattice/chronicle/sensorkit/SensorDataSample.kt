@@ -31,7 +31,7 @@ data class NotificationUsage(
         val bundleIdentifier: String,
         val event: String
 )
-data class DeviceUsageDataSample(
+data class DeviceUsageData(
         val totalScreenWakes: Int,
         val totalUnlocks: Int,
         val totalUnlockDuration: Double,
@@ -40,21 +40,21 @@ data class DeviceUsageDataSample(
         val notificationUsage: Map<String, NotificationUsage>
         )
 
-data class PhoneUsageDataSample(
+data class PhoneUsageData(
         val totalIncomingCalls: Int,
         val totalOutgoingCalls: Int,
         val totalPhoneDuration: Double,
         val totalUniqueContacts: Int
 )
 
-data class MessagesUsageDataSample(
+data class MessagesUsageData(
         val totalIncomingMessages: Int,
         val totalOutgoingMessages: Int,
         val totalUniqueContacts: Int
 )
 
 //NOTE: optional parameters are currently only available for iOS 15.0+
-data class KeyboardMetricsDataSample(
+data class KeyboardMetricsData(
         val totalWords: Int,
         val totalAlteredWords: Int,
         val totalTaps: Int,
