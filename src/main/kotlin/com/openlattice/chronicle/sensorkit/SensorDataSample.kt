@@ -9,7 +9,7 @@ import java.util.*
  * An instance of this class encapsulates a sample recorded by SensorKit framework
  */
 
-data class SensorDataSample (
+data class SensorDataSample(
         val id: UUID,
         val dateRecorded: OffsetDateTime,
         val duration: Double,
@@ -31,6 +31,7 @@ data class NotificationUsage(
         val bundleIdentifier: String,
         val event: String
 )
+
 data class DeviceUsageData(
         val totalScreenWakes: Int,
         val totalUnlocks: Int,
@@ -38,7 +39,7 @@ data class DeviceUsageData(
         val appUsage: Map<String, AppUsage>,
         val webUsage: Map<String, Double>,
         val notificationUsage: Map<String, NotificationUsage>
-        )
+)
 
 data class PhoneUsageData(
         val totalIncomingCalls: Int,
