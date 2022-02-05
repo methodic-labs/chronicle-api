@@ -26,8 +26,8 @@ import retrofit2.http.POST
  */
 interface PermissionsApi {
     companion object {
-        const val SERVICE = "/datastore"
-        const val CONTROLLER = "/permissions"
+        const val SERVICE = "/chronicle"
+        const val CONTROLLER = "/v3/permissions"
         const val BASE = SERVICE + CONTROLLER
         const val BULK = "/bulk"
         const val EXPLAIN = "/explain"
