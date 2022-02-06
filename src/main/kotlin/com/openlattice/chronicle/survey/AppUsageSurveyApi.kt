@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
-import java.util.*
+import java.util.UUID
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
@@ -13,7 +13,7 @@ import java.util.*
 interface AppUsageSurveyApi {
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/app-usage"
+        const val CONTROLLER = "/v3/app-usage"
         const val BASE = SERVICE + CONTROLLER
 
         const val ORGANIZATION_ID = "organizationId"
