@@ -232,23 +232,6 @@ public interface ChronicleApi {
             @Body List<SetMultimap<UUID, Object>> data );
 
     /**
-     * Uploads sensor data from iOS device
-     *
-     * @param studyId        - studyId
-     * @param participantId  - participantId
-     * @param datasourceId   - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
-     * @param data           - A list of SensorDataSample objects.
-     * @return number of rows written
-     */
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATASOURCE_ID_PATH + UPLOAD_PATH + SENSOR_PATH )
-    Integer uploadSensorData(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Path( DATASOURCE_ID ) String datasourceId,
-            @Body List<SensorDataSample> data
-    );
-
-    /**
      * Looks up property type ids for the requested property type FQNS (passed as Strings)
      *
      * @param propertyTypeFqns A set of property type FQNs (as Strings)

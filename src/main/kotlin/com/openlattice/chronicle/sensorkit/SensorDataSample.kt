@@ -21,6 +21,13 @@ data class SensorDataSample(
         val endDate: OffsetDateTime
 )
 
+data class SensorSourceDevice(
+        val model: String,
+        val name: String,
+        val systemName: String,
+        val systemVersion: String
+)
+
 data class AppUsage(
         val usageTime: Double,
         val textInputSessions: Map<String, Double>,
@@ -36,7 +43,7 @@ data class DeviceUsageData(
         val totalScreenWakes: Int,
         val totalUnlocks: Int,
         val totalUnlockDuration: Double,
-        val appUsage: Map<String, AppUsage>,
+        val appUsage: Map<String, List<AppUsage>>,
         val webUsage: Map<String, Double>,
         val notificationUsage: Map<String, NotificationUsage>
 )

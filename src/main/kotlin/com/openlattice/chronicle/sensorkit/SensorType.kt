@@ -9,6 +9,6 @@ package com.openlattice.chronicle.sensorkit
 enum class SensorType {
     deviceUsage,
     keyboardMetrics,
-    messagesUpdate,
+    messagesUsage,
     phoneUsage
 }
