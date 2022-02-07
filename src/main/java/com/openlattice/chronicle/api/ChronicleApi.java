@@ -5,14 +5,9 @@ import com.google.common.collect.SetMultimap;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
 import com.openlattice.chronicle.data.ChronicleQuestionnaire;
 import com.openlattice.chronicle.data.ParticipationStatus;
-import com.openlattice.chronicle.sensorkit.SensorDataSample;
 import com.openlattice.chronicle.sources.SourceDevice;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +22,7 @@ public interface ChronicleApi {
     String CONTROLLER = "/v2";
     String BASE       = SERVICE + CONTROLLER;
 
-    String APP_NAME        = "appName";
+    String APP_NAME = "appName";
     String DATASOURCE_ID   = "datasourceId";
     String DATE            = "date";
     String ENTITY_KEY_ID   = "entityKeyId";
@@ -46,7 +41,6 @@ public interface ChronicleApi {
     String STATUS_PATH            = "/status";
     String TIME_USE_DIARY         = "/time-use-diary";
     String UPLOAD_PATH            = "/upload";
-    String SENSOR_PATH            = "/sensor";
 
     String DATASOURCE_ID_PATH   = "/{" + DATASOURCE_ID + "}";
     String ENTITY_KEY_ID_PATH   = "/{" + ENTITY_KEY_ID + "}";
@@ -100,7 +94,7 @@ public interface ChronicleApi {
      * @param organizationId - Id of the organization to which study belongs
      * @param studyId        - the studyId
      * @param participantId  - the participant
-     * @param date           - The date of something
+     * @param date  - The date of something
      * @return a list of neighbor entities and associations
      */
     @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS_PATH )
@@ -187,21 +181,21 @@ public interface ChronicleApi {
     /**
      * Submit responses for time use diary survey
      *
-     * @param organizationId  - Id of the organization to which study belongs
-     * @param studyId         - studyId
-     * @param participantId   - participantId
-     * @param surveyResponses - survey responses.
+     * @param organizationId - Id of the organization to which study belongs
+     * @param studyId        - studyId
+     * @param participantId  - participantId
+     * @param surveyResponses  - survey responses.
      * @apiNote Each element of the surveyResponses array represents a question/answer instance
      * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
      * and ol.datetimeend &amp; ol.datetimestart values to define a time range.
      * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
      * could be represented in the array as this object:
      * {
-     * ol.code: primaryActivity
-     * ol.title: 'Primary Activity,
-     * ol.values: ['Napping'],
-     * ol.datetimestart: &lt;Date + 08:00&gt;
-     * ol.datetimeend: &lt;Date + 10:00&gt;
+     *      ol.code: primaryActivity
+     *      ol.title: 'Primary Activity,
+     *      ol.values: ['Napping'],
+     *      ol.datetimestart: &lt;Date + 08:00&gt;
+     *      ol.datetimeend: &lt;Date + 10:00&gt;
      * }
      * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
      */
