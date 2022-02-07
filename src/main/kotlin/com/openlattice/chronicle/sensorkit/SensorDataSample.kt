@@ -34,18 +34,12 @@ data class AppUsage(
         val bundleIdentifier: String
 )
 
-data class NotificationUsage(
-        val bundleIdentifier: String,
-        val event: String
-)
-
 data class DeviceUsageData(
         val totalScreenWakes: Int,
         val totalUnlocks: Int,
         val totalUnlockDuration: Double,
         val appUsage: Map<String, List<AppUsage>>,
-        val webUsage: Map<String, Double>,
-        val notificationUsage: Map<String, NotificationUsage>
+        val webUsage: Map<String, Double>
 )
 
 data class PhoneUsageData(
