@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.organizations
 
 import com.openlattice.chronicle.settings.AppComponent
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -23,7 +24,7 @@ interface OrganizationsApi {
     }
 
     @POST(BASE)
-    fun createOrganization(organization: Organization): UUID
+    fun createOrganization(@Body organization: Organization): UUID
 
     @GET(BASE + ORGANIZATION_ID_PATH)
     fun getOrganization(@Path(ORGANIZATION_ID) organizationId: UUID): Organization
