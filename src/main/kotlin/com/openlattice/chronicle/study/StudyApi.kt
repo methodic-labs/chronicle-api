@@ -2,8 +2,14 @@ package com.openlattice.chronicle.study
 
 import com.openlattice.chronicle.api.ChronicleApi
 import com.openlattice.chronicle.participants.Participant
+import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sources.SourceDevice
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.PATCH
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import java.util.*
 
 
@@ -29,7 +35,8 @@ interface StudyApi {
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_PATH = "/participant"
         const val ORGANIZATION_PATH = "/organization"
-
+        const val UPLOAD_PATH = "/upload"
+        const val SENSOR_PATH = "/sensor"
         const val RETRIEVE = "retrieve"
     }
 
@@ -85,7 +92,7 @@ interface StudyApi {
      * @return A list of studies that belong to the provided organization.
      */
     @GET(BASE + ORGANIZATION_PATH + ORGANIZATION_ID_PATH)
-    fun getOrgStudies(@Path(ORGANIZATION_ID) organizationId: UUID): Iterable<Study>
+    fun getOrgStudies(@Path(ORGANIZATION_ID) organizationId: UUID): List<Study>
 
     /**
      * Updates an existing study based on id
@@ -102,6 +109,14 @@ interface StudyApi {
     ): Study?
 
     /**
+     * Deletes an existing study based on id.
+     *
+     * @param studyId The id of the study to be destroyed.
+     */
+    @DELETE(BASE + STUDY_ID_PATH)
+    fun destroyStudy(@Path(STUDY_ID) studyId: UUID)
+
+    /**
      * Registers a participant in a study and creates the corresponding candidate if they do not exist.
      * @param participant The participant to register
      * @return The id of the candidate that is created.
@@ -111,4 +126,21 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Body participant: Participant
     ): UUID
+
+    /**
+     * Uploads sensor data from iOS device
+     *
+     * @param studyId        - studyId
+     * @param participantId  - participantId
+     * @param datasourceId   - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param data           - A list of SensorDataSample objects.
+     * @return number of rows written
+     */
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + SENSOR_PATH)
+    fun uploadSensorData(
+            @Path(ChronicleApi.STUDY_ID) studyId: UUID,
+            @Path(ChronicleApi.PARTICIPANT_ID) participantId: String,
+            @Path(ChronicleApi.DATASOURCE_ID) datasourceId: String,
+            @Body data: List<SensorDataSample>
+    ): Int
 }
