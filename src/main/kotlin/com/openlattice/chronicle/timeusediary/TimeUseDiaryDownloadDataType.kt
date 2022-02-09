@@ -5,8 +5,22 @@ package com.openlattice.chronicle.timeusediary
  */
 enum class TimeUseDiaryDownloadDataType {
     DAY_TIME {
-        override val keywords: List<String>
+        override val downloadColumnTitles: List<String>
             get() = listOf(
+                "primaryActivity",
+                "careGiver",
+                "primaryBookType",
+                "bgTvDay",
+                "bgAudioDay",
+                "adultMedia",
+                "secondaryBookType",
+                "secondaryMediaActivity",
+                "secondaryActivity",
+                "secondaryMediaAge",
+                "secondaryMediaName",
+                "primaryMediaActivity",
+                "primaryMediaAge",
+                "primaryMediaName",
                 "dayOfWeek",
                 "typicalDay",
                 "nonTypicalDayReason",
@@ -14,32 +28,36 @@ enum class TimeUseDiaryDownloadDataType {
                 "dayStartTime",
                 "dayEndTime",
                 "typicalSleepPattern",
-                "nonTypicalSleepPattern",   // Potentially remove
+                "nonTypicalSleepPattern",
+                "nonTypicalSleepReason",
+                "sleepArrangement",
+                "wakeUpCount",
+                "bgTvNight",
+                "bgAudioNight",
+                "startDateTime",
+                "endDateTime"
+            )
+             },
+    NIGHT_TIME {
+        override val downloadColumnTitles: List<String>
+            get() = listOf(
+                "dayOfWeek",
+                "typicalDay",
+                "nonTypicalDayReason",
+                "todayWakeUpTime",
+                "dayEndTime",
+                "typicalSleepPattern",
                 "nonTypicalSleepReason",
                 "sleepArrangement",
                 "wakeUpCount",
                 "bgTvNight",
                 "bgAudioNight"
             )
-             },
-    NIGHT_TIME {
-        override val keywords: List<String>
-            get() = listOf(
-                "primary",
-                "secondary",
-                "day",
-                "adult",
-                "activity",
-                "caregiver",
-                "typical",
-                "counter",
-                "duration"
-            )
                },
     SUMMARIZED {
-        override val keywords: List<String>
+        override val downloadColumnTitles: List<String>
             get() = TODO("Not yet implemented")
     };
 
-    abstract val keywords: List<String>
+    abstract val downloadColumnTitles: List<String>
 }

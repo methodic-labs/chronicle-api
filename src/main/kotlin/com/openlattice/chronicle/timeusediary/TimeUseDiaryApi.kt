@@ -1,14 +1,15 @@
 package com.openlattice.chronicle.timeusediary
 
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.util.UUID
+import java.time.OffsetDateTime
+import java.util.*
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
@@ -19,13 +20,12 @@ interface TimeUseDiaryApi {
         const val CONTROLLER = "/v3/time-use-diary"
         const val BASE = SERVICE + CONTROLLER
 
-        const val DATA_TYPE = "dataType"
+        const val DOWNLOAD_TYPE = "downloadType"
         const val END_DATE = "endDate"
         const val ORGANIZATION_ID = "organizationId"
         const val PARTICIPANT_ID = "participantId"
         const val START_DATE = "startDate"
         const val STUDY_ID = "studyId"
-        const val ZONE_OFFSET = "zoneOffset"
 
         const val DOWNLOAD_PATH = "/download"
         const val IDS_PATH = "/ids"
@@ -100,9 +100,8 @@ interface TimeUseDiaryApi {
         @Path(ORGANIZATION_ID) organizationId: UUID,
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Query(START_DATE) startDateTime: LocalDateTime,
-        @Query(END_DATE) endDateTime: LocalDateTime,
-        @Query(ZONE_OFFSET) zoneOffset: ZoneOffset
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime,
     ): Map<LocalDate, Set<UUID>>
 
     /**
@@ -113,15 +112,16 @@ interface TimeUseDiaryApi {
      * @param participantId - Participant ID
      * @param type - type of data to download
      * @param submissionIds - Ids of survey submission to be downloaded
+     * @return An iterable data structure to be converted into a downloadable CSV file
      */
     @GET(BASE + DOWNLOAD_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun downloadTimeUseDiaryData(
         @Path(ORGANIZATION_ID) organizationId: UUID,
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Query(DATA_TYPE) type: TimeUseDiaryDownloadDataType,
+        @Query(DOWNLOAD_TYPE) downloadType: TimeUseDiaryDownloadDataType,
         @Body submissionIds: Set<UUID>
-    ): Iterable<Map<String, Set<Any>>>
+    ): Iterable<Map<String,Any>>
 
     @GET(BASE + STATUS_PATH)
     fun isRunning(): Boolean
