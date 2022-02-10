@@ -144,17 +144,4 @@ interface StudyApi {
             @Path(DATA_SOURCE_ID) datasourceId: String,
             @Body data: List<SensorDataSample>
     ): Int
-
-    /**
-     * Downloads sensor data associated with a participant into a csv file
-     *
-     * @param studyId - studyId
-     * @param participantId - participantId
-     * @return A collection of all sensor data associated with participant
-     */
-    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_PATH + SENSOR_PATH)
-    fun downloadSensorData(
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String
-    ): Iterable<Map<String, Any>>
 }
