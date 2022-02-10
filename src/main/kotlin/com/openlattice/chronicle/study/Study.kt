@@ -106,7 +106,7 @@ class Study @JsonCreator constructor(studyId: UUID = IdConstants.UNINITIALIZED.i
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun getConfiguredSensors(): Set<SensorType> {
+    fun retrieveConfiguredSensors(): Set<SensorType> {
         if (!settings.containsKey(SENSORS)) return setOf()
 
         return (settings.getValue(SENSORS) as List<String>).map { SensorType.valueOf(it) }.toSet()
