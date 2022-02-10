@@ -10,7 +10,7 @@ interface CandidateApi {
 
     companion object {
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/v3/candidates"
+        const val CONTROLLER = "/v3/candidate"
         const val BASE = SERVICE + CONTROLLER
 
         const val BULK_PATH = "/bulk"
