@@ -28,7 +28,7 @@ interface StudyApi {
         const val PARTICIPANT_ID = "participantId"
         const val DATA_SOURCE_ID = "dataSourceId"
 
-
+        const val DATA_PATH = "/data"
         const val ENROLL_PATH = "/enroll"
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
@@ -139,9 +139,9 @@ interface StudyApi {
      */
     @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + SENSOR_PATH)
     fun uploadSensorData(
-            @Path(ChronicleApi.STUDY_ID) studyId: UUID,
-            @Path(ChronicleApi.PARTICIPANT_ID) participantId: String,
-            @Path(ChronicleApi.DATASOURCE_ID) datasourceId: String,
+            @Path(STUDY_ID) studyId: UUID,
+            @Path(PARTICIPANT_ID) participantId: String,
+            @Path(DATA_SOURCE_ID) datasourceId: String,
             @Body data: List<SensorDataSample>
     ): Int
 }

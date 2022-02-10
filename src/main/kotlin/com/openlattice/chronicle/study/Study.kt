@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
+import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.storage.ChronicleStorage
 import org.apache.commons.lang3.StringUtils
 import org.joda.time.DateTime
@@ -35,6 +36,9 @@ class Study @JsonCreator constructor(studyId: UUID = IdConstants.UNINITIALIZED.i
         check( storage.length <= 36 && StringUtils.isAlpha(storage)) {
             "Storage name cannot be more 36 characters and must also be alphabetic characters only"
         }
+    }
+    companion object {
+        const val SENSORS = "sensors"
     }
     //    constructor(   studyId: UUID,
 //                   title: String,
@@ -99,6 +103,13 @@ class Study @JsonCreator constructor(studyId: UUID = IdConstants.UNINITIALIZED.i
 
     override fun toString(): String {
         return "Study(createdAt=$createdAt, updatedAt=$updatedAt, startedAt=$startedAt, endedAt=$endedAt, lat=$lat, lon=$lon, group='$group', version='$version', contact='$contact', organizationIds=$organizationIds, notificationsEnabled=$notificationsEnabled, storage='$storage', settings=$settings, category=$category)"
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun getConfiguredSensors(): Set<SensorType> {
+        if (!settings.containsKey(SENSORS)) return setOf()
+
+        return (settings.getValue(SENSORS) as List<String>).map { SensorType.valueOf(it) }.toSet()
     }
 
 }
