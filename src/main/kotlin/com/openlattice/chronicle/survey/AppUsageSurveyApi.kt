@@ -29,15 +29,13 @@ interface AppUsageSurveyApi {
     /**
      * Get app usage data for the specified participantId filtered by current date
      *
-     * @param organizationId - Id of the organization to which study belongs
      * @param studyId        - the studyId
      * @param participantId  - the participant
      * @param date  - usage date
      * @return a list of AppUsage objects
      */
-    @GET(BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun getAppUsageData(
-            @Path(ORGANIZATION_ID) organizationId: UUID,
             @Path(STUDY_ID) studyId: UUID,
             @Path(PARTICIPANT_ID) participantId: String,
             @Query(DATE) date: String
@@ -46,14 +44,12 @@ interface AppUsageSurveyApi {
     /**
      * Submit app usage survey responses for the specified participantId
      *
-     * @param organizationId - organizationId
      * @param studyId - studyId
      * @param participantId - participantId
      * @param surveyResponses - mapping from appUsageId to a set of users
      */
-    @POST(BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun submitAppUsageSurvey(
-            @Path(ORGANIZATION_ID) organizationId: UUID,
             @Path(STUDY_ID) studyId: UUID,
             @Path(PARTICIPANT_ID) participantId: String,
             @Body surveyResponses: Map<UUID, Set<String>>
