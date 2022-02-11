@@ -1,11 +1,7 @@
 package com.openlattice.chronicle.survey
 
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
-import java.util.UUID
+import retrofit2.http.*
+import java.util.*
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
@@ -36,9 +32,9 @@ interface AppUsageSurveyApi {
      */
     @GET(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun getAppUsageData(
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Query(DATE) date: String
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Query(DATE) date: String
     ): List<AppUsage>
 
     /**
@@ -50,8 +46,8 @@ interface AppUsageSurveyApi {
      */
     @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun submitAppUsageSurvey(
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Body surveyResponses: Map<UUID, Set<String>>
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Body surveyResponses: Map<UUID, Set<String>>
     )
 }
