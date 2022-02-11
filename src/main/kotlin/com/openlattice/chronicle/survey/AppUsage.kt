@@ -7,8 +7,15 @@ import java.util.*
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
 data class AppUsage(
-        var id: UUID,
-        var appPackageName: String,
-        var appLabel: String,
-        var timeStamp: OffsetDateTime,
-)
+    val appPackageName: String,
+    var appLabel: String?,
+    val timestamp: OffsetDateTime,
+    val users: List<String> = listOf(),
+    val timezone: String,
+) {
+    init {
+        if (appLabel?.isBlank() == true) {
+            appLabel = appPackageName
+        }
+    }
+}
