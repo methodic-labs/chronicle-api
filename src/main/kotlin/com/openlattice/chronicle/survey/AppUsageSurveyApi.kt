@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.survey
 
 import retrofit2.http.*
+import java.time.OffsetDateTime
 import java.util.*
 
 /**
@@ -16,6 +17,8 @@ interface AppUsageSurveyApi {
         const val STUDY_ID = "studyId"
         const val PARTICIPANT_ID = "participantId"
         const val DATE = "date"
+        const val START_DATE = "startDate"
+        const val END_DATE = "endDate"
 
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
@@ -35,7 +38,8 @@ interface AppUsageSurveyApi {
     fun getAppUsageSurveyData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Query(DATE) date: String
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
     ): List<AppUsage>
 
     /**
