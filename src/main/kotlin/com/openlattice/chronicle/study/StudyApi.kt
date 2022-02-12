@@ -1,16 +1,11 @@
 package com.openlattice.chronicle.study
 
-import com.openlattice.chronicle.api.ChronicleApi
+import com.openlattice.chronicle.base.OK
+import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sources.SourceDevice
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 import java.util.*
 
 
@@ -37,8 +32,9 @@ interface StudyApi {
         const val PARTICIPANT_PATH = "/participant"
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
-        const val SENSOR_PATH = "/sensor"
+        const val IOS_PATH = "/ios"
         const val RETRIEVE = "retrieve"
+        const val DATA_COLLECTION = "/data-collection/"
     }
 
 
@@ -131,17 +127,31 @@ interface StudyApi {
     /**
      * Uploads sensor data from iOS device
      *
-     * @param studyId        - studyId
-     * @param participantId  - participantId
-     * @param datasourceId   - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
-     * @param data           - A list of SensorDataSample objects.
+     * @param studyId The id of the study.
+     * @param participantId The id of the participant.
+     * @param datasourceId A unique id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param data A list of SensorDataSample objects.
      * @return number of rows written
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + SENSOR_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + IOS_PATH)
     fun uploadSensorData(
             @Path(STUDY_ID) studyId: UUID,
             @Path(PARTICIPANT_ID) participantId: String,
             @Path(DATA_SOURCE_ID) datasourceId: String,
             @Body data: List<SensorDataSample>
     ): Int
+
+
+    /**
+     * Uploads sensor data from iOS device
+     *
+     * @param studyId - studyId
+     * @param dataCollectionSettings - A list of SensorDataSample objects.
+     * @return number of rows written
+     */
+    @PUT(BASE + STUDY_ID_PATH + DATA_COLLECTION )
+    fun setChronicleDataCollectionSettings(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body dataCollectionSettings: ChronicleDataCollectionSettings
+    ) : OK
 }
