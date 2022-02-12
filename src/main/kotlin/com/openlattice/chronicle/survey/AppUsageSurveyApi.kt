@@ -32,7 +32,7 @@ interface AppUsageSurveyApi {
      * an app used at a specific timestamp in a specific timezone
      */
     @GET(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
-    fun getAppUsageData(
+    fun getAppUsageSurveyData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(DATE) date: String
