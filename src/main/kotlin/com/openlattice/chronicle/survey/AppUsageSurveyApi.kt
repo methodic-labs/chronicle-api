@@ -30,7 +30,8 @@ interface AppUsageSurveyApi {
      *
      * @param studyId        - the studyId
      * @param participantId  - the participant
-     * @param date  - usage date
+     * @param startDateTime  - lower bound date (inclusive)
+     * @param endDateTime - upper bound date (exclusive)
      * @return a list of AppUsage objects where each object encapsulates
      * an app used at a specific timestamp in a specific timezone
      */
