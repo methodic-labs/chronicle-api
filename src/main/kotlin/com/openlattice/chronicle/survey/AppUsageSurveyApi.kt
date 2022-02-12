@@ -40,6 +40,8 @@ interface AppUsageSurveyApi {
 
     /**
      * Submit app usage survey responses for the specified participantId
+     * Note that each instance of AppUsage(appPackageName, appLabel, timestamp) is considered a unique entity
+     * and will not be overwritten if it already exists in storage
      *
      * @param studyId - studyId
      * @param participantId - participantId
