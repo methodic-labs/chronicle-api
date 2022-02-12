@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.survey
 
 import retrofit2.http.*
+import java.time.OffsetDateTime
 import java.util.*
 
 /**
@@ -16,6 +17,8 @@ interface AppUsageSurveyApi {
         const val STUDY_ID = "studyId"
         const val PARTICIPANT_ID = "participantId"
         const val DATE = "date"
+        const val START_DATE = "startDate"
+        const val END_DATE = "endDate"
 
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
@@ -23,31 +26,36 @@ interface AppUsageSurveyApi {
     }
 
     /**
-     * Get app usage data for the specified participantId filtered by current date
+     * Queries the chronicle_usage_events table for usage events matching given studyId, participantId and date
      *
      * @param studyId        - the studyId
      * @param participantId  - the participant
-     * @param date  - usage date
-     * @return a list of AppUsage objects
+     * @param startDateTime  - lower bound date (inclusive)
+     * @param endDateTime - upper bound date (exclusive)
+     * @return a list of AppUsage objects where each object encapsulates
+     * an app used at a specific timestamp in a specific timezone
      */
     @GET(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
-    fun getAppUsageData(
+    fun getAppUsageSurveyData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Query(DATE) date: String
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
     ): List<AppUsage>
 
     /**
      * Submit app usage survey responses for the specified participantId
+     * Note that each instance of AppUsage(appPackageName, appLabel, timestamp) is considered a unique entity
+     * and will not be overwritten if it already exists in storage
      *
      * @param studyId - studyId
      * @param participantId - participantId
-     * @param surveyResponses - mapping from appUsageId to a set of users
+     * @param surveyResponses - a list of AppUsage Objects
      */
     @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
     fun submitAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Body surveyResponses: Map<UUID, Set<String>>
+        @Body surveyResponses: List<AppUsage>
     )
 }
