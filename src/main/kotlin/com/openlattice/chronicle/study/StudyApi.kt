@@ -38,6 +38,7 @@ interface StudyApi {
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
         const val SENSOR_PATH = "/sensor"
+        const val SETTINGS_PATH = "/settings"
         const val RETRIEVE = "retrieve"
     }
 
@@ -144,4 +145,14 @@ interface StudyApi {
             @Path(DATA_SOURCE_ID) datasourceId: String,
             @Body data: List<SensorDataSample>
     ): Int
+
+    /**
+     * Returns the settings for a given study
+     * This endpoint expects the caller to know the value type(s)
+     * @param studyId studyId
+     */
+    @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH)
+    fun getStudySettings(
+        @Path(STUDY_ID) studyId: UUID
+    ): Map<String, Any>
 }
