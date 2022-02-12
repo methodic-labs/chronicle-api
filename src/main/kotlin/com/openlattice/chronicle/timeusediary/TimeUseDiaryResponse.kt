@@ -11,6 +11,10 @@ import java.time.OffsetDateTime
 
 data class TimeUseDiaryResponse(
 
+        @JsonProperty("ol.code")
+        @JsonAlias("code")
+        val code: String,
+
         @JsonProperty("ol.title")
         @JsonAlias("question")
         val question: String,
