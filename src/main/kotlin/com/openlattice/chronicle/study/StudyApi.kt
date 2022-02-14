@@ -1,17 +1,10 @@
 package com.openlattice.chronicle.study
 
 import com.google.common.collect.SetMultimap
-import com.openlattice.chronicle.api.ChronicleApi
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sources.SourceDevice
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 import java.util.*
 
 
@@ -39,7 +32,8 @@ interface StudyApi {
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
         const val SENSOR_PATH = "/sensor"
-        const val DATA_SOURCE_PATH = "/datasource/"
+        const val SETTINGS_PATH = "/settings"
+        const val DATA_SOURCE_PATH = "/datasource"
         const val IOS_PATH = "/ios"
         const val ANDROID_PATH = "/android"
         const val RETRIEVE = "retrieve"
@@ -141,16 +135,25 @@ interface StudyApi {
      * @param data A list of SensorDataSample objects.
      * @return number of rows written
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_PATH +  DATA_SOURCE_ID_PATH + UPLOAD_PATH + IOS_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + IOS_PATH)
     fun uploadSensorData(
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Path(DATA_SOURCE_ID) datasourceId: String,
-            @Body data: List<SensorDataSample>
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Path(DATA_SOURCE_ID) datasourceId: String,
+        @Body data: List<SensorDataSample>
     ): Int
 
     /**
-     * Upload usage event data from android devices
+     * Returns the settings for a given study
+     * This endpoint expects the caller to know the value type(s)
+     * @param studyId studyId
+     */
+    @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH)
+    fun getStudySettings(
+        @Path(STUDY_ID) studyId: UUID
+    ): Map<String, Any>
+
+    /** Upload usage event data from android devices
      * @param studyId studyId
      * @param participantId participantId
      * @param datasourceId device id unique to each combination of app-signing key, user and device
@@ -166,4 +169,3 @@ interface StudyApi {
         @Body data: List<SetMultimap<UUID, Any>>
     ): Int
 }
-
