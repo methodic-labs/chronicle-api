@@ -33,6 +33,8 @@ interface StudyApi {
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
         const val IOS_PATH = "/ios"
+        const val SENSOR_PATH = "/sensor"
+        const val SETTINGS_PATH = "/settings"
         const val RETRIEVE = "retrieve"
         const val DATA_COLLECTION = "/data-collection/"
     }
@@ -95,7 +97,7 @@ interface StudyApi {
      * Updates an existing study based on id
      * @param studyId The id of the study to update.
      * @param study The changes to the study. Excludes non-user specifiable fields such as studyId, createdAt, updatedAt
-     * @param retrieve
+     * @param retrieve Set to true to retrieve the updated view of the study.
      * Does not accept changes to associated organizations.
      */
     @PATCH(BASE + STUDY_ID_PATH)
@@ -141,7 +143,6 @@ interface StudyApi {
             @Body data: List<SensorDataSample>
     ): Int
 
-
     /**
      * Uploads sensor data from iOS device
      *
@@ -154,4 +155,15 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Body dataCollectionSettings: ChronicleDataCollectionSettings
     ) : OK
+
+    /**
+     * Returns the settings for a given study
+     * This endpoint expects the caller to know the value type(s)
+     * @param studyId studyId
+     */
+    @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH)
+    fun getStudySettings(
+        @Path(STUDY_ID) studyId: UUID
+    ): Map<String, Any>
+
 }
