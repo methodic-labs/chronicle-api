@@ -1,16 +1,10 @@
 package com.openlattice.chronicle.study
 
-import com.openlattice.chronicle.api.ChronicleApi
+import com.google.common.collect.SetMultimap
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sources.SourceDevice
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 import java.util.*
 
 
@@ -39,6 +33,9 @@ interface StudyApi {
         const val UPLOAD_PATH = "/upload"
         const val SENSOR_PATH = "/sensor"
         const val SETTINGS_PATH = "/settings"
+        const val DATA_SOURCE_PATH = "/datasource"
+        const val IOS_PATH = "/ios"
+        const val ANDROID_PATH = "/android"
         const val RETRIEVE = "retrieve"
     }
 
@@ -132,18 +129,18 @@ interface StudyApi {
     /**
      * Uploads sensor data from iOS device
      *
-     * @param studyId        - studyId
-     * @param participantId  - participantId
-     * @param datasourceId   - unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
-     * @param data           - A list of SensorDataSample objects.
+     * @param studyId studyId
+     * @param participantId participantId
+     * @param datasourceId unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param data A list of SensorDataSample objects.
      * @return number of rows written
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + SENSOR_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + IOS_PATH)
     fun uploadSensorData(
-            @Path(STUDY_ID) studyId: UUID,
-            @Path(PARTICIPANT_ID) participantId: String,
-            @Path(DATA_SOURCE_ID) datasourceId: String,
-            @Body data: List<SensorDataSample>
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Path(DATA_SOURCE_ID) datasourceId: String,
+        @Body data: List<SensorDataSample>
     ): Int
 
     /**
@@ -155,4 +152,20 @@ interface StudyApi {
     fun getStudySettings(
         @Path(STUDY_ID) studyId: UUID
     ): Map<String, Any>
+
+    /** Upload usage event data from android devices
+     * @param studyId studyId
+     * @param participantId participantId
+     * @param datasourceId device id unique to each combination of app-signing key, user and device
+     * @param data A list of usage event objects to write. Each object encapsulates an instance of
+     * android's UsageEvents.Event with properties such as package name, timestamp and event type
+     * ref: https://developer.android.com/reference/android/app/usage/UsageEvents.Event
+     */
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + ANDROID_PATH)
+    fun uploadAndroidUsageEventData(
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Path(DATA_SOURCE_ID) datasourceId: String,
+        @Body data: List<SetMultimap<UUID, Any>>
+    ): Int
 }
