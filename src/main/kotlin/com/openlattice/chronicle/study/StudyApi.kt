@@ -1,6 +1,9 @@
 package com.openlattice.chronicle.study
 
+
 import com.google.common.collect.SetMultimap
+import com.openlattice.chronicle.base.OK
+import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sources.SourceDevice
@@ -20,23 +23,23 @@ interface StudyApi {
         const val ORGANIZATION_ID = "organizationId"
         const val STUDY_ID = "studyId"
         const val PARTICIPANT_ID = "participantId"
-        const val DATA_SOURCE_ID = "dataSourceId"
+        const val SOURCE_DEVICE_ID = "sourceDeviceId"
 
         const val DATA_PATH = "/data"
         const val ENROLL_PATH = "/enroll"
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
-        const val DATA_SOURCE_ID_PATH = "/{$DATA_SOURCE_ID}"
+        const val SOURCE_DEVICE_ID_PATH = "/{$SOURCE_DEVICE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_PATH = "/participant"
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
         const val SENSOR_PATH = "/sensor"
         const val SETTINGS_PATH = "/settings"
-        const val DATA_SOURCE_PATH = "/datasource"
         const val IOS_PATH = "/ios"
         const val ANDROID_PATH = "/android"
         const val RETRIEVE = "retrieve"
+        const val DATA_COLLECTION = "/data-collection/"
     }
 
 
@@ -55,11 +58,11 @@ interface StudyApi {
      * @return The internal chronicle id for a device. It can be used to track a single device across resets, app uninstalls,
      * etc. It is not perfect due to privacy obfuscation implemented by mobile operating systems.
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_ID_PATH + ENROLL_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + SOURCE_DEVICE_ID_PATH + ENROLL_PATH)
     fun enroll(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Path(DATA_SOURCE_ID) datasourceId: String,
+        @Path(SOURCE_DEVICE_ID) datasourceId: String,
         @Body datasource: SourceDevice
     ): UUID
 
@@ -97,7 +100,7 @@ interface StudyApi {
      * Updates an existing study based on id
      * @param studyId The id of the study to update.
      * @param study The changes to the study. Excludes non-user specifiable fields such as studyId, createdAt, updatedAt
-     * @param retrieve
+     * @param retrieve Set to true to retrieve the updated view of the study.
      * Does not accept changes to associated organizations.
      */
     @PATCH(BASE + STUDY_ID_PATH)
@@ -129,19 +132,32 @@ interface StudyApi {
     /**
      * Uploads sensor data from iOS device
      *
-     * @param studyId studyId
-     * @param participantId participantId
-     * @param datasourceId unique Id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param studyId The id of the study.
+     * @param participantId The id of the participant.
+     * @param datasourceId A unique id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
      * @param data A list of SensorDataSample objects.
      * @return number of rows written
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + IOS_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + IOS_PATH + SOURCE_DEVICE_ID_PATH)
     fun uploadSensorData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Path(DATA_SOURCE_ID) datasourceId: String,
+        @Path(SOURCE_DEVICE_ID) datasourceId: String,
         @Body data: List<SensorDataSample>
     ): Int
+
+    /**
+     * Uploads sensor data from iOS device
+     *
+     * @param studyId - studyId
+     * @param dataCollectionSettings - A list of SensorDataSample objects.
+     * @return number of rows written
+     */
+    @PUT(BASE + STUDY_ID_PATH + DATA_COLLECTION)
+    fun setChronicleDataCollectionSettings(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body dataCollectionSettings: ChronicleDataCollectionSettings
+    ): OK
 
     /**
      * Returns the settings for a given study
@@ -153,6 +169,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID
     ): Map<String, Any>
 
+
     /** Upload usage event data from android devices
      * @param studyId studyId
      * @param participantId participantId
@@ -161,11 +178,12 @@ interface StudyApi {
      * android's UsageEvents.Event with properties such as package name, timestamp and event type
      * ref: https://developer.android.com/reference/android/app/usage/UsageEvents.Event
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DATA_SOURCE_PATH + DATA_SOURCE_ID_PATH + UPLOAD_PATH + ANDROID_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + ANDROID_PATH + SOURCE_DEVICE_ID_PATH)
     fun uploadAndroidUsageEventData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Path(DATA_SOURCE_ID) datasourceId: String,
+        @Path(SOURCE_DEVICE_ID) datasourceId: String,
         @Body data: List<SetMultimap<UUID, Any>>
     ): Int
+
 }
