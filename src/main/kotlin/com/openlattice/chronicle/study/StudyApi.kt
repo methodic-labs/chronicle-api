@@ -32,6 +32,7 @@ interface StudyApi {
         const val SOURCE_DEVICE_ID_PATH = "/{$SOURCE_DEVICE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_PATH = "/participant"
+        const val PARTICIPANTS_PATH = "/participants"
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
         const val SENSOR_PATH = "/sensor"
@@ -186,4 +187,6 @@ interface StudyApi {
         @Body data: List<SetMultimap<UUID, Any>>
     ): Int
 
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
+    fun getStudyParticipants(@Path(STUDY_ID) studyId: UUID): Iterable<Participant>
 }
