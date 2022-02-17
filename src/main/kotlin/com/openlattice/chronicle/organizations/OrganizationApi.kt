@@ -11,11 +11,11 @@ import java.util.UUID
  *
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-interface OrganizationsApi {
+interface OrganizationApi {
     companion object {
         // @formatter:off
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/v3/organizations"
+        const val CONTROLLER = "/v3/organization"
         const val BASE = SERVICE + CONTROLLER
         // @formatter:on
 
