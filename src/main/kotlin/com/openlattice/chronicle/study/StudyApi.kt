@@ -115,9 +115,10 @@ interface StudyApi {
      * Deletes an existing study based on id.
      *
      * @param studyId The id of the study to be destroyed.
+     * @return The id of the background job created to delete usage data related to the study
      */
     @DELETE(BASE + STUDY_ID_PATH)
-    fun destroyStudy(@Path(STUDY_ID) studyId: UUID)
+    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): UUID
 
     /**
      * Registers a participant in a study and creates the corresponding candidate if they do not exist.
@@ -135,7 +136,7 @@ interface StudyApi {
      *
      * @param studyId The id of the study.
      * @param participantId The id of the participant.
-     * @param datasourceId A unique id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param sourceDeviceId A unique id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
      * @param data A list of SensorDataSample objects.
      * @return number of rows written
      */
@@ -143,7 +144,7 @@ interface StudyApi {
     fun uploadSensorData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Path(SOURCE_DEVICE_ID) datasourceId: String,
+        @Path(SOURCE_DEVICE_ID) sourceDeviceId: String,
         @Body data: List<SensorDataSample>
     ): Int
 
