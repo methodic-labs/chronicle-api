@@ -117,7 +117,7 @@ interface StudyApi {
      * @return The id of the background job created to delete usage data related to the study
      */
     @DELETE(BASE + STUDY_ID_PATH)
-    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): UUID
+    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): Iterable<UUID>
 
     /**
      * Registers a participant in a study and creates the corresponding candidate if they do not exist.
