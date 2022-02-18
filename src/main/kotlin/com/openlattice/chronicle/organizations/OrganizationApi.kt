@@ -29,8 +29,10 @@ interface OrganizationApi {
     @GET(BASE + ORGANIZATION_ID_PATH)
     fun getOrganization(@Path(ORGANIZATION_ID) organizationId: UUID): Organization
 
+    @GET(BASE)
+    fun getOrganizations(): Iterable<Organization>
+
     fun searchOrganizations(): Collection<Organization>
-    fun getOrganizations(): Collection<Organization>
 
     fun getOrganizationSettings(): OrganizationSettings
     fun getChronicleDataCollectionSettings(organizationId: UUID): ChronicleDataCollectionSettings
