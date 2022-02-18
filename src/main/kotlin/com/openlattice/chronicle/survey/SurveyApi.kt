@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.survey
 
+import com.openlattice.chronicle.base.OK
 import retrofit2.http.*
 import java.time.OffsetDateTime
 import java.util.*
@@ -68,12 +69,15 @@ interface SurveyApi {
 
     /**
      * Create a new questionnaire
+     *
+     * @param studyId
+     * @return questionnaire Id
      */
     @POST(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH)
     fun createQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
         @Body questionnaire: Questionnaire
-    ): Questionnaire
+    ): UUID
 
     /**
      * Deletes a questionnaire.
@@ -103,13 +107,13 @@ interface SurveyApi {
      * Toggles active status of questionnaire of given id
      * @param studyId studyId
      * @param questionnaireId questionnaire id
-     * @return updated questionnaire
+     * @return "SUCCESS" if operation was successful
      */
     @PATCH(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH)
     fun toggleQuestionnaireStatus(
         @Path(STUDY_ID) studyId: UUID,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
-    ): Questionnaire
+    ): OK
 
     /**
      * Retrieves all questionnaires associated with a study
@@ -128,7 +132,7 @@ interface SurveyApi {
      * @param studyId studyId
      * @param participantId participantId
      * @param questionnaireId questionnaire id
-     * @return the number of entities written
+     * @return "success" message if submission was successful
      */
     @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH)
     fun submitQuestionnaireResponses(
@@ -136,7 +140,7 @@ interface SurveyApi {
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
         @Body responses: List<QuestionnaireResponse>
-    ): Int
+    ): OK
 
     /**
      * Fetches all responses to a given questionnaire
