@@ -6,6 +6,7 @@ import com.openlattice.chronicle.base.OK
 import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.sensorkit.SensorDataSample
+import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
 import retrofit2.http.*
 import java.util.*
@@ -32,9 +33,10 @@ interface StudyApi {
         const val SOURCE_DEVICE_ID_PATH = "/{$SOURCE_DEVICE_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_PATH = "/participant"
+        const val PARTICIPANTS_PATH = "/participants"
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
-        const val SENSOR_PATH = "/sensor"
+        const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
         const val IOS_PATH = "/ios"
         const val ANDROID_PATH = "/android"
@@ -135,7 +137,7 @@ interface StudyApi {
      *
      * @param studyId The id of the study.
      * @param participantId The id of the participant.
-     * @param datasourceId A unique id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
+     * @param sourceDeviceId A unique id obtained from https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor
      * @param data A list of SensorDataSample objects.
      * @return number of rows written
      */
@@ -143,7 +145,7 @@ interface StudyApi {
     fun uploadSensorData(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Path(SOURCE_DEVICE_ID) datasourceId: String,
+        @Path(SOURCE_DEVICE_ID) sourceDeviceId: String,
         @Body data: List<SensorDataSample>
     ): Int
 
@@ -170,6 +172,17 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID
     ): Map<String, Any>
 
+    /**
+     * Fetches sensors configured for a study.
+     *
+     * @param studyId studyId
+     * @return all sensor types for given study
+     */
+    @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH + SENSORS_PATH)
+    fun getStudySensors(
+        @Path(STUDY_ID) studyId: UUID
+    ): Set<SensorType>
+
 
     /** Upload usage event data from android devices
      * @param studyId studyId
@@ -187,4 +200,6 @@ interface StudyApi {
         @Body data: List<SetMultimap<UUID, Any>>
     ): Int
 
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
+    fun getStudyParticipants(@Path(STUDY_ID) studyId: UUID): Iterable<Participant>
 }
