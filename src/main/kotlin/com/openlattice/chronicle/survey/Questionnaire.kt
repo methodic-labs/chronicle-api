@@ -14,12 +14,13 @@ data class Questionnaire(
 )
 
 data class Question(
+    val id: UUID,
     val title: String,
-    val type: QuestionType,
-    val options: Set<String>
+    val choices: Set<String> //
 )
 
-enum class QuestionType{
-    MULTIPLE_CHOICE,
-    TEXT_INPUT
-}
+data class QuestionnaireResponse(
+    val questionId: UUID,
+    val value: Set<String>
+)
+
