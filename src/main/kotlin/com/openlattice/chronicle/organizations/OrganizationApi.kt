@@ -11,11 +11,11 @@ import java.util.UUID
  *
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-interface OrganizationsApi {
+interface OrganizationApi {
     companion object {
         // @formatter:off
         const val SERVICE = "/chronicle"
-        const val CONTROLLER = "/v3/organizations"
+        const val CONTROLLER = "/v3/organization"
         const val BASE = SERVICE + CONTROLLER
         // @formatter:on
 
@@ -29,8 +29,10 @@ interface OrganizationsApi {
     @GET(BASE + ORGANIZATION_ID_PATH)
     fun getOrganization(@Path(ORGANIZATION_ID) organizationId: UUID): Organization
 
+    @GET(BASE)
+    fun getOrganizations(): Iterable<Organization>
+
     fun searchOrganizations(): Collection<Organization>
-    fun getOrganizations(): Collection<Organization>
 
     fun getOrganizationSettings(): OrganizationSettings
     fun getChronicleDataCollectionSettings(organizationId: UUID): ChronicleDataCollectionSettings
