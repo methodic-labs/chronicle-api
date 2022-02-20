@@ -2,6 +2,7 @@ package com.openlattice.chronicle.survey
 
 import com.google.common.base.Preconditions
 import com.google.common.base.Preconditions.checkArgument
+import org.dmfs.rfc5545.recur.RecurrenceRule
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -14,7 +15,8 @@ data class Questionnaire(
     val dateCreated: OffsetDateTime?,
     val description: String = "",
     val active: Boolean = true,
-    val questions: List<Question>
+    val questions: List<Question>,
+    val recurrenceRule: RecurrenceRule?
 ) {
     init {
         check(questions.isNotEmpty()) { "questions must be non-empty" }

@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.survey
 
 import com.openlattice.chronicle.base.OK
+import com.openlattice.chronicle.data.FileType
 import retrofit2.http.*
 import java.time.OffsetDateTime
 import java.util.*
@@ -21,6 +22,7 @@ interface SurveyApi {
         const val START_DATE = "startDate"
         const val END_DATE = "endDate"
         const val QUESTIONNAIRE_ID = "questionnaireId"
+        const val TYPE = "type"
 
         const val PARTICIPANT_PATH = "/participant"
         const val APP_USAGE_PATH = "/app-usage"
@@ -80,16 +82,17 @@ interface SurveyApi {
     ): UUID
 
     /**
-     * Deletes a questionnaire.
+     * Deletes a questionnaire. This does not delete any existing responses for the questionnaire
      *
      * @param studyId studyId
-     * @param questionnaireId questionnare id
+     * @param questionnaireId questionnaire id
+     * @return success message if successful
      */
     @DELETE(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH)
     fun deleteQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID
-    )
+    ): OK
 
     /**
      * Retrieves a questionnaire of given id
@@ -104,15 +107,16 @@ interface SurveyApi {
     ): Questionnaire
 
     /**
-     * Toggles active status of questionnaire of given id
+     * Updates questionnaire details
      * @param studyId studyId
      * @param questionnaireId questionnaire id
      * @return "SUCCESS" if operation was successful
      */
     @PATCH(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH)
-    fun toggleQuestionnaireStatus(
+    fun updateQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
+        @Body update: QuestionnaireUpdate
     ): OK
 
     /**
@@ -143,16 +147,16 @@ interface SurveyApi {
     ): OK
 
     /**
-     * Fetches all responses to a given questionnaire
+     * Fetches all responses to a given questionnaire and writes to specified file type
      *
      * @param studyId studyId
-     * @param participantId participantId
      * @param questionnaireId questionnaire Id
+     * @param fileType type of file to write to
      */
-    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH + DATA_PATH)
+    @GET(BASE + STUDY_ID_PATH  + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH + DATA_PATH)
     fun getQuestionnaireResponses(
         @Path(STUDY_ID) studyId: UUID,
-        @Path(PARTICIPANT_ID) participantId: String,
-        @Path(QUESTIONNAIRE_ID) questionnaireId: UUID
+        @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
+        @Query(value = TYPE) fileType: FileType
     ): Iterable<Map<String, Any>>
 }

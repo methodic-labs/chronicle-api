@@ -179,8 +179,9 @@ dependencies {
 
     implementation "com.auth0:auth0:${project.auth0_version}"
 
+    implementation "org.dmfs:lib-recur:0.10.2"
     testImplementation "junit:junit:${junit_version}"
-
+    
     /*
      * TESTING
      */
