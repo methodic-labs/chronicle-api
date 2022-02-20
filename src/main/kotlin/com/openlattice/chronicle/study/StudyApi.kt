@@ -202,4 +202,7 @@ interface StudyApi {
 
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
     fun getStudyParticipants(@Path(STUDY_ID) studyId: UUID): Iterable<Participant>
+
+    @GET(BASE)
+    fun getAllStudies() : Iterable<Study>
 }
