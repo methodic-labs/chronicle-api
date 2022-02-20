@@ -62,7 +62,7 @@ interface SurveyApi {
      * @param participantId participantId
      * @param surveyResponses a list of AppUsage Objects
      */
-    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_ID + PARTICIPANT_ID_PATH + APP_USAGE_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + APP_USAGE_PATH)
     fun submitAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
