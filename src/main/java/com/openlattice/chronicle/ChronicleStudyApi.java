@@ -2,7 +2,7 @@ package com.openlattice.chronicle;
 
 import com.google.common.base.Optional;
 import com.openlattice.chronicle.data.ChronicleAppsUsageDetails;
-import com.openlattice.chronicle.data.ChronicleQuestionnaire;
+import com.openlattice.chronicle.data.LegacyChronicleQuestionnaire;
 import com.openlattice.chronicle.data.ParticipationStatus;
 import com.openlattice.chronicle.sources.SourceDevice;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
@@ -136,7 +136,7 @@ public interface ChronicleStudyApi {
      * @return A chronicle questionnaire
      */
     @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRE + ENTITY_KEY_ID_PATH )
-    ChronicleQuestionnaire getChronicleQuestionnaire(
+    LegacyChronicleQuestionnaire getChronicleQuestionnaire(
             @Path( STUDY_ID ) UUID studyId,
             @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
     );
