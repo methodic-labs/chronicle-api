@@ -33,7 +33,7 @@ interface PrincipalApi {
 
     companion object {
         const val SERVICE = "/datastore"
-        const val CONTROLLER = "/principals"
+        const val CONTROLLER = "/principal"
         const val BASE = SERVICE + CONTROLLER
 
         const val CURRENT = "/current"
