@@ -215,4 +215,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String
     ): Boolean
+    
+    @GET(BASE)
+    fun getAllStudies() : Iterable<Study>
 }
