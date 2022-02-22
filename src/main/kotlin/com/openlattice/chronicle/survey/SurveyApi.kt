@@ -23,6 +23,7 @@ interface SurveyApi {
         const val END_DATE = "endDate"
         const val QUESTIONNAIRE_ID = "questionnaireId"
         const val TYPE = "type"
+        const val FILE_NAME = "fileName"
 
         const val PARTICIPANT_PATH = "/participant"
         const val APP_USAGE_PATH = "/app-usage"
