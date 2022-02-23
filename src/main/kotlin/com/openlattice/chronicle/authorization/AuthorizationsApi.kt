@@ -35,9 +35,7 @@ interface AuthorizationsApi {
      */
     @GET(BASE)
     fun getAccessibleObjects(
-            @Query(
-                    OBJECT_TYPE
-            ) objectType: SecurableObjectType,
+            @Query(OBJECT_TYPE) objectType: SecurableObjectType,
             @Query(PERMISSION) permission: Permission,
             @Query(PAGING_TOKEN) pagingToken: String
     ): AuthorizedObjectsSearchResult
