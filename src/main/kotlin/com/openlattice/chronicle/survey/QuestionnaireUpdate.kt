@@ -9,7 +9,13 @@ import org.dmfs.rfc5545.recur.RecurrenceRule
 data class QuestionnaireUpdate(
     val title: String,
     val description: String?,
-    val recurrenceRule: RecurrenceRule?,
+    var recurrenceRule: String?,
     val active: Boolean?,
     val questions: List<Question>?
-)
+) {
+    init {
+        recurrenceRule?.let {
+            recurrenceRule = RecurrenceRule(it).toString()
+        }
+    }
+}
