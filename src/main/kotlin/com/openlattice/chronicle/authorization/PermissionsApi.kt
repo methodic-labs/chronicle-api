@@ -17,6 +17,7 @@
  */
 package com.openlattice.chronicle.authorization
 
+import com.openlattice.chronicle.base.OK
 import retrofit2.http.Body
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -47,7 +48,7 @@ interface PermissionsApi {
      * @param req The acl key, the principals, and the aces to set for that particular ace key.
      */
     @PATCH(BASE)
-    fun updateAcl(@Body req: AclData?): Void?
+    fun updateAcl(@Body req: AclData): OK
 
     /**
      * Adds, removes, or sets the ace for a particular set of acl keys. Successful only if user is the owner of all acl keys.
@@ -62,7 +63,7 @@ interface PermissionsApi {
      * @return Void
      */
     @PATCH(BASE + UPDATE)
-    fun updateAcls(@Body req: List<AclData?>?): Void?
+    fun updateAcls(@Body req: List<AclData>): OK
 
     /**
      * Retrieves the acl for a particular acl key. Only return if user is the owner of acl key.
@@ -70,7 +71,7 @@ interface PermissionsApi {
      * @param aclKey The acl key.
      */
     @POST(BASE)
-    fun getAcl(@Body aclKey: AclKey?): Acl?
+    fun getAcl(@Body aclKey: AclKey): Acl
 
     /**
      * Retrieves the set of Acls for the given set of AclKeys, only if the user is OWNER of all AclKeys.
@@ -79,7 +80,7 @@ interface PermissionsApi {
      * @return the set of Acls corresponding to the given set of AclKeys
      */
     @POST(BASE + BULK)
-    fun getAcls(@Body aclKeys: Set<AclKey?>?): Set<Acl?>?
+    fun getAcls(@Body aclKeys: Set<AclKey>): Set<Acl>
 
     /**
      * Retrieves the acl for a particular acl key, with explanation of where the permissions come from. Only return if
@@ -89,6 +90,6 @@ interface PermissionsApi {
      * @return The aces for the requested acl key, together with the explanation.
      */
     @POST(BASE + EXPLAIN)
-    fun getAclExplanation(@Body aclKey: AclKey?): Collection<AclExplanation?>?
+    fun getAclExplanation(@Body aclKey: AclKey): Collection<AclExplanation>
 
 }
