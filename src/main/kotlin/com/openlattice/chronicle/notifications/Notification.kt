@@ -18,6 +18,6 @@ data class Notification(
     var messageId: String,
     val type: String,
     val body: String,
-    val email: String?,
+    val email: String? = null,
     val phone: String,
 )
