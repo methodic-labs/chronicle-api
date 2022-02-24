@@ -2,7 +2,6 @@ package com.openlattice.chronicle.data;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.SetMultimap;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 
 import java.util.List;
@@ -13,16 +12,16 @@ import java.util.Set;
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
-public class ChronicleQuestionnaire {
+public class LegacyChronicleQuestionnaire {
     private Map<FullQualifiedName, Set<Object>>          questionnaireDetails;
     private List<Map<FullQualifiedName, Set<Object>>> questions;
 
     @JsonCreator
-    public ChronicleQuestionnaire() {
+    public LegacyChronicleQuestionnaire() {
     }
 
     @JsonCreator
-    public ChronicleQuestionnaire(
+    public LegacyChronicleQuestionnaire(
             @JsonProperty( SerializationConstants.QUESTIONNAIRE_DETAILS )
                     Map<FullQualifiedName, Set<Object>> questionnaireDetails,
             @JsonProperty( SerializationConstants.QUESTIONS ) List<Map<FullQualifiedName, Set<Object>>> questions
@@ -51,7 +50,7 @@ public class ChronicleQuestionnaire {
 
     @Override
     public String toString() {
-        return "ChronicleQuestionnaire{" +
+        return "LegacyChronicleQuestionnaire{" +
                 "questionnaireDetails=" + questionnaireDetails +
                 ", questions=" + questions +
                 '}';
@@ -63,7 +62,7 @@ public class ChronicleQuestionnaire {
             return true;
         if ( o == null || getClass() != o.getClass() )
             return false;
-        ChronicleQuestionnaire that = (ChronicleQuestionnaire) o;
+        LegacyChronicleQuestionnaire that = (LegacyChronicleQuestionnaire) o;
         return Objects.equals( questionnaireDetails, that.questionnaireDetails ) &&
                 Objects.equals( questions, that.questions );
     }

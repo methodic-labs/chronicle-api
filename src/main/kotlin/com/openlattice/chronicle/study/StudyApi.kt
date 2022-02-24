@@ -26,6 +26,7 @@ interface StudyApi {
         const val PARTICIPANT_ID = "participantId"
         const val SOURCE_DEVICE_ID = "sourceDeviceId"
 
+        const val VERIFY_PATH = "/verify"
         const val DATA_PATH = "/data"
         const val ENROLL_PATH = "/enroll"
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
@@ -119,7 +120,7 @@ interface StudyApi {
      * @return The id of the background job created to delete usage data related to the study
      */
     @DELETE(BASE + STUDY_ID_PATH)
-    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): UUID
+    fun destroyStudy(@Path(STUDY_ID) studyId: UUID): Iterable<UUID>
 
     /**
      * Registers a participant in a study and creates the corresponding candidate if they do not exist.
@@ -202,4 +203,19 @@ interface StudyApi {
 
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
     fun getStudyParticipants(@Path(STUDY_ID) studyId: UUID): Iterable<Participant>
+
+    /**
+     * Verifies that participant is in a study
+     * @param studyId studyId
+     * @param participantId participantId
+     * @return true if the participant is in the study
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + VERIFY_PATH)
+    fun isKnownParticipant(
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String
+    ): Boolean
+    
+    @GET(BASE)
+    fun getAllStudies() : Iterable<Study>
 }
