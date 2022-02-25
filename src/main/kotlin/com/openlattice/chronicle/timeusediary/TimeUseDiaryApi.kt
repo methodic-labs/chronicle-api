@@ -109,7 +109,6 @@ interface TimeUseDiaryApi {
     /**
      * Returns all TUD survey submissionIds grouped by date for a given date range and study
      *
-     * @param organizationId - Organization ID
      * @param studyId - Study ID
      * @param startDateTime - lower bound submission date
      * @param endDateTime - upper bound submission date
