@@ -5,6 +5,7 @@ import com.google.common.collect.SetMultimap
 import com.openlattice.chronicle.base.OK
 import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
+import com.openlattice.chronicle.participants.ParticipantStats
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
@@ -39,6 +40,7 @@ interface StudyApi {
         const val UPLOAD_PATH = "/upload"
         const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
+        const val STATS_PATH = "/stats"
         const val IOS_PATH = "/ios"
         const val ANDROID_PATH = "/android"
         const val RETRIEVE = "retrieve"
@@ -218,4 +220,14 @@ interface StudyApi {
     
     @GET(BASE)
     fun getAllStudies() : Iterable<Study>
+
+    /**
+     * Retrieves stats of participant in a study
+     * @param studyId studyId
+     * @return a map of participantId to stats object.
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH + STATS_PATH)
+    fun getParticipantStats(
+        @Path(STUDY_ID) studyId: UUID
+    ): Map<String, ParticipantStats>
 }
