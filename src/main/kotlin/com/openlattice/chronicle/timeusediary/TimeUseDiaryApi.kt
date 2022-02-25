@@ -35,6 +35,8 @@ interface TimeUseDiaryApi {
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
 
         const val STATUS_PATH = "/status"
+        const val STUDY_PATH = "/study"
+        const val PARTICIPANT_PATH = "/participant"
     }
 
     // @formatter:off
@@ -86,7 +88,7 @@ interface TimeUseDiaryApi {
     ): UUID
 
     /**
-     * Returns TUD survey submissionIds grouped by date for a given date range
+     * Returns TUD survey submissionIds grouped by date for a single participant in a study within a date range
      *
      * @param organizationId - Organization ID
      * @param studyId - Study ID
@@ -96,10 +98,26 @@ interface TimeUseDiaryApi {
      * @return A set of submissionIds grouped by Date
      */
     @GET(BASE + IDS_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
-    fun getSubmissionsByDate(
+    fun getParticipantTUDSubmissionsByDate(
         @Path(ORGANIZATION_ID) organizationId: UUID,
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime,
+    ): Map<LocalDate, Set<UUID>>
+
+    /**
+     * Returns all TUD survey submissionIds grouped by date for a given date range and study
+     *
+     * @param organizationId - Organization ID
+     * @param studyId - Study ID
+     * @param startDateTime - lower bound submission date
+     * @param endDateTime - upper bound submission date
+     * @return A set of submissionIds grouped by Date
+     */
+    @GET(BASE + STUDY_PATH + STUDY_ID_PATH)
+    fun getStudyTUDSubmissionsByDate(
+        @Path(STUDY_ID) studyId: UUID,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
     ): Map<LocalDate, Set<UUID>>
