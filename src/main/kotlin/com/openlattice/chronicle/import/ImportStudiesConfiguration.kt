@@ -9,5 +9,6 @@ data class ImportStudiesConfiguration(
     val candidatesTable: String,
     val studiesTable: String,
     val studySettingsTable: String,
-    val timeUseDiaryTable: String? = ""
+    val timeUseDiaryTable: String? = "",
+    val participantStatsTable: String
 )
