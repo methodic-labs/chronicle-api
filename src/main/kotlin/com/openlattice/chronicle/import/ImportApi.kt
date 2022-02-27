@@ -13,8 +13,12 @@ interface ImportApi {
         const val BASE = SERVICE + CONTROLLER
 
         const val STUDIES = "/studies"
+        const val PARTICIPANT_STATS = "/participant-stats"
     }
 
     @POST(BASE + STUDIES)
     fun importStudies(config: ImportStudiesConfiguration)
+
+    @POST(BASE + PARTICIPANT_STATS)
+    fun importParticipantStats(config: ImportStudiesConfiguration)
 }
