@@ -14,6 +14,8 @@ interface ImportApi {
 
         const val STUDIES = "/studies"
         const val PARTICIPANT_STATS = "/participant-stats"
+        const val APP_USAGE_SURVEY = "/app-usage-survey"
+        const val SYSTEM_APPS ="/system-apps"
     }
 
     @POST(BASE + STUDIES)
@@ -21,4 +23,10 @@ interface ImportApi {
 
     @POST(BASE + PARTICIPANT_STATS)
     fun importParticipantStats(config: ImportStudiesConfiguration)
+
+    @POST(BASE + APP_USAGE_SURVEY)
+    fun importAppUsageSurvey(config: ImportStudiesConfiguration)
+
+    @POST(BASE + APP_USAGE_SURVEY)
+    fun importSystemApps(config: ImportStudiesConfiguration)
 }
