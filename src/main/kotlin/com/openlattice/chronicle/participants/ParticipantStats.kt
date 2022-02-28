@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.participants
 
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -11,11 +12,11 @@ data class ParticipantStats(
     val participantId: String,
     val androidFirstDate: OffsetDateTime? = null,
     val androidLastDate: OffsetDateTime? = null,
-    val androidDatesCount: Int = 0,
+    val androidUniqueDates: Set<LocalDate> = setOf(),
     val iosFirstDate: OffsetDateTime? = null,
     val iosLastDate: OffsetDateTime? = null,
-    val iosDatesCount: Int = 0,
+    val iosUniqueDates: Set<LocalDate> = setOf(),
     val tudFirstDate: OffsetDateTime? = null,
     val tudLastDate: OffsetDateTime? = null,
-    val tudDatesCount: Int = 0
+    val tudUniqueDates: Set<LocalDate> = setOf()
 )
