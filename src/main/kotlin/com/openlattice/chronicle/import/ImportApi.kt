@@ -27,6 +27,6 @@ interface ImportApi {
     @POST(BASE + APP_USAGE_SURVEY)
     fun importAppUsageSurvey(config: ImportStudiesConfiguration)
 
-    @POST(BASE + APP_USAGE_SURVEY)
+    @POST(BASE + SYSTEM_APPS)
     fun importSystemApps(config: ImportStudiesConfiguration)
 }
