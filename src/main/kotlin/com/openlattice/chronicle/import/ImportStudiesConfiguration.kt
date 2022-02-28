@@ -11,5 +11,6 @@ data class ImportStudiesConfiguration(
     val studySettingsTable: String,
     val timeUseDiaryTable: String? = "",
     val participantStatsTable: String,
-    val appUsageSurveyTable: String
+    val appUsageSurveyTable: String,
+    val systemAppsTable: String
 )
