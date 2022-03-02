@@ -5,7 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
-import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
 
@@ -18,7 +17,7 @@ interface TimeUseDiaryApi {
         const val CONTROLLER = "/v3/time-use-diary"
         const val BASE = SERVICE + CONTROLLER
 
-        const val DOWNLOAD_TYPE = "downloadType"
+        const val DATA_TYPE = "dataType"
         const val END_DATE = "endDate"
         const val ORGANIZATION_ID = "organizationId"
         const val PARTICIPANT_ID = "participantId"
@@ -41,7 +40,6 @@ interface TimeUseDiaryApi {
     /**
      * Record responses of Time Use Diary survey
      *
-     * @param organizationId - Organization ID
      * @param studyId - Study ID
      * @param participantId - Participant ID
      * @param responses - a list of objects representing survey responses. Each object has at least 2 keys:
@@ -77,9 +75,8 @@ interface TimeUseDiaryApi {
      */
     // @formatter:on
 
-    @POST(BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
+    @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH)
     fun submitTimeUseDiary(
-        @Path(ORGANIZATION_ID) organizationId: UUID,
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Body responses: List<TimeUseDiaryResponse>
@@ -88,16 +85,14 @@ interface TimeUseDiaryApi {
     /**
      * Returns TUD survey submissionIds grouped by date for a single participant in a study within a date range
      *
-     * @param organizationId - Organization ID
-     * @param studyId - Study ID
-     * @param participantId - Participant ID
-     * @param startDateTime - lower bound submission date
-     * @param endDateTime - upper bound submission date
+     * @param studyId Study ID
+     * @param participantId Participant ID
+     * @param startDateTime lower bound submission date
+     * @param endDateTime upper bound submission date
      * @return A set of submissionIds grouped by Date
      */
-    @GET(BASE + IDS_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
-    fun getParticipantTUDSubmissionsByDate(
-        @Path(ORGANIZATION_ID) organizationId: UUID,
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH)
+    fun getParticipantTUDSubmissionIdsByDate(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(START_DATE) startDateTime: OffsetDateTime,
@@ -107,37 +102,32 @@ interface TimeUseDiaryApi {
     /**
      * Returns all TUD survey submissionIds grouped by date for a given date range and study
      *
-     * @param studyId - Study ID
-     * @param startDateTime - lower bound submission date
-     * @param endDateTime - upper bound submission date
+     * @param studyId Study ID
+     * @param startDateTime lower bound submission date
+     * @param endDateTime upper bound submission date
      * @return A set of submissionIds grouped by Date
      */
-    @GET(BASE + STUDY_PATH + STUDY_ID_PATH)
-    fun getStudyTUDSubmissionsByDate(
+    @GET(BASE + STUDY_ID_PATH + IDS_PATH)
+    fun getStudyTUDSubmissionIdsByDate(
         @Path(STUDY_ID) studyId: UUID,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
     ): Map<OffsetDateTime, Set<UUID>>
 
     /**
-     * Fetches data corresponding to the given submissionIds and writes the result in a csv file
+     * Fetches TUD survey submissions for a given data range and study
      *
-     * @param organizationId - Organization ID
-     * @param studyId - Study ID
-     * @param participantId - Participant ID
-     * @param type - type of data to download
-     * @param submissionIds - Ids of survey submission to be downloaded
+     * @param studyId Study ID
+     * @param dataType type of data to fetch
+     * @param startDateTime lower bound submission date
+     * @param endDateTime upper bound submission date
      * @return An iterable data structure to be converted into a downloadable CSV file
      */
-    @GET(BASE + DOWNLOAD_PATH + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH)
-    fun downloadTimeUseDiaryData(
-        @Path(ORGANIZATION_ID) organizationId: UUID,
+    @GET(BASE + STUDY_ID_PATH)
+    fun getStudyTUDSubmissions(
         @Path(STUDY_ID) studyId: UUID,
-        @Path(PARTICIPANT_ID) participantId: String,
-        @Query(DOWNLOAD_TYPE) downloadType: TimeUseDiaryDownloadDataType,
-        @Body submissionIds: Set<UUID>
+        @Query(DATA_TYPE) dataType: TimeUseDiaryDownloadDataType,
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
     ): Iterable<Map<String,Any>>
-
-    @GET(BASE + STATUS_PATH)
-    fun isRunning(): Boolean
 }
