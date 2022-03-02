@@ -132,7 +132,8 @@ interface StudyApi {
      * @return the ids of the background jobs created to delete data related to the deleted participants
      */
     @HTTP(
-        path = BASE + STUDY_ID_PATH + PARTICIPANTS_PATH, method = "DELETE",
+        path = BASE + STUDY_ID_PATH + PARTICIPANTS_PATH, 
+        method = "DELETE",
         hasBody = true
     )
     fun deleteStudyParticipants(
