@@ -135,7 +135,7 @@ interface StudyApi {
         path = BASE + STUDY_ID_PATH + PARTICIPANTS_PATH, method = "DELETE",
         hasBody = true
     )
-    fun deleteParticipantsFromStudy(
+    fun deleteStudyParticipants(
         @Path(STUDY_ID) studyId: UUID,
         @Body participantIds: Set<String>
     ): Iterable<UUID>
