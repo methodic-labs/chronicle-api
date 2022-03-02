@@ -153,10 +153,6 @@ interface StudyApi {
     ): UUID
 
     /**
-     *
-     */
-
-    /**
      * Uploads sensor data from iOS device
      *
      * @param studyId The id of the study.
