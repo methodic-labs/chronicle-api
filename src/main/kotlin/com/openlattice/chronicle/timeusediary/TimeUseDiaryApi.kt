@@ -1,7 +1,5 @@
 package com.openlattice.chronicle.timeusediary
 
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -9,7 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import java.time.LocalDate
 import java.time.OffsetDateTime
-import java.util.*
+import java.util.UUID
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
@@ -104,7 +102,7 @@ interface TimeUseDiaryApi {
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
-    ): Map<LocalDate, Set<UUID>>
+    ): Map<OffsetDateTime, Set<UUID>>
 
     /**
      * Returns all TUD survey submissionIds grouped by date for a given date range and study
@@ -119,7 +117,7 @@ interface TimeUseDiaryApi {
         @Path(STUDY_ID) studyId: UUID,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
-    ): Map<LocalDate, Set<UUID>>
+    ): Map<OffsetDateTime, Set<UUID>>
 
     /**
      * Fetches data corresponding to the given submissionIds and writes the result in a csv file
