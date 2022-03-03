@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.UUID
 
@@ -112,7 +113,7 @@ interface TimeUseDiaryApi {
         @Path(STUDY_ID) studyId: UUID,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
-    ): Map<OffsetDateTime, Set<UUID>>
+    ): Map<LocalDate, Set<UUID>>
 
     /**
      * Fetches TUD survey submissions for a given data range and study
@@ -129,5 +130,5 @@ interface TimeUseDiaryApi {
         @Query(DATA_TYPE) dataType: TimeUseDiaryDownloadDataType,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime
-    ): Iterable<Map<String,Any>>
+    ): Iterable<List<Map<String,Any>>>
 }
