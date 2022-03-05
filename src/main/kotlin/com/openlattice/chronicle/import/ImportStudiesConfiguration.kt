@@ -15,5 +15,5 @@ data class ImportStudiesConfiguration(
     val systemAppsTable: String? = "",
     val usersTable: String? = "",
     val legacyUsersTable: String? = "",
-    val timeUseDiarySummarizedTable: String
+    val timeUseDiarySummarizedTable: String? = ""
 )
