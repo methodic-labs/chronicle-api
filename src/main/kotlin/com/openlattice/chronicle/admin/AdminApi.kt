@@ -33,4 +33,10 @@ interface AdminApi {
     @GET(BASE + PRINCIPALS + ID_PATH)
     fun getUserPrincipals(@Path(ID) principalId: String): Set<Principal>
 
+    /**
+     * Retrieves all the principals for the current user.
+     * @return All the principals of the current user.
+     */
+    @GET(BASE + PRINCIPALS)
+    fun getCurrentUserPrincipals(): Set<Principal>
 }
