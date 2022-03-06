@@ -40,6 +40,38 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_TODAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_YESTERDAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAVE_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.ADULT_MEDIA_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.ADULT_MEDIA_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BD_MEDIA_DAY_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BG_AUDIO_DAY_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BG_AUDIO_DAY_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BG_MEDIA_DAY_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BG_TV_DAY_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BG_TV_DAY_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.DAY_START_TIME
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_BATHROOM_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_BATHROOM_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_CHILDCARE_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_CHILDCARE_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_EATING_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_MEDIA_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_MEDIA_CO_VIEWERS_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_MEDIA_CO_VIEWERS_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_MEDIA_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_MEDIA_PLAY_OUTSIDE_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_OTHER_AT_HOME_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_OTHER_AT_HOME_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_PLAY_INSIDE_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_PLAY_INSIDE_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_PLAY_OUTSIDE_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_READING_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.PRIMARY_READING_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.SCREEN_DURATION_PLAYING_PROPORTION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.SCREEN_DURING_EATING_PROPORTION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.SCREEN_DURING_SLEEPING_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.SCREEN_ONE_HOUR_FROM_SLEEPING_BLOCKS
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.TODAY_WAKE_UP_TIME
+import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.TYPICAL_SLEEP_PATTERN
 
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
@@ -106,7 +138,59 @@ enum class TimeUseDiaryDownloadDataType {
     },
     Summarized {
         override val downloadColumnTitles: LinkedHashSet<String>
-            get() = TODO("Not yet implemented")
+            get() = linkedSetOf(
+                SUBMISSION_ID,
+                STUDY_ID,
+                PARTICIPANT_ID,
+                TimeUseDiarySummarizedDataVariables.FAMILY_ID,
+                TimeUseDiarySummarizedDataVariables.WAVE_ID,
+                PRIMARY_BATHROOM_DURATION,
+                ADULT_MEDIA_BLOCKS,
+                TimeUseDiarySummarizedDataVariables.SLEEP_ARRANGEMENT,
+                TimeUseDiarySummarizedDataVariables.BG_AUDIO_NIGHT,
+                PRIMARY_CHILDCARE_BLOCKS,
+                PRIMARY_MEDIA_DURATION,
+                TimeUseDiarySummarizedDataVariables.DAY_TIME_END,
+                PRIMARY_MEDIA_CO_VIEWERS_BLOCKS,
+                BD_MEDIA_DAY_BLOCKS,
+                PRIMARY_CHILDCARE_DURATION,
+                PRIMARY_PLAY_INSIDE_DURATION,
+                ADULT_MEDIA_DURATION,
+                TimeUseDiarySummarizedDataVariables.DAY_OF_WEEK,
+                TYPICAL_SLEEP_PATTERN,
+                TimeUseDiarySummarizedDataVariables.WAKE_UP_COUNT,
+                BG_MEDIA_DAY_DURATION,
+                SCREEN_ONE_HOUR_FROM_SLEEPING_BLOCKS,
+                TimeUseDiarySummarizedDataVariables.TYPICAL_DAY,
+                TimeUseDiarySummarizedDataVariables.SECONDARY_BOOK_TITLE,
+                SCREEN_DURATION_PLAYING_PROPORTION,
+                PRIMARY_EATING_DURATION,
+                BG_TV_DAY_DURATION,
+                PRIMARY_READING_DURATION,
+                PRIMARY_PLAY_INSIDE_BLOCKS,
+                TODAY_WAKE_UP_TIME,
+                PRIMARY_OTHER_AT_HOME_BLOCKS,
+                PRIMARY_MEDIA_BLOCKS,
+                PRIMARY_BATHROOM_BLOCKS,
+                SCREEN_DURING_SLEEPING_DURATION,
+                PRIMARY_OTHER_AT_HOME_DURATION,
+                TimeUseDiarySummarizedDataVariables.PRIMARY_MEDIA_NAME,
+                BG_TV_DAY_BLOCKS,
+                PRIMARY_MEDIA_CO_VIEWERS_DURATION,
+                PRIMARY_MEDIA_PLAY_OUTSIDE_DURATION,
+                DAY_START_TIME,
+                SCREEN_DURING_EATING_PROPORTION,
+                BG_AUDIO_DAY_DURATION,
+                TimeUseDiarySummarizedDataVariables.NON_TYPICAL_DAY_REASON,
+                PRIMARY_PLAY_OUTSIDE_BLOCKS,
+                TimeUseDiarySummarizedDataVariables.BG_TV_NIGHT,
+                PRIMARY_READING_BLOCKS,
+                BG_AUDIO_DAY_BLOCKS,
+                TimeUseDiarySummarizedDataVariables.PRIMARY_EATING_BLOCKS,
+                TimeUseDiarySummarizedDataVariables.PRIMARY_BOOK_TITLE,
+                TimeUseDiarySummarizedDataVariables.SECONDARY_MEDIA_NAME,
+                TimeUseDiarySummarizedDataVariables.NON_TYPICAL_SLEEP_REASON,
+            )
     };
 
     abstract val downloadColumnTitles: LinkedHashSet<String>
