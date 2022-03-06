@@ -142,6 +142,7 @@ enum class TimeUseDiaryDownloadDataType {
                 SUBMISSION_ID,
                 STUDY_ID,
                 PARTICIPANT_ID,
+                TIMESTAMP,
                 TimeUseDiarySummarizedDataVariables.FAMILY_ID,
                 TimeUseDiarySummarizedDataVariables.WAVE_ID,
                 PRIMARY_BATHROOM_DURATION,
