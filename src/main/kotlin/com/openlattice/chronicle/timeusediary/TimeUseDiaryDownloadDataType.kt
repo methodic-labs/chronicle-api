@@ -33,6 +33,7 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SLEEP_HOURS
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SLEEP_PATTERN
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.STUDY_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SUBMISSION_ID
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.TIMESTAMP
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.TYPICAL_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_COUNT
@@ -47,6 +48,7 @@ enum class TimeUseDiaryDownloadDataType {
     DayTime {
         override val downloadColumnTitles: LinkedHashSet<String>
             get() = linkedSetOf(
+                SUBMISSION_ID,
                 STUDY_ID,
                 PARTICIPANT_ID,
                 FAMILY_ID,
@@ -80,6 +82,7 @@ enum class TimeUseDiaryDownloadDataType {
     NightTime {
         override val downloadColumnTitles: LinkedHashSet<String>
             get() = linkedSetOf(
+                SUBMISSION_ID,
                 STUDY_ID,
                 PARTICIPANT_ID,
                 FAMILY_ID,

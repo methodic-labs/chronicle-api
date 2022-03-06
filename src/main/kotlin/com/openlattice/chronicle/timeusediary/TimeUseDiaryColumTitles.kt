@@ -37,6 +37,7 @@ class TimeUseDiaryColumTitles {
         const val SLEEP_ARRANGEMENT = "Sleeping_Arrangement"
         const val SLEEP_HOURS = "Sleep_Hours"
         const val STUDY_ID = "Study_ID"
+        const val SUBMISSION_ID = "Submission_ID"
         const val TIMESTAMP = "Timestamp"
         const val TYPICAL_DAY = "Typical_Day"
         const val SLEEP_PATTERN = "Typical_Sleep_Pattern"
