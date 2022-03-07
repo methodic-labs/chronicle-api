@@ -271,7 +271,6 @@ interface StudyApi {
     fun getParticipantsData(
         @Path(STUDY_ID) studyId: UUID,
         @Query(DATA_TYPE) dataType: ParticipantDataType,
-        @Query(CATEGORY) timeUseDiaryDownloadDataType: TimeUseDiaryDownloadDataType?,
         @Query(PARTICIPANT_ID) participantIds: Set<String>,
         @Query(START_DATE) startDateTime: OffsetDateTime?,
         @Query(END_DATE) endDateTime: OffsetDateTime?,
