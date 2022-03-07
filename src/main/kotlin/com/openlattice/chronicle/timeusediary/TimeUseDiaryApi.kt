@@ -25,6 +25,7 @@ interface TimeUseDiaryApi {
         const val PARTICIPANT_ID = "participantId"
         const val START_DATE = "startDate"
         const val STUDY_ID = "studyId"
+        const val FILE_NAME = "fileName"
 
         const val DOWNLOAD_PATH = "/download"
         const val IDS_PATH = "/ids"
@@ -136,7 +137,7 @@ interface TimeUseDiaryApi {
     ): Iterable<List<Map<String,Any>>>
 
     /**
-     * Fetches TUD survey submissions for specified set of participants optionally bound by an upper and lower offset datetime
+     * Fetches TUD survey submissions for specified set of participants bound by an upper and lower offset datetime
      * @param studyId studyId
      * @param participantIds set of participants
      * @param startDateTime optional lower bound date
@@ -148,8 +149,8 @@ interface TimeUseDiaryApi {
         @Path(STUDY_ID) studyId: UUID,
         @Query(PARTICIPANT_ID) participantIds: Set<String>,
         @Query(DATA_TYPE) dataType: TimeUseDiaryDownloadDataType,
-        @Query(START_DATE) startDateTime: OffsetDateTime?,
-        @Query(END_DATE) endDateTime: OffsetDateTime?
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
     ): Iterable<List<Map<String, Any>>>
 
 }

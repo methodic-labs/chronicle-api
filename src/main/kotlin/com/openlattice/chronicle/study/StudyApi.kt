@@ -32,6 +32,7 @@ interface StudyApi {
         const val END_DATE = "endDate"
         const val DATA_TYPE = "dataType"
         const val CATEGORY = "category"
+        const val FILE_NAME = "fileName"
 
         const val VERIFY_PATH = "/verify"
         const val DATA_PATH = "/data"
@@ -259,7 +260,7 @@ interface StudyApi {
 
 
     /**
-     * Retrieve data of specified type associated with a set of participants in a study, optionally bounded by a lower and upper offset datetime.
+     * Retrieve data of specified type associated with a set of participants in a study, bounded by a lower and upper offset datetime.
      * The interpretation of the date range depends on the context in which this endpoint is invoked.
      * @param studyId studyId
      * @param dataType one of event usage
@@ -272,7 +273,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Query(DATA_TYPE) dataType: ParticipantDataType,
         @Query(PARTICIPANT_ID) participantIds: Set<String>,
-        @Query(START_DATE) startDateTime: OffsetDateTime?,
-        @Query(END_DATE) endDateTime: OffsetDateTime?,
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime,
     ): Iterable<Map<String, Any>>
 }
