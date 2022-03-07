@@ -9,7 +9,9 @@ import com.openlattice.chronicle.participants.ParticipantStats
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
 import retrofit2.http.*
+import java.time.OffsetDateTime
 import java.util.*
 
 
@@ -26,6 +28,10 @@ interface StudyApi {
         const val STUDY_ID = "studyId"
         const val PARTICIPANT_ID = "participantId"
         const val SOURCE_DEVICE_ID = "sourceDeviceId"
+        const val START_DATE = "startDate"
+        const val END_DATE = "endDate"
+        const val DATA_TYPE = "dataType"
+        const val CATEGORY = "category"
 
         const val VERIFY_PATH = "/verify"
         const val DATA_PATH = "/data"
@@ -250,4 +256,24 @@ interface StudyApi {
     fun getParticipantStats(
         @Path(STUDY_ID) studyId: UUID
     ): Map<String, ParticipantStats>
+
+
+    /**
+     * Retrieve data of specified type associated with a set of participants in a study, optionally bounded by a lower and upper offset datetime.
+     * The interpretation of the date range depends on the context in which this endpoint is invoked.
+     * @param studyId studyId
+     * @param dataType one of event usage
+     * @param participantIds ids of participants
+     * @param startDateTime an optional lower bound date
+     * @param endDateTime an optional upper bound date
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH + DATA_PATH)
+    fun getParticipantsData(
+        @Path(STUDY_ID) studyId: UUID,
+        @Query(DATA_TYPE) dataType: ParticipantDataType,
+        @Query(CATEGORY) timeUseDiaryDownloadDataType: TimeUseDiaryDownloadDataType?,
+        @Query(PARTICIPANT_ID) participantIds: Set<String>,
+        @Query(START_DATE) startDateTime: OffsetDateTime?,
+        @Query(END_DATE) endDateTime: OffsetDateTime?,
+    ): Iterable<Map<String, Any>>
 }
