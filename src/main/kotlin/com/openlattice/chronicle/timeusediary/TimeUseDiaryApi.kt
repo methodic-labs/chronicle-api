@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.timeusediary
 
+import com.openlattice.chronicle.study.StudyApi
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -24,9 +25,12 @@ interface TimeUseDiaryApi {
         const val PARTICIPANT_ID = "participantId"
         const val START_DATE = "startDate"
         const val STUDY_ID = "studyId"
+        const val FILE_NAME = "fileName"
 
         const val DOWNLOAD_PATH = "/download"
         const val IDS_PATH = "/ids"
+        const val PARTICIPANTS_PATH = "/participants"
+        const val DATA_PATH = "/data"
 
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
@@ -124,11 +128,29 @@ interface TimeUseDiaryApi {
      * @param endDateTime upper bound submission date
      * @return An iterable data structure to be converted into a downloadable CSV file
      */
-    @GET(BASE + STUDY_ID_PATH)
+    @GET(BASE + STUDY_ID_PATH + DATA_PATH)
     fun getStudyTUDSubmissions(
         @Path(STUDY_ID) studyId: UUID,
         @Query(DATA_TYPE) dataType: TimeUseDiaryDownloadDataType,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime
     ): Iterable<List<Map<String,Any>>>
+
+    /**
+     * Fetches TUD survey submissions for specified set of participants bound by an upper and lower offset datetime
+     * @param studyId studyId
+     * @param participantIds set of participants
+     * @param startDateTime optional lower bound date
+     * @param endDateTime optional upper bound date
+     * @param dataType category of Time Use Diary data
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH + DATA_PATH)
+    fun getParticipantsTudSubmissions(
+        @Path(STUDY_ID) studyId: UUID,
+        @Query(PARTICIPANT_ID) participantIds: Set<String>,
+        @Query(DATA_TYPE) dataType: TimeUseDiaryDownloadDataType,
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
+    ): Iterable<List<Map<String, Any>>>
+
 }
