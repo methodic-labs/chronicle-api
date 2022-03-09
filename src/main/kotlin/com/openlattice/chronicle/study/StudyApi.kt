@@ -3,6 +3,7 @@ package com.openlattice.chronicle.study
 
 import com.google.common.collect.SetMultimap
 import com.openlattice.chronicle.base.OK
+import com.openlattice.chronicle.data.ParticipationStatus
 import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.participants.ParticipantStats
@@ -33,6 +34,7 @@ interface StudyApi {
         const val DATA_TYPE = "dataType"
         const val CATEGORY = "category"
         const val FILE_NAME = "fileName"
+        const val PARTICIPATION_STATUS = "participationStatus"
 
         const val VERIFY_PATH = "/verify"
         const val DATA_PATH = "/data"
@@ -48,6 +50,7 @@ interface StudyApi {
         const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
         const val STATS_PATH = "/stats"
+        const val STATUS_PATH = "/status"
         const val IOS_PATH = "/ios"
         const val ANDROID_PATH = "/android"
         const val RETRIEVE = "retrieve"
@@ -276,4 +279,17 @@ interface StudyApi {
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
     ): Iterable<Map<String, Any>>
+
+    /**
+     * Updates participation status of participant in specified study
+     * @param studyId studyId
+     * @param participantId participantId
+     * @param participationStatus new status value
+     */
+    @PATCH(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + STATUS_PATH)
+    fun updateParticipationStatus(
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Query(PARTICIPATION_STATUS) participationStatus: ParticipationStatus
+    ): OK
 }
