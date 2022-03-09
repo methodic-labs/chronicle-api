@@ -5,6 +5,7 @@ import com.google.common.collect.SetMultimap
 import com.openlattice.chronicle.base.OK
 import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
+import com.openlattice.chronicle.participants.ParticipantStats
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
@@ -39,6 +40,7 @@ interface StudyApi {
         const val UPLOAD_PATH = "/upload"
         const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
+        const val STATS_PATH = "/stats"
         const val IOS_PATH = "/ios"
         const val ANDROID_PATH = "/android"
         const val RETRIEVE = "retrieve"
@@ -114,13 +116,33 @@ interface StudyApi {
     ): Study?
 
     /**
-     * Deletes an existing study based on id.
+     * Deletes an existing study, its associations to any organizations, and removes
+     * all participants by study id. Creates 3 jobs to delete all usage data, time use diary submissions
+     * and app usage surveys for that study.
      *
      * @param studyId The id of the study to be destroyed.
-     * @return The id of the background job created to delete usage data related to the study
+     * @return The ids of the background jobs created to delete data related to the study
      */
     @DELETE(BASE + STUDY_ID_PATH)
     fun destroyStudy(@Path(STUDY_ID) studyId: UUID): Iterable<UUID>
+
+    /**
+     * Removes participants from a study by participant ids. Creates 3 jobs to delete usage data, time use diary submissions,
+     * and app usage surveys for all removed participants.
+     *
+     * @param studyId The id of the study
+     * @param participantIds a collection of participant ids to be deleted
+     * @return the ids of the background jobs created to delete data related to the deleted participants
+     */
+    @HTTP(
+        path = BASE + STUDY_ID_PATH + PARTICIPANTS_PATH, 
+        method = "DELETE",
+        hasBody = true
+    )
+    fun deleteStudyParticipants(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body participantIds: Set<String>
+    ): Iterable<UUID>
 
     /**
      * Registers a participant in a study and creates the corresponding candidate if they do not exist.
@@ -218,4 +240,14 @@ interface StudyApi {
     
     @GET(BASE)
     fun getAllStudies() : Iterable<Study>
+
+    /**
+     * Retrieves stats of participant in a study
+     * @param studyId studyId
+     * @return a map of participantId to stats object.
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH + STATS_PATH)
+    fun getParticipantStats(
+        @Path(STUDY_ID) studyId: UUID
+    ): Map<String, ParticipantStats>
 }
