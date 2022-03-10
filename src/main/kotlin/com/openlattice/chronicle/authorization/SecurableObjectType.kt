@@ -11,6 +11,7 @@ enum class SecurableObjectType {
     Candidate,
     Datasource,
     Module,
+    Notification,
     Principal,
     Role,
     Unknown
