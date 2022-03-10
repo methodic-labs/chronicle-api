@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.import
 
+import retrofit2.http.Body
 import retrofit2.http.POST
 
 /**
@@ -17,20 +18,24 @@ interface ImportApi {
         const val APP_USAGE_SURVEY = "/app-usage-survey"
         const val SYSTEM_APPS ="/system-apps"
         const val TIME_USE_DIARY = "/time-use-diary"
+        const val PERMISSIONS = "/permissions"
     }
 
     @POST(BASE + STUDIES)
-    fun importStudies(config: ImportStudiesConfiguration)
+    fun importStudies(@Body config: ImportStudiesConfiguration)
 
     @POST(BASE + PARTICIPANT_STATS)
-    fun importParticipantStats(config: ImportStudiesConfiguration)
+    fun importParticipantStats(@Body config: ImportStudiesConfiguration)
 
     @POST(BASE + APP_USAGE_SURVEY)
-    fun importAppUsageSurvey(config: ImportStudiesConfiguration)
+    fun importAppUsageSurvey(@Body config: ImportStudiesConfiguration)
 
     @POST(BASE + SYSTEM_APPS)
-    fun importSystemApps(config: ImportStudiesConfiguration)
+    fun importSystemApps(@Body config: ImportStudiesConfiguration)
 
     @POST(BASE + TIME_USE_DIARY)
-    fun importTimeUseDiarySubmissions(config: ImportStudiesConfiguration)
+    fun importTimeUseDiarySubmissions(@Body config: ImportStudiesConfiguration)
+
+    @POST(BASE + PERMISSIONS)
+    fun importUserPermissions(@Body config: ImportStudiesConfiguration)
 }
