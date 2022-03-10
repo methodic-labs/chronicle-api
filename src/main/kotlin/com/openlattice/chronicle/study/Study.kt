@@ -1,21 +1,20 @@
 package com.openlattice.chronicle.study
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.storage.ChronicleStorage
 import org.apache.commons.lang3.StringUtils
-import org.joda.time.DateTime
 import java.time.OffsetDateTime
 import java.util.*
 
 /**
  * @author Solomon Tang <solomon@openlattice.com>
  */
-class Study @JsonCreator constructor(studyId: UUID = IdConstants.UNINITIALIZED.id,
+class Study @JsonCreator constructor(
+    studyId: UUID = IdConstants.UNINITIALIZED.id,
     title: String,
     description: String = "",
     val createdAt: OffsetDateTime = OffsetDateTime.now(),
@@ -31,12 +30,14 @@ class Study @JsonCreator constructor(studyId: UUID = IdConstants.UNINITIALIZED.i
     val notificationsEnabled: Boolean = false,
     var storage: String = ChronicleStorage.CHRONICLE.id,
     val settings: Map<String, Any> = mapOf(),
+    val phoneNumber: String = ""
 ) : AbstractSecurableObject(studyId, title, description) {
     init {
-        check( storage.length <= 36 && StringUtils.isAlpha(storage)) {
+        check(storage.length <= 36 && StringUtils.isAlpha(storage)) {
             "Storage name cannot be more 36 characters and must also be alphabetic characters only"
         }
     }
+
     companion object {
         const val SENSORS = "sensors"
     }
