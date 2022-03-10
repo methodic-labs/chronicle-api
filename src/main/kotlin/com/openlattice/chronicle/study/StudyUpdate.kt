@@ -18,7 +18,7 @@ data class StudyUpdate(
     val settings: Map<String, Any>? = null,
     val contact: String? = null ,
     val notificationsEnabled: Boolean? = null,
-    val storage: String? = null,
+    val storage: String? = null
 ) {
     init {
         Preconditions.checkArgument(

@@ -21,7 +21,6 @@ package com.openlattice.chronicle.authorization
  * @author Ho Chung Modified from Drew's Permission.java in mapstore
  */
 enum class Permission {
-    DISCOVER,
     MATERIALIZE,
     LINK,
     READ,
