@@ -32,7 +32,7 @@ import retrofit2.http.Path
 interface PrincipalApi {
 
     companion object {
-        const val SERVICE = "/datastore"
+        const val SERVICE = "/chronicle"
         const val CONTROLLER = "/principal"
         const val BASE = SERVICE + CONTROLLER
 
