@@ -8,18 +8,10 @@ import java.util.*
 data class AclKey(private val ids: List<UUID>) : List<UUID> by ids {
     constructor(vararg ids: UUID) : this(ids.asList())
 
-    val index: String
+    val index: String = joinToString("") {it.toString().replace("-","") }
 
     @Transient
     private val h: Int = ids.hashCode()
-
-    init {
-        val joiner = StringJoiner(",")
-        for (uuid in this) {
-            joiner.add(uuid.toString())
-        }
-        index = joiner.toString()
-    }
 
     operator fun compareTo(o: AclKey): Int {
         var result = 0
