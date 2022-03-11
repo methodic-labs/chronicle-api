@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.util.JsonFields
 import java.time.OffsetDateTime
 
-data class Ace @JsonCreator @JvmOverloads constructor(
+data class Ace constructor(
         @JsonProperty(JsonFields.PRINCIPAL) val principal: Principal,
         @JsonProperty(JsonFields.PERMISSIONS) val permissions: Set<Permission>,
         @JsonProperty(JsonFields.EXPIRATION) val expirationDate: OffsetDateTime = OffsetDateTime.MAX

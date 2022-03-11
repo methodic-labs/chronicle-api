@@ -266,7 +266,7 @@ interface StudyApi {
      * Retrieve data of specified type associated with a set of participants in a study, bounded by a lower and upper offset datetime.
      * The interpretation of the date range depends on the context in which this endpoint is invoked.
      * @param studyId studyId
-     * @param dataType one of event usage
+     * @param dataType one of  UsageEvents, Preprocessed,AppUsageSurvey, IOSSensor
      * @param participantIds ids of participants
      * @param startDateTime an optional lower bound date
      * @param endDateTime an optional upper bound date
