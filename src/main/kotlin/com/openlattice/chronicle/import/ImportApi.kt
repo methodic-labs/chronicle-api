@@ -19,6 +19,7 @@ interface ImportApi {
         const val SYSTEM_APPS ="/system-apps"
         const val TIME_USE_DIARY = "/time-use-diary"
         const val PERMISSIONS = "/permissions"
+        const val PARTICIPANTS = "/participants"
     }
 
     @POST(BASE + STUDIES)
@@ -38,4 +39,7 @@ interface ImportApi {
 
     @POST(BASE + PERMISSIONS)
     fun importUserPermissions(@Body config: ImportStudiesConfiguration)
+
+    @POST(BASE + PARTICIPANTS)
+    fun importParticipants(@Body config: ImportStudiesConfiguration)
 }
