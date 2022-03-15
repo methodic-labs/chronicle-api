@@ -76,35 +76,6 @@ public interface ChronicleStudyApi {
             @Path( DATASOURCE_ID ) String datasourceId );
 
     /**
-     * Submit app usage survey
-     *
-     * @param studyId            - the study id
-     * @param participantId      - participantId
-     * @param associationDetails - mapping from association EKID to association entity data
-     */
-    @POST( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
-    public void submitAppUsageSurvey(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> associationDetails
-    );
-
-    /**
-     * Get all apps usage data associated with a participant filtered by current date
-     *
-     * @param studyId       - the studyId
-     * @param participantId - the participant
-     * @param date - date
-     * @return a list of neighbor entities and associations
-     */
-    @GET( BASE + PARTICIPANT_PATH + DATA_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS )
-    List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Query( DATE ) String date
-    );
-
-    /**
      * Verify that daily push notifications are enabled for participant devices associated with a study
      *
      * @param studyId - study id
@@ -129,33 +100,6 @@ public interface ChronicleStudyApi {
     );
 
     /**
-     * Retrieve questionnaire matching given entity key id
-     *
-     * @param studyId           - studyId
-     * @param questionnaireEKID - questionnaire entity key id
-     * @return A chronicle questionnaire
-     */
-    @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRE + ENTITY_KEY_ID_PATH )
-    LegacyChronicleQuestionnaire getChronicleQuestionnaire(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
-    );
-
-    /**
-     * Submit a questionnaire
-     *
-     * @param studyId                - studyId
-     * @param participantId          - participant id
-     * @param questionnaireResponses mapping from questionEntityKeyId to answer entity
-     */
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE )
-    void submitQuestionnaire(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> questionnaireResponses
-    );
-
-    /**
      * Get all questionnaires for a given study
      *
      * @param studyId - studyId
@@ -165,32 +109,5 @@ public interface ChronicleStudyApi {
     @GET( BASE + STUDY_ID_PATH + QUESTIONNAIRES )
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( STUDY_ID ) UUID studyId
-    );
-
-    /**
-     * Submit responses for time use diary survey
-     *
-     * @param studyId       - studyId
-     * @param participantId - participantId
-     * @param surveyResponses - Survey response
-     * @apiNote Each element of the surveyResponses array represents a question/answer instance
-     * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
-     * and ol.datetimeend &amp; ol.datetimestart values to define a time range.
-     * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
-     * could be represented in the array as this object:
-     * {
-     *      ol.code: primaryActivity
-     *      ol.title: 'Primary Activity,
-     *      ol.values: ['Napping'],
-     *      ol.datetimestart: &lt;Date + 08:00&gt;
-     *      ol.datetimeend: &lt;Date + 10:00&gt;
-     * }
-     * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
-     */
-    @POST( BASE + STUDY_ID_PATH + PARTICIPANT_ID_PATH + TIME_USE_DIARY )
-    void submitTimeUseDiarySurvey(
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Body List<Map<FullQualifiedName, Set<Object>>> surveyResponses
     );
 }
