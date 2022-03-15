@@ -73,39 +73,6 @@ public interface ChronicleApi {
             @Body Optional<SourceDevice> datasource );
 
     /**
-     * Submit app usage survey.
-     *
-     * @param organizationId     - Id of the organization to which study belongs
-     * @param studyId            - the study id
-     * @param participantId      - participantId
-     * @param associationDetails - mapping from association EKID to association entity data
-     */
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS_PATH )
-    public void submitAppUsageSurvey(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> associationDetails
-    );
-
-    /**
-     * Get all apps usage data associated with a participant filtered by current date
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - the studyId
-     * @param participantId  - the participant
-     * @param date  - The date of something
-     * @return a list of neighbor entities and associations
-     */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + APPS_PATH )
-    List<ChronicleAppsUsageDetails> getParticipantAppsUsageData(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Query( DATE ) String date
-    );
-
-    /**
      * Verify that daily push notifications are enabled for participant devices associated with a study
      *
      * @param organizationId - Id of organization to which study belongs
@@ -134,37 +101,6 @@ public interface ChronicleApi {
     );
 
     /**
-     * Retrieve questionnaire matching given entity key id
-     *
-     * @param organizationId    - Id of the organization to which study belongs
-     * @param studyId           - studyId
-     * @param questionnaireEKID - questionnaire entity key id
-     * @return A chronicle questionnaire.
-     */
-    @GET( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + QUESTIONNAIRE_PATH + ENTITY_KEY_ID_PATH )
-    LegacyChronicleQuestionnaire getChronicleQuestionnaire(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( ENTITY_KEY_ID ) UUID questionnaireEKID
-    );
-
-    /**
-     * Submit a questionnaire
-     *
-     * @param organizationId         - Id of the organization to which study belongs
-     * @param studyId                - studyId
-     * @param participantId          - participant id
-     * @param questionnaireResponses mapping from questionEntityKeyId to answer entity
-     */
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + QUESTIONNAIRE_PATH )
-    void submitQuestionnaire(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Body Map<UUID, Map<FullQualifiedName, Set<Object>>> questionnaireResponses
-    );
-
-    /**
      * Get all questionnaires for a given study
      *
      * @param organizationId - Id of the organization to which study belongs
@@ -176,35 +112,6 @@ public interface ChronicleApi {
     Map<UUID, Map<FullQualifiedName, Set<Object>>> getStudyQuestionnaires(
             @Path( ORGANIZATION_ID ) UUID organizationId,
             @Path( STUDY_ID ) UUID studyId
-    );
-
-    /**
-     * Submit responses for time use diary survey
-     *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param studyId        - studyId
-     * @param participantId  - participantId
-     * @param surveyResponses  - survey responses.
-     * @apiNote Each element of the surveyResponses array represents a question/answer instance
-     * with ol.code + ol.title properties uniquely identifying the question, ol.values value representing the answer to that question,
-     * and ol.datetimeend &amp; ol.datetimestart values to define a time range.
-     * For example, the question pair ("What was the child doing between 08:00 and 10:00", "Napping")
-     * could be represented in the array as this object:
-     * {
-     *      ol.code: primaryActivity
-     *      ol.title: 'Primary Activity,
-     *      ol.values: ['Napping'],
-     *      ol.datetimestart: &lt;Date + 08:00&gt;
-     *      ol.datetimeend: &lt;Date + 10:00&gt;
-     * }
-     * Note that not all questions define a time range, and therefore the ol.datetimestart and ol.datetimeend properties are optional
-     */
-    @POST( BASE + ORGANIZATION_ID_PATH + STUDY_ID_PATH + PARTICIPANT_ID_PATH + TIME_USE_DIARY )
-    void submitTimeUseDiarySurvey(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Path( STUDY_ID ) UUID studyId,
-            @Path( PARTICIPANT_ID ) String participantId,
-            @Body List<Map<FullQualifiedName, Set<Object>>> surveyResponses
     );
 
     /**
@@ -233,12 +140,6 @@ public interface ChronicleApi {
      */
     @POST( BASE + EDM_PATH )
     Map<FullQualifiedName, UUID> getPropertyTypeIds( @Body Set<FullQualifiedName> propertyTypeFqns );
-
-    @GET( BASE + ORGANIZATION_ID_PATH + SETTINGS_PATH )
-    Map<String, Object> getAppSettings(
-            @Path( ORGANIZATION_ID ) UUID organizationId,
-            @Query( APP_NAME ) String appName
-    );
 
     @GET( BASE + STATUS_PATH )
     Boolean isRunning();
