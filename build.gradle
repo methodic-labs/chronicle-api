@@ -43,11 +43,11 @@ plugins {
 description = "Chronicle REST APIs"
 group = "com.openlattice"
 ext.projectName = 'chronicle-api'
-ext.scmUrl = 'scm:git:https://github.com/openlattice/chronicle-api.git'
-ext.connectionUrl = 'scm:git:https://github.com/openlattice/chronicle-api.git'
-ext.developerConnectionUrl = 'scm:git:https://github.com/openlattice/chronicle-api.git'
+ext.scmUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
+ext.connectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
+ext.developerConnectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
 
-apply from: "https://raw.githubusercontent.com/openlattice/openlattice/main/gradles/openlattice.gradle"
+apply from: "../gradles/methodic.gradle"
 
 // Still on java 8 as a implementation target for android
 sourceCompatibility = JavaVersion.VERSION_11
