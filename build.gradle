@@ -47,7 +47,11 @@ ext.scmUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
 ext.connectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
 ext.developerConnectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
 
-apply from: "../gradles/methodic.gradle"
+if( project.hasProperty('developmentMode') && project.developmentMode ) {
+    apply from: "../gradles/methodic.gradle"
+} else {
+    apply from: "https://raw.githubusercontent.com/methodic-labs/methodic/main/gradles/methodic.gradle"
+}
 
 // Still on java 8 as a implementation target for android
 sourceCompatibility = JavaVersion.VERSION_11
