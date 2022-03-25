@@ -7,4 +7,4 @@ On the backend, controllers directly implement retroifit annotated interfaces wi
 
 Using retrofit makes it to generate typesafe clients for making RESTful requests in JVM based languages.
 
-This currently used primarily by chronicle server tests and the Android application at the moment.
+This is currently used primarily by chronicle server tests and the Android application.
