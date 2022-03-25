@@ -1,6 +1,8 @@
 Chronicle API
 ===============
 
-Contains object models for interacting with chronicle backend.
+Contains object models and interfaces for interacting with chronicle backend.
 
-Use retrofit to make it easy to build mostly typesafe clients for making RESTful requests in JVM based languages.
+On the backend, controllers directly implement retroifit annotated interfaces with Jackson handling the JSON marshalling on both sides.
+
+Using retrofit makes it to generate typesafe clients for making RESTful requests in JVM based languages.
