@@ -21,7 +21,6 @@ interface NotificationApi {
         const val PARTICIPANT_ID = "participantId"
         const val DATE = "date"
 
-        const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_ID_PATH = "/{${PARTICIPANT_ID}}"
 
@@ -33,13 +32,13 @@ interface NotificationApi {
     /**
      * Send Message to participant.
      *
-     * @param organizationId - Id of the organization to which study belongs
-     * @param notificationDetailsList - a list of notification details
+     * @param studyId - Id of the organization to which study belongs
+     * @param participantNotificationList - a list of notification details
      */
-    @POST(BASE + ORGANIZATION_ID_PATH)
+    @POST(BASE + STUDY_ID_PATH)
     fun sendNotifications(
-        @Path( ORGANIZATION_ID ) organizationId :UUID,
-        @Body notificationDetailsList: List<NotificationDetails>
+        @Path( STUDY_ID ) studyId :UUID,
+        @Body participantNotificationList: List<ParticipantNotification>
     )
 
     /**
