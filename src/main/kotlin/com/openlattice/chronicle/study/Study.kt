@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
+import com.openlattice.chronicle.notifications.StudyNotificationSettings
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.storage.ChronicleStorage
 import org.apache.commons.lang3.StringUtils
@@ -19,6 +20,7 @@ class Study @JsonCreator constructor(
     studyId: UUID = IdConstants.UNINITIALIZED.id,
     title: String,
     description: String = "",
+    labFriendlyName: String = "",
     val createdAt: OffsetDateTime = OffsetDateTime.now(),
     val updatedAt: OffsetDateTime = OffsetDateTime.now(),
     val startedAt: OffsetDateTime = OffsetDateTime.now(),
@@ -31,7 +33,7 @@ class Study @JsonCreator constructor(
     val organizationIds: Set<UUID> = setOf(),
     val notificationsEnabled: Boolean = false,
     var storage: String = ChronicleStorage.CHRONICLE.id,
-    val settings: Map<String, Any> = mapOf(),
+    val settings: Map<String, Any> = initialSettings(title, labFriendlyName),
     val phoneNumber: String = "",
 ) : AbstractSecurableObject(studyId, title, description) {
     init {
@@ -42,6 +44,9 @@ class Study @JsonCreator constructor(
 
     companion object {
         const val SENSORS = "sensors"
+        fun initialSettings(title: String, labFriendlyName: String): Map<String, Any> {
+            return mapOf(StudyNotificationSettings.SETTINGS_KEY to StudyNotificationSettings(labFriendlyName, title))
+        }
     }
 
     override val category: SecurableObjectType = SecurableObjectType.Study
@@ -103,3 +108,5 @@ class Study @JsonCreator constructor(
     }
 
 }
+
+
