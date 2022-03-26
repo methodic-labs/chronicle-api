@@ -49,11 +49,8 @@ if (hasProperty('buildScan')) {
 }
 
 description = "Chronicle REST APIs"
-group = "com.openlattice"
+group = "com.methodic"
 ext.projectName = 'chronicle-api'
-ext.scmUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
-ext.connectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
-ext.developerConnectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
 
 if(!project.hasProperty('developmentMode')) {
     ext.developmentMode = false
@@ -78,10 +75,6 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     }
 }
 
-tasks.withType(Javadoc) {
-    enabled = false
-}
-
 jacoco {
     toolVersion = "0.8.2"
 }
@@ -97,6 +90,7 @@ tasks.withType(Javadoc) {
     options.tags('implSpec:a:Implementation Requirements:')
     options.tags('implNote:a:Implementation Note:')
 }
+
 tasks.withType(Checkstyle) {
     reports {
         xml.enabled = false
