@@ -38,6 +38,7 @@ plugins {
     id 'com.github.spotbugs' version '4.6.0'
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.10'
+    id 'org.jetbrains.dokka' version '1.6.10'
 }
 
 if (hasProperty('buildScan')) {
@@ -48,11 +49,8 @@ if (hasProperty('buildScan')) {
 }
 
 description = "Chronicle REST APIs"
-group = "com.openlattice"
+group = "com.methodic"
 ext.projectName = 'chronicle-api'
-ext.scmUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
-ext.connectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
-ext.developerConnectionUrl = 'scm:git:https://github.com/methodic-labs/chronicle-api.git'
 
 if(!project.hasProperty('developmentMode')) {
     ext.developmentMode = false
@@ -92,6 +90,7 @@ tasks.withType(Javadoc) {
     options.tags('implSpec:a:Implementation Requirements:')
     options.tags('implNote:a:Implementation Note:')
 }
+
 tasks.withType(Checkstyle) {
     reports {
         xml.enabled = false
@@ -185,6 +184,8 @@ dependencies {
     implementation ("com.fasterxml.jackson.datatype:jackson-datatype-guava:${jackson_version}") {
         exclude module: 'guava'
     }
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:${jackson_version}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${jackson_version}"
 
     implementation "org.apache.olingo:odata-server-api:${odata_version}"
     implementation "org.apache.olingo:odata-server-core:${odata_version}"
