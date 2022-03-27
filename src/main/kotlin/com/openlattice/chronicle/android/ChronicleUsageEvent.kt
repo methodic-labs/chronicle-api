@@ -25,4 +25,4 @@ data class ChronicleUsageEvent(
     val timezone: String,
     val user: String,
     val applicationLabel: String,
-)
+) : ChronicleDataUpload
