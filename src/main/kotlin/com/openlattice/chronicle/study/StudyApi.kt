@@ -230,7 +230,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(SOURCE_DEVICE_ID) datasourceId: String,
-        @Body data: List<SetMultimap<UUID, Any>>
+        @Body data: List<SetMultimap<UUID, @JvmSuppressWildcards Any>>
     ): Int
 
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
