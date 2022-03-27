@@ -6,11 +6,13 @@ import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
 import com.openlattice.chronicle.notifications.StudyNotificationSettings
+import com.openlattice.chronicle.sensorkit.SensorSetting
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.storage.ChronicleStorage
 import org.apache.commons.lang3.StringUtils
 import org.joda.time.DateTime
 import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import java.util.*
 
 /**
@@ -21,9 +23,9 @@ class Study @JsonCreator constructor(
     title: String,
     description: String = "",
     labFriendlyName: String = "",
-    val createdAt: OffsetDateTime = OffsetDateTime.now(),
-    val updatedAt: OffsetDateTime = OffsetDateTime.now(),
-    val startedAt: OffsetDateTime = OffsetDateTime.now(),
+    val createdAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
+    val updatedAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
+    val startedAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
     val endedAt: OffsetDateTime = OffsetDateTime.MAX,
     val lat: Double = 0.0,
     val lon: Double = 0.0,
@@ -33,7 +35,7 @@ class Study @JsonCreator constructor(
     val organizationIds: Set<UUID> = setOf(),
     val notificationsEnabled: Boolean = false,
     var storage: String = ChronicleStorage.CHRONICLE.id,
-    val settings: Map<String, Any> = initialSettings(title, labFriendlyName),
+    val settings: StudySettings = initialSettings(title, labFriendlyName),
     val phoneNumber: String = "",
 ) : AbstractSecurableObject(studyId, title, description) {
     init {
@@ -44,8 +46,8 @@ class Study @JsonCreator constructor(
 
     companion object {
         const val SENSORS = "sensors"
-        fun initialSettings(title: String, labFriendlyName: String): Map<String, Any> {
-            return mapOf(StudyNotificationSettings.SETTINGS_KEY to StudyNotificationSettings(labFriendlyName, title))
+        fun initialSettings(title: String, labFriendlyName: String): StudySettings {
+            return StudySettings(mapOf(StudyNotificationSettings.SETTINGS_KEY to StudyNotificationSettings(labFriendlyName, title)))
         }
     }
 
@@ -100,7 +102,7 @@ class Study @JsonCreator constructor(
     fun retrieveConfiguredSensors(): Set<SensorType> {
         if (!settings.containsKey(SENSORS)) return setOf()
 
-        return (settings.getValue(SENSORS) as List<String>).map { SensorType.valueOf(it) }.toSet()
+        return settings.getValue(SENSORS) as SensorSetting
     }
 
     override fun toString(): String {

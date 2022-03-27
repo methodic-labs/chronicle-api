@@ -2,6 +2,7 @@ package com.openlattice.chronicle.organizations
 
 import com.openlattice.chronicle.settings.AppComponent
 import com.openlattice.chronicle.settings.AppUsageFrequency
+import com.openlattice.chronicle.study.StudySetting
 
 /**
  *
@@ -9,7 +10,7 @@ import com.openlattice.chronicle.settings.AppUsageFrequency
  */
 data class ChronicleDataCollectionSettings(
         val appUsageFrequency: AppUsageFrequency = AppUsageFrequency.DAILY
-)
+) : StudySetting
 
 data class OrganizationSettings(
         val chronicleDataCollection: ChronicleDataCollectionSettings = ChronicleDataCollectionSettings(),
