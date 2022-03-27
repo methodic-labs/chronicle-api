@@ -7,11 +7,10 @@ import java.util.*
  * @author Todd Bergman <todd@openlattice.com>
  */
 
-data class NotificationDetails(
-    val notificationType: String,
+data class ParticipantNotification(
+    val participantId: String,
+    val notificationType: NotificationType,
+    val deliveryType: EnumSet<DeliveryType>,
+    val message: String,
     val dateTime: OffsetDateTime = OffsetDateTime.now(),
-    val candidateId: UUID,
-    val phoneNumber: String,
-    val url: String,
-    val studyId: UUID
 )

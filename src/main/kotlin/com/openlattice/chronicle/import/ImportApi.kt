@@ -1,6 +1,8 @@
 package com.openlattice.chronicle.import
 
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 /**
@@ -21,6 +23,9 @@ interface ImportApi {
         const val PERMISSIONS = "/permissions"
         const val PARTICIPANTS = "/participants"
     }
+
+    @PATCH(BASE + STUDIES )
+    fun initializeStudySettings() : Int
 
     @POST(BASE + STUDIES)
     fun importStudies(@Body config: ImportStudiesConfiguration)
