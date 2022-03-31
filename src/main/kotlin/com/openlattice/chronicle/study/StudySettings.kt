@@ -17,3 +17,9 @@ class StudySettings(settings : Map<String, StudySetting> = mapOf()) : Map<String
 
     override fun hashCode(): Int = h
 }
+
+enum class StudySettingType(val key:String) {
+    DATA_COLLECTION("dataCollection"),
+    SENSOR("sensor"),
+    NOTIFICATIONS("notifications")
+}

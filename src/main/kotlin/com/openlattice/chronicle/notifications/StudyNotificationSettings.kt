@@ -25,8 +25,4 @@ data class StudyNotificationSettings(
             "You've been invited by $labFriendlyName to enroll in the $studyFriendlyName"
         }
     }
-
-    companion object {
-        const val SETTINGS_KEY = "notifications"
-    }
 }

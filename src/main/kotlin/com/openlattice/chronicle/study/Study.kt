@@ -1,7 +1,6 @@
 package com.openlattice.chronicle.study
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
@@ -10,7 +9,6 @@ import com.openlattice.chronicle.sensorkit.SensorSetting
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.storage.ChronicleStorage
 import org.apache.commons.lang3.StringUtils
-import org.joda.time.DateTime
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 import java.util.*
@@ -22,7 +20,6 @@ class Study @JsonCreator constructor(
     studyId: UUID = IdConstants.UNINITIALIZED.id,
     title: String,
     description: String = "",
-    labFriendlyName: String = "",
     val createdAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
     val updatedAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
     val startedAt: OffsetDateTime = OffsetDateTime.now(ZoneOffset.UTC),
@@ -35,29 +32,33 @@ class Study @JsonCreator constructor(
     val organizationIds: Set<UUID> = setOf(),
     val notificationsEnabled: Boolean = false,
     var storage: String = ChronicleStorage.CHRONICLE.id,
-    val settings: StudySettings = initialSettings(title, labFriendlyName),
+    val settings: StudySettings = initialSettings(title),
+    val modules: Map<String, Any> = mapOf(),
     val phoneNumber: String = "",
 ) : AbstractSecurableObject(studyId, title, description) {
+    companion object {
+        fun initialSettings(title: String, labFriendlyName: String = ""): StudySettings {
+            return StudySettings(
+                mapOf(StudySettingType.NOTIFICATIONS.key to StudyNotificationSettings(labFriendlyName, title)))
+        }
+    }
+
+    override val category: SecurableObjectType = SecurableObjectType.Study
+
     init {
         check(storage.length <= 36 && StringUtils.isAlpha(storage)) {
             "Storage name cannot be more 36 characters and must also be alphabetic characters only"
         }
     }
 
-    companion object {
-        const val SENSORS = "sensors"
-        fun initialSettings(title: String, labFriendlyName: String): StudySettings {
-            return StudySettings(mapOf(StudyNotificationSettings.SETTINGS_KEY to StudyNotificationSettings(labFriendlyName, title)))
-        }
+    fun retrieveConfiguredSensors(): Set<SensorType> {
+        return (settings[StudySettingType.SENSOR.key] as SensorSetting? ?: SensorSetting(setOf()))
     }
 
-    override val category: SecurableObjectType = SecurableObjectType.Study
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+        if (other !is Study) return false
         if (!super.equals(other)) return false
-
-        other as Study
 
         if (createdAt != other.createdAt) return false
         if (updatedAt != other.updatedAt) return false
@@ -72,8 +73,9 @@ class Study @JsonCreator constructor(
         if (notificationsEnabled != other.notificationsEnabled) return false
         if (storage != other.storage) return false
         if (settings != other.settings) return false
-        if (category != other.category) return false
+        if (modules != other.modules) return false
         if (phoneNumber != other.phoneNumber) return false
+        if (category != other.category) return false
 
         return true
     }
@@ -93,20 +95,14 @@ class Study @JsonCreator constructor(
         result = 31 * result + notificationsEnabled.hashCode()
         result = 31 * result + storage.hashCode()
         result = 31 * result + settings.hashCode()
-        result = 31 * result + category.hashCode()
+        result = 31 * result + modules.hashCode()
         result = 31 * result + phoneNumber.hashCode()
+        result = 31 * result + category.hashCode()
         return result
     }
 
-    @Suppress("UNCHECKED_CAST")
-    fun retrieveConfiguredSensors(): Set<SensorType> {
-        if (!settings.containsKey(SENSORS)) return setOf()
-
-        return settings.getValue(SENSORS) as SensorSetting
-    }
-
     override fun toString(): String {
-        return "Study(createdAt=$createdAt, updatedAt=$updatedAt, startedAt=$startedAt, endedAt=$endedAt, lat=$lat, lon=$lon, group='$group', version='$version', contact='$contact', organizationIds=$organizationIds, notificationsEnabled=$notificationsEnabled, storage='$storage', settings=$settings, phoneNumber='$phoneNumber', category=$category)"
+        return "Study(createdAt=$createdAt, updatedAt=$updatedAt, startedAt=$startedAt, endedAt=$endedAt, lat=$lat, lon=$lon, group='$group', version='$version', contact='$contact', organizationIds=$organizationIds, notificationsEnabled=$notificationsEnabled, storage='$storage', settings=$settings, modules=$modules, phoneNumber='$phoneNumber', category=$category)"
     }
 
 }

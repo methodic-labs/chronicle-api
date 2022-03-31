@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.study
 
 import com.google.common.base.Preconditions
+import com.openlattice.chronicle.sensorkit.SensorSetting
 import java.time.OffsetDateTime
 
 /**
@@ -15,10 +16,11 @@ data class StudyUpdate(
     val lon: Double? = null,
     val group: String? = null,
     val version: String? = null,
-    val settings: Map<String, Any>? = null,
-    val contact: String? = null ,
+    val settings: StudySettings? = null,
+    val modules: Map<String, Any>? = null,
+    val contact: String? = null,
     val notificationsEnabled: Boolean? = null,
-    val storage: String? = null
+    val storage: String? = null,
 ) {
     init {
         Preconditions.checkArgument(
