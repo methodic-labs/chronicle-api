@@ -39,7 +39,7 @@ class Study @JsonCreator constructor(
     companion object {
         fun initialSettings(title: String, labFriendlyName: String = ""): StudySettings {
             return StudySettings(
-                mapOf(StudySettingType.NOTIFICATIONS.type to StudyNotificationSettings(labFriendlyName, title)))
+                mapOf(StudySettingType.NOTIFICATIONS.key to StudyNotificationSettings(labFriendlyName, title)))
         }
     }
 
@@ -52,7 +52,7 @@ class Study @JsonCreator constructor(
     }
 
     fun retrieveConfiguredSensors(): Set<SensorType> {
-        return (settings[StudySettingType.SENSOR.type] as SensorSetting? ?: SensorSetting(setOf()))
+        return (settings[StudySettingType.SENSOR.key] as SensorSetting? ?: SensorSetting(setOf()))
     }
 
     override fun equals(other: Any?): Boolean {
