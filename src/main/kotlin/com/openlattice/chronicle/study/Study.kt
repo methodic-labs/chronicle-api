@@ -36,21 +36,20 @@ class Study @JsonCreator constructor(
     val modules: Map<String, Any> = mapOf(),
     val phoneNumber: String = "",
 ) : AbstractSecurableObject(studyId, title, description) {
+    companion object {
+        fun initialSettings(title: String, labFriendlyName: String = ""): StudySettings {
+            return StudySettings(
+                mapOf(StudySettingType.NOTIFICATIONS.type to StudyNotificationSettings(labFriendlyName, title)))
+        }
+    }
+
+    override val category: SecurableObjectType = SecurableObjectType.Study
+
     init {
         check(storage.length <= 36 && StringUtils.isAlpha(storage)) {
             "Storage name cannot be more 36 characters and must also be alphabetic characters only"
         }
     }
-
-    companion object {
-
-        fun initialSettings(title: String, labFriendlyName: String = ""): StudySettings {
-            return StudySettings(mapOf(StudySettingType.NOTIFICATIONS.type to StudyNotificationSettings(labFriendlyName,
-                                                                                                        title)))
-        }
-    }
-
-    override val category: SecurableObjectType = SecurableObjectType.Study
 
     fun retrieveConfiguredSensors(): Set<SensorType> {
         return (settings[StudySettingType.SENSOR.type] as SensorSetting? ?: SensorSetting(setOf()))
