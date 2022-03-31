@@ -17,7 +17,7 @@ data class StudyUpdate(
     val group: String? = null,
     val version: String? = null,
     val settings: StudySettings? = null,
-    val modules: Map<String, Any>? = null
+    val modules: Map<String, Any>? = null,
     val contact: String? = null,
     val notificationsEnabled: Boolean? = null,
     val storage: String? = null,
