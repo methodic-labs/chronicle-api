@@ -205,7 +205,7 @@ interface StudyApi {
     @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH)
     fun getStudySettings(
         @Path(STUDY_ID) studyId: UUID
-    ): Map<String, Any>
+    ): Map<StudySettingType, StudySetting>
 
     /**
      * Fetches sensors configured for a study.

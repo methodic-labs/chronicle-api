@@ -10,8 +10,6 @@ import java.time.OffsetDateTime
 data class StudyUpdate(
     val title: String? = null,
     val description: String? = null,
-    val startedAt: OffsetDateTime? = null,
-    val endedAt: OffsetDateTime? = null,
     val lat: Double? = null,
     val lon: Double? = null,
     val group: String? = null,
