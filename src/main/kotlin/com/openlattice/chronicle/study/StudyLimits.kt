@@ -17,7 +17,10 @@ import java.util.*
 data class StudyLimits(
     val studyDuration: StudyDuration = StudyDuration(years = 1),
     val dataRetentionDuration: StudyDuration = StudyDuration(days = 90),
-    val participantCount: Int = 0,
     val participantLimit: Int = 25,
-    val features: EnumSet<StudyFeature> = EnumSet.of(StudyFeature.APP_USAGE),
+    val features: EnumSet<StudyFeature> = EnumSet.of(
+        StudyFeature.CHRONICLE,
+        StudyFeature.CHRONICLE_DATA_COLLECTION,
+        StudyFeature.CHRONICLE_SURVEYS
+    ),
 )
