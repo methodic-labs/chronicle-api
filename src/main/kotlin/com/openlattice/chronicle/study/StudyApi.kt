@@ -51,6 +51,7 @@ interface StudyApi {
         const val UPLOAD_PATH = "/upload"
         const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
+        const val FEATURES_PATH = "/features"
         const val STATS_PATH = "/stats"
         const val STATUS_PATH = "/status"
         const val IOS_PATH = "/ios"
@@ -196,6 +197,13 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Body dataCollectionSettings: ChronicleDataCollectionSettings
     ): OK
+
+    /**
+     * Retrieves features for a given study, and any associated key-value pairs
+     * @param studyId studyId
+     */
+    @GET(BASE + STUDY_ID_PATH + FEATURES_PATH)
+    fun getStudyFeatures(@Path(STUDY_ID) studyId: UUID): Map<StudyFeature, Map<String, Any>>
 
     /**
      * Returns the settings for a given study
