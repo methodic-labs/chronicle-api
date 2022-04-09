@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.study
 
 
+import com.openlattice.chronicle.android.ChronicleData
 import com.openlattice.chronicle.android.ChronicleSample
 import com.openlattice.chronicle.base.OK
 import com.openlattice.chronicle.data.ParticipationStatus
@@ -229,7 +230,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(SOURCE_DEVICE_ID) datasourceId: String,
-        @Body data: List<ChronicleSample>
+        @Body data: ChronicleData
     ): Int
 
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
