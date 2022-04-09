@@ -1,9 +1,7 @@
 package com.openlattice.chronicle.study
 
 
-import com.google.common.collect.SetMultimap
-import com.openlattice.chronicle.android.ChronicleDataUpload
-import com.openlattice.chronicle.android.ChronicleUsageEvent
+import com.openlattice.chronicle.android.ChronicleSample
 import com.openlattice.chronicle.base.OK
 import com.openlattice.chronicle.data.ParticipationStatus
 import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
@@ -12,7 +10,6 @@ import com.openlattice.chronicle.participants.ParticipantStats
 import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryDownloadDataType
 import retrofit2.http.*
 import java.time.OffsetDateTime
 import java.util.*
@@ -232,7 +229,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(SOURCE_DEVICE_ID) datasourceId: String,
-        @Body data: List<ChronicleDataUpload>
+        @Body data: List<ChronicleSample>
     ): Int
 
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
