@@ -9,6 +9,7 @@ enum class StudyFeature {
     APP_USAGE_SURVEY,
     TIME_USE_DIARY,
     ARCHIVE,
+    IOS_SENSOR,
     //Legacy features
     CHRONICLE_SURVEYS,
     CHRONICLE,
