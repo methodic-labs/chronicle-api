@@ -63,7 +63,7 @@ object RetrofitBuilders {
     }
 
     @JvmStatic
-    fun createBaseChronicleRetrofitBuilder(baseUrl: String?, httpClient: OkHttpClient?): Retrofit.Builder {
+    fun createBaseChronicleRetrofitBuilder(baseUrl: String, httpClient: OkHttpClient): Retrofit.Builder {
         return Retrofit.Builder().baseUrl(baseUrl).client(httpClient)
     }
 }
