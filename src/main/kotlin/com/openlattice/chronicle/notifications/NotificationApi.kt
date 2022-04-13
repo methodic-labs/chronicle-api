@@ -21,17 +21,17 @@ interface NotificationApi {
         const val DATE = "date"
         const val SETTINGS = "settings"
         const val NOTIFICATION_TYPE = "notificationType"
-        const val CONFIRMATION_CODE = "confirmationCode"
         const val PHONE_NUMBER = "phoneNumber"
 
         const val PHONE_NUMBERS_PATH = "/phone-numbers"
         const val NOTIFICATIONS_PATH = "/notifications"
+        const val VERIFICATION_PATH = "/verify"
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
         const val PARTICIPANT_ID_PATH = "/{${PARTICIPANT_ID}}"
         const val PRINCIPAL_ID_PATH = "/principal/{$PRINCIPAL_ID}"
         const val NOTIFICATION_TYPE_PATH = "$NOTIFICATIONS_PATH/{$NOTIFICATION_TYPE}"
         const val PHONE_NUMBER_PATH = "$PHONE_NUMBERS_PATH/{$PHONE_NUMBER}"
-        const val CONFIRMATION_CODE_PATH = "/confirmation-code/{$CONFIRMATION_CODE}"
+
 
         const val MESSAGE_ID = "MessageSid"
         const val MESSAGE_STATUS = "MessageStatus"
@@ -51,11 +51,14 @@ interface NotificationApi {
     @PUT(BASE + STUDY_ID_PATH + PRINCIPAL_ID_PATH + PHONE_NUMBER_PATH)
     fun setResearcherPhoneNumber(@Path(PRINCIPAL_ID) principalId: String, @Path(PHONE_NUMBER) phoneNumber: String)
 
-    @POST(BASE + STUDY_ID_PATH + PRINCIPAL_ID_PATH + PHONE_NUMBER_PATH + CONFIRMATION_CODE_PATH)
+    @POST(BASE + STUDY_ID_PATH + PRINCIPAL_ID_PATH + PHONE_NUMBER_PATH + VERIFICATION_PATH)
     fun verifyResearcherPhoneNumber(
         @Path(PHONE_NUMBER) phoneNumber: String,
-        @Path(CONFIRMATION_CODE) confirmationCode: String,
+        @Body confirmationCode: String,
     )
+
+    @GET(BASE + STUDY_ID_PATH + PRINCIPAL_ID_PATH + PHONE_NUMBER_PATH + VERIFICATION_PATH)
+    fun isResearcherPhoneNumberVerified(@Path(PHONE_NUMBER) phoneNumber: String): Boolean
 
     @GET(BASE + STUDY_ID_PATH + PRINCIPAL_ID_PATH + NOTIFICATIONS_PATH)
     fun getResearcherNotificationSettings(
@@ -88,7 +91,7 @@ interface NotificationApi {
     /**
      * Send Message to participant.
      *
-     * @param studyId - Id of the organization to which study belongs
+     * @param studyId - The id of the study.
      * @param participantNotificationList - a list of notification details
      */
     @POST(BASE + STUDY_ID_PATH)

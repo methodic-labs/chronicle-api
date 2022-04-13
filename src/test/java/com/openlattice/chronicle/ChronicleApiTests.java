@@ -37,7 +37,7 @@ public class ChronicleApiTests {
 
     private static ChronicleApi chronicleApi;
     static {
-        RetrofitBuilders.getMapper().registerModule( new GuavaModule() );
+        RetrofitBuilders.mapper.registerModule( new GuavaModule() );
     }
 
     @Test
