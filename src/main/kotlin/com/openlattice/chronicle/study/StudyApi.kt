@@ -2,13 +2,13 @@ package com.openlattice.chronicle.study
 
 
 import com.openlattice.chronicle.android.ChronicleData
-import com.openlattice.chronicle.android.ChronicleSample
 import com.openlattice.chronicle.base.OK
 import com.openlattice.chronicle.data.ParticipationStatus
 import com.openlattice.chronicle.organizations.ChronicleDataCollectionSettings
 import com.openlattice.chronicle.participants.Participant
 import com.openlattice.chronicle.participants.ParticipantStats
 import com.openlattice.chronicle.sensorkit.SensorDataSample
+import com.openlattice.chronicle.sensorkit.SensorSetting
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
 import retrofit2.http.*
@@ -77,7 +77,7 @@ interface StudyApi {
     fun enroll(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Path(SOURCE_DEVICE_ID) datasourceId: String,
+        @Path(SOURCE_DEVICE_ID) sourceDeviceId: String,
         @Body datasource: SourceDevice
     ): UUID
 
@@ -124,6 +124,20 @@ interface StudyApi {
         @Body study: StudyUpdate,
         @Query(RETRIEVE) retrieve: Boolean = false
     ): Study?
+
+    /**
+     * Manage SensorKit data collection for a study. Due to Apple restrictions this is an admin only API.
+     *
+     * @param studyId The id of the study to update.
+     * @param sensorSetting The list of sensor kit sensors to collect for this study.
+     *
+     * Does not accept changes to associated organizations.
+     */
+    @PUT(BASE + STUDY_ID_PATH + SETTINGS_PATH)
+    fun updateStudyAppleSettings(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body sensorSetting: SensorSetting,
+    ): OK
 
     /**
      * Deletes an existing study, its associations to any organizations, and removes
