@@ -52,38 +52,39 @@ interface SurveyApi {
      * Set the entire app usage survey filter all at once.
      *
      * @param studyId Identifier of the study whose app usage survey filter is being modified.
-     * @param filteredAppPackages A set of app package names to filter from the app usage survey
+     * @param appPackages A set of app package names to filter from the app usage survey
      * @return HTTP OK with message success if request succeeds, other error code otherwise.
      */
     @PUT(BASE + STUDY_ID_PATH + FILTERED_PATH)
     fun setAppsFilteredForStudyAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
-        filteredAppPackages: Set<String>,
+        @Body appPackages: Set<String>,
     ): OK
 
     /**
-     * Filter a single app package name from the filter list.
+     * Filter one or more app package names from the app usage survey.
      *
      * @param studyId Identifier of the study whose app usage survey filter is being modified.
-     * @param filteredAppPackage An app package name to filter from the app usage survey.
+     * @param appPackages A list of app package names to filter from the app usage survey.
      * @return HTTP OK with message success if request succeeds, other error code otherwise.
      */
     @PATCH(BASE + STUDY_ID_PATH + FILTERED_PATH)
     fun filterAppForStudyAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
-        filteredAppPackage: String,
+        @Body appPackages: Set<String>,
     ): OK
 
     /**
-     * Allow a single app for the study app usage survey.
+     * Allow one or more apps for the study app usage survey.
      *
      * @param studyId Identifier of the study whose app usage survey filter is being modified.
+     * @param appPackages
      * @return HTTP OK with message success if request succeeds, other error code otherwise.
      */
     @HTTP(method = "DELETE", path = BASE + STUDY_ID_PATH + FILTERED_PATH)
     fun allowAppForStudyAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
-        filteredAppPackage: String,
+        @Body appPackages: Set<String>,
     ): OK
 
     /**
