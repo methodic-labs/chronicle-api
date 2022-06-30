@@ -46,7 +46,7 @@ interface SurveyApi {
     @GET(BASE + STUDY_ID_PATH + FILTERED_PATH)
     fun getAppsFilteredForStudyAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
-    ): List<String>
+    ): Collection<String>
 
     /**
      * Set the entire app usage survey filter all at once.
