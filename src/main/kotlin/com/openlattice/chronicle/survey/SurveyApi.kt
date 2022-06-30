@@ -28,6 +28,7 @@ interface SurveyApi {
         const val PARTICIPANT_PATH = "/participant"
         const val APP_USAGE_PATH = "/app-usage"
         const val QUESTIONNAIRE_PATH = "/questionnaire"
+        const val FILTERED_PATH = "/filtered"
         const val DATA_PATH = "/data"
 
         const val ORGANIZATION_ID_PATH = "/{$ORGANIZATION_ID}"
@@ -35,6 +36,55 @@ interface SurveyApi {
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
         const val QUESTIONNAIRE_ID_PATH = "/{$QUESTIONNAIRE_ID}"
     }
+
+    /**
+     * Retrieve the app package filtered from the app usage survey.
+     *
+     * @param studyId Identifier of the study whose app usage survey filter is being retrieved.
+     * @return A list of app package names that are filtered from the app usage survey.
+     */
+    @GET(BASE + STUDY_ID_PATH + FILTERED_PATH)
+    fun getAppsFilteredForStudyAppUsageSurvey(
+        @Path(STUDY_ID) studyId: UUID,
+    ): List<String>
+
+    /**
+     * Set the entire app usage survey filter all at once.
+     *
+     * @param studyId Identifier of the study whose app usage survey filter is being modified.
+     * @param filteredAppPackages A set of app package names to filter from the app usage survey
+     * @return HTTP OK with message success if request succeeds, other error code otherwise.
+     */
+    @PUT(BASE + STUDY_ID_PATH + FILTERED_PATH)
+    fun setAppsFilteredForStudyAppUsageSurvey(
+        @Path(STUDY_ID) studyId: UUID,
+        filteredAppPackages: Set<String>,
+    ): OK
+
+    /**
+     * Filter a single app package name from the filter list.
+     *
+     * @param studyId Identifier of the study whose app usage survey filter is being modified.
+     * @param filteredAppPackage An app package name to filter from the app usage survey.
+     * @return HTTP OK with message success if request succeeds, other error code otherwise.
+     */
+    @PATCH(BASE + STUDY_ID_PATH + FILTERED_PATH)
+    fun filterAppForStudyAppUsageSurvey(
+        @Path(STUDY_ID) studyId: UUID,
+        filteredAppPackage: String,
+    ): OK
+
+    /**
+     * Allow a single app for the study app usage survey.
+     *
+     * @param studyId Identifier of the study whose app usage survey filter is being modified.
+     * @return HTTP OK with message success if request succeeds, other error code otherwise.
+     */
+    @HTTP(method = "DELETE", path = BASE + STUDY_ID_PATH + FILTERED_PATH)
+    fun allowAppForStudyAppUsageSurvey(
+        @Path(STUDY_ID) studyId: UUID,
+        filteredAppPackage: String,
+    ): OK
 
     /**
      * Queries the chronicle_usage_events table for usage events matching given studyId, participantId and date
@@ -51,7 +101,7 @@ interface SurveyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(START_DATE) startDateTime: OffsetDateTime,
-        @Query(END_DATE) endDateTime: OffsetDateTime
+        @Query(END_DATE) endDateTime: OffsetDateTime,
     ): List<AppUsage>
 
     /**
@@ -67,7 +117,7 @@ interface SurveyApi {
     fun submitAppUsageSurvey(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Body surveyResponses: List<AppUsage>
+        @Body surveyResponses: List<AppUsage>,
     )
 
     /**
@@ -79,7 +129,7 @@ interface SurveyApi {
     @POST(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH)
     fun createQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
-        @Body questionnaire: Questionnaire
+        @Body questionnaire: Questionnaire,
     ): UUID
 
     /**
@@ -92,7 +142,7 @@ interface SurveyApi {
     @DELETE(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH)
     fun deleteQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
-        @Path(QUESTIONNAIRE_ID) questionnaireId: UUID
+        @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
     ): OK
 
     /**
@@ -104,7 +154,7 @@ interface SurveyApi {
     @GET(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH)
     fun getQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
-        @Path(QUESTIONNAIRE_ID) questionnaireId: UUID
+        @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
     ): Questionnaire
 
     /**
@@ -117,7 +167,7 @@ interface SurveyApi {
     fun updateQuestionnaire(
         @Path(STUDY_ID) studyId: UUID,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
-        @Body update: QuestionnaireUpdate
+        @Body update: QuestionnaireUpdate,
     ): OK
 
     /**
@@ -128,7 +178,7 @@ interface SurveyApi {
      */
     @GET(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH)
     fun getStudyQuestionnaires(
-        @Path(STUDY_ID) studyId: UUID
+        @Path(STUDY_ID) studyId: UUID,
     ): List<Questionnaire>
 
     /**
@@ -144,7 +194,7 @@ interface SurveyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
-        @Body responses: List<QuestionnaireResponse>
+        @Body responses: List<QuestionnaireResponse>,
     ): OK
 
     /**
@@ -154,10 +204,10 @@ interface SurveyApi {
      * @param questionnaireId questionnaire Id
      * @param fileType type of file to write to
      */
-    @GET(BASE + STUDY_ID_PATH  + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH + DATA_PATH)
+    @GET(BASE + STUDY_ID_PATH + QUESTIONNAIRE_PATH + QUESTIONNAIRE_ID_PATH + DATA_PATH)
     fun getQuestionnaireResponses(
         @Path(STUDY_ID) studyId: UUID,
         @Path(QUESTIONNAIRE_ID) questionnaireId: UUID,
-        @Query(value = TYPE) fileType: FileType
+        @Query(value = TYPE) fileType: FileType,
     ): Iterable<Map<String, Any>>
 }
