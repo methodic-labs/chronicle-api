@@ -8,4 +8,8 @@ import com.openlattice.chronicle.study.StudySetting
  * @author Matthew Tamayo-Rios &lt;matthew@getmethodic.com&gt;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-class SensorSetting( sensors : Set<SensorType> ) : StudySetting, Set<SensorType>  by sensors
+class SensorSetting( sensors : Set<SensorType> ) : StudySetting, Set<SensorType>  by sensors {
+    companion object{
+        val NO_SENSORS = SensorSetting( emptySet() )
+    }
+}

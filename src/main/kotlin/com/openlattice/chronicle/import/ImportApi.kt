@@ -24,9 +24,6 @@ interface ImportApi {
         const val PARTICIPANTS = "/participants"
     }
 
-    @PATCH(BASE + STUDIES )
-    fun initializeStudySettings() : Int
-
     @POST(BASE + STUDIES)
     fun importStudies(@Body config: ImportStudiesConfiguration)
 
