@@ -37,6 +37,23 @@ interface SurveyApi {
     }
 
     /**
+     * Queries the device usage for a given study, participant, and time window.
+     *
+     * @param studyId the studyId
+     * @param participantId the participant
+     * @param startDateTime lower bound date (inclusive)
+     * @param endDateTime upper bound date (exclusive)
+     * @return
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + APP_USAGE_PATH)
+    fun getDeviceUsageSurveyData(
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
+    ): List<DeviceUsage>
+
+    /**
      * Queries the chronicle_usage_events table for usage events matching given studyId, participantId and date
      *
      * @param studyId the studyId
