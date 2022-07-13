@@ -203,7 +203,7 @@ dependencies {
     /*
      * TESTING
      */
-    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j_version}"
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j18-impl', version: "${log4j_version}"
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j_version}"
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j_version}"
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-web', version: "${log4j_version}"
