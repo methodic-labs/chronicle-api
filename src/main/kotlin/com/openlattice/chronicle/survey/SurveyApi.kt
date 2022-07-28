@@ -52,7 +52,7 @@ interface SurveyApi {
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime
-    ): List<DeviceUsage>
+    ): DeviceUsage
 
     /**
      * Retrieve the app package filtered from the app usage survey.

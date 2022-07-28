@@ -7,8 +7,8 @@ import java.util.*
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
 data class DeviceUsage(
-    val startTime: OffsetDateTime,
-    val endTime: OffsetDateTime,
-    val timezone: String,
-    val users: List<String> = listOf(),
+    val totalTime: Long,
+    val usageByPackage: Map<String, Long>,
+    val categoryByPackage: Map<String, String>,
+    val users: List<String> = listOf()
 )

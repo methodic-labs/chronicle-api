@@ -21,8 +21,10 @@ data class ChronicleUsageEvent(
     val participantId: String,
     val appPackageName: String,
     val interactionType: String,
+    val eventType: Int,
     val timestamp: OffsetDateTime,
     val timezone: String,
     val user: String,
     val applicationLabel: String,
 ) : ChronicleSample
+
