@@ -7,8 +7,8 @@ import java.util.*
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
 data class DeviceUsage(
-    val totalTime: Long,
-    val usageByPackage: Map<String, Long>,
+    val totalTime: Double,
+    val usageByPackage: Map<String, Double>,
     val categoryByPackage: Map<String, String>,
     val users: List<String> = listOf()
 )

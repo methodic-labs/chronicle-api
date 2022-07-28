@@ -21,10 +21,24 @@ data class ChronicleUsageEvent(
     val participantId: String,
     val appPackageName: String,
     val interactionType: String,
-    val eventType: Int,
+    val eventType: Int = fromInteractionType(interactionType) ,
     val timestamp: OffsetDateTime,
     val timezone: String,
     val user: String,
     val applicationLabel: String,
 ) : ChronicleSample
 
+fun fromInteractionType(interactionType: String): Int {
+    return when (interactionType) {
+        "Move to Background" -> ChronicleUsageEventType.MOVE_TO_BACKGROUND.value
+        "Move to Foreground" -> ChronicleUsageEventType.MOVE_TO_FOREGROUND.value
+        "Configuration Change" -> ChronicleUsageEventType.CONFIGURATION_CHANGE.value
+        "Shortcut Invocation" -> ChronicleUsageEventType.SHORTCUT_INVOCATION.value
+        "User Interaction" -> ChronicleUsageEventType.USER_INTERACTION.value
+        "None" -> ChronicleUsageEventType.NONE.value
+        "Usage Stat" -> -1
+        else -> {
+            interactionType.substringAfter("Unknown importance: ").toInt()
+        }
+    }
+}
