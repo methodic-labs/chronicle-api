@@ -3,6 +3,7 @@ package com.openlattice.chronicle
 import com.openlattice.chronicle.android.ChronicleData
 import com.openlattice.chronicle.android.ChronicleUsageEvent
 import org.apache.commons.lang3.RandomStringUtils
+import org.apache.commons.lang3.RandomUtils
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -18,6 +19,7 @@ class ChronicleDataSerializerTest : AbstractJacksonSerializationTest<ChronicleDa
                     RandomStringUtils.randomAlphanumeric(5),
                     RandomStringUtils.randomAlphanumeric(5),
                     RandomStringUtils.randomAlphanumeric(5),
+                    RandomUtils.nextInt(0, 100),
                     OffsetDateTime.now(),
                     TimeZone.getDefault().id,
                     RandomStringUtils.randomAlphanumeric(5),

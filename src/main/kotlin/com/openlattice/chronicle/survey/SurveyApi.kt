@@ -27,6 +27,7 @@ interface SurveyApi {
 
         const val PARTICIPANT_PATH = "/participant"
         const val APP_USAGE_PATH = "/app-usage"
+        const val DEVICE_USAGE_PATH = "/device-usage"
         const val QUESTIONNAIRE_PATH = "/questionnaire"
         const val FILTERED_PATH = "/filtered"
         const val DATA_PATH = "/data"
@@ -36,6 +37,23 @@ interface SurveyApi {
         const val PARTICIPANT_ID_PATH = "/{$PARTICIPANT_ID}"
         const val QUESTIONNAIRE_ID_PATH = "/{$QUESTIONNAIRE_ID}"
     }
+
+    /**
+     * Queries the device usage for a given study, participant, and time window.
+     *
+     * @param studyId the studyId
+     * @param participantId the participant
+     * @param startDateTime lower bound date (inclusive)
+     * @param endDateTime upper bound date (exclusive)
+     * @return
+     */
+    @GET(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + DEVICE_USAGE_PATH)
+    fun getDeviceUsageSurveyData(
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(PARTICIPANT_ID) participantId: String,
+        @Query(START_DATE) startDateTime: OffsetDateTime,
+        @Query(END_DATE) endDateTime: OffsetDateTime
+    ): DeviceUsage
 
     /**
      * Retrieve the app package filtered from the app usage survey.
