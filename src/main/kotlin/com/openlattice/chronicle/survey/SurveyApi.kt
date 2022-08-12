@@ -54,7 +54,7 @@ interface SurveyApi {
         @Path(PARTICIPANT_ID) participantId: String,
         @Query(START_DATE) startDateTime: OffsetDateTime,
         @Query(END_DATE) endDateTime: OffsetDateTime,
-        @Query(THRESHOLD) thresholdInSeconds: Int?,
+        @Query(THRESHOLD) thresholdInSeconds: Int? = 0,
     ): DeviceUsage
 
     /**
