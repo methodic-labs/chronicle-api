@@ -8,6 +8,7 @@ import com.openlattice.chronicle.notifications.StudyNotificationSettings
 import com.openlattice.chronicle.sensorkit.SensorSetting
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.storage.ChronicleStorage
+import com.openlattice.chronicle.survey.SurveySettings
 import com.openlattice.chronicle.timeusediary.TimeUseDiarySettings
 import org.apache.commons.lang3.StringUtils
 import java.time.OffsetDateTime
@@ -77,7 +78,8 @@ class Study(
             return StudySettings(
                 mapOf(
                     StudySettingType.Notifications to StudyNotificationSettings(labFriendlyName, title),
-                    StudySettingType.TimeUseDiary to TimeUseDiarySettings()
+                    StudySettingType.TimeUseDiary to TimeUseDiarySettings(),
+                    StudySettingType.Survey to SurveySettings()
                 )
             )
         }
