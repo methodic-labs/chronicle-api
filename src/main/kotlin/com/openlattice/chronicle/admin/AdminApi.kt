@@ -14,12 +14,16 @@ interface AdminApi {
 
         const val RELOAD_CACHE = "/reload/cache"
         const val PRINCIPALS = "/principals"
+        const val REDSHIFT = "/redshift"
 
         const val ID = "id"
         const val ID_PATH = "/{$ID}"
         const val NAME = "name"
         const val NAME_PATH = "/{$NAME}"
     }
+
+    @GET(BASE + REDSHIFT)
+    fun moveToRedshift()
 
     /**
      * Reload the all the in memory caches.
