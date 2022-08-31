@@ -14,7 +14,7 @@ interface AdminApi {
 
         const val RELOAD_CACHE = "/reload/cache"
         const val PRINCIPALS = "/principals"
-        const val REDSHIFT = "/redshift"
+        const val EVENT_STORAGE = "/event-storage"
 
         const val ID = "id"
         const val ID_PATH = "/{$ID}"
@@ -22,8 +22,8 @@ interface AdminApi {
         const val NAME_PATH = "/{$NAME}"
     }
 
-    @GET(BASE + REDSHIFT)
-    fun moveToRedshift()
+    @GET(BASE + EVENT_STORAGE)
+    fun moveToEventStorage()
 
     /**
      * Reload the all the in memory caches.
