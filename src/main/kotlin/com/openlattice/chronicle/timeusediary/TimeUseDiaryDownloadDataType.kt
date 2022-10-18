@@ -1,6 +1,8 @@
 package com.openlattice.chronicle.timeusediary
 
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_COUNTER
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_DATE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_DURATION
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_END_TIME
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_START_TIME
@@ -86,7 +88,9 @@ enum class TimeUseDiaryDownloadDataType {
                 FAMILY_ID,
                 WAVE_ID,
                 TIMESTAMP,
+                ACTIVITY_DATE,
                 DAY_OF_WEEK,
+                ACTIVITY_DAY,
                 TYPICAL_DAY,
                 NON_TYPICAL_DAY_REASON,
                 ACTIVITY_COUNTER,
@@ -108,7 +112,8 @@ enum class TimeUseDiaryDownloadDataType {
                 SECONDARY_ACTIVITY,
                 BG_TV_DAY,
                 BG_AUDIO_DAY,
-                ADULT_MEDIA
+                ADULT_MEDIA,
+                WAKE_UP_YESTERDAY
             )
     },
     NightTime {
@@ -120,7 +125,9 @@ enum class TimeUseDiaryDownloadDataType {
                 FAMILY_ID,
                 WAVE_ID,
                 TIMESTAMP,
+                ACTIVITY_DATE,
                 DAY_OF_WEEK,
+                ACTIVITY_DAY,
                 TYPICAL_DAY,
                 NON_TYPICAL_DAY_REASON,
                 WAKE_UP_YESTERDAY,
@@ -133,7 +140,7 @@ enum class TimeUseDiaryDownloadDataType {
                 SLEEP_ARRANGEMENT,
                 WAKE_UP_COUNT,
                 BG_TV_NIGHT,
-                BG_AUDIO_NIGHT
+                BG_AUDIO_NIGHT,
             )
     },
     Summarized {
