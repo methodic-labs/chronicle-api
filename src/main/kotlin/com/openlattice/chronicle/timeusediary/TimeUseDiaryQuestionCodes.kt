@@ -21,11 +21,11 @@ class TimeUseDiaryQuestionCodes {
         const val NON_TYPICAL_SLEEP_PATTERN = "nonTypicalSleepReason"
         const val PRIMARY_BOOK_TITLE = "primaryBookTitle"
         const val PRIMARY_BOOK_TYPE = "primaryBookType"
-        const val PRIMARY_MEDIA_ACTIVITY ="primaryMediaActivity"
+        const val PRIMARY_MEDIA_ACTIVITY = "primaryMediaActivity"
         const val PRIMARY_MEDIA_AGE = "primaryMediaAge"
         const val PRIMARY_MEDIA_NAME = "primaryMediaName"
         const val SECONDARY_ACTIVITY = "secondaryActivity"
-        const val SECONDARY_BOOK_TITLE ="secondaryBookTitle"
+        const val SECONDARY_BOOK_TITLE = "secondaryBookTitle"
         const val SECONDARY_BOOK_TYPE = "secondaryBookType"
         const val SECONDARY_MEDIA_ACTIVITY = "secondaryMediaActivity"
         const val SECONDARY_MEDIA_AGE = "secondaryMediaAge"
@@ -37,5 +37,9 @@ class TimeUseDiaryQuestionCodes {
         const val WAKE_UP_COUNT = "wakeUpCount"
         const val FAMILY_ID = "familyId"
         const val WAVE_ID = "waveId"
+        const val ACTIVITY_DAY = "activityDay"
+        const val ACTIVITY_DATE = "activityDate"
+        const val WAKE_UP_TIME_AFTER_ACTIVITY_DAY = "wakeUpTimeAfterActivityDay"
+        const val BED_TIME_BEFORE_ACTIVITY_DAY = "bedTimeBeforeActivityDay"
     }
 }
