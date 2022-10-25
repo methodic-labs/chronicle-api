@@ -176,7 +176,6 @@ enum class TimeUseDiaryDownloadDataType {
                 BG_TV_DAY_DURATION,
                 PRIMARY_READING_DURATION,
                 PRIMARY_PLAY_INSIDE_BLOCKS,
-                TODAY_WAKE_UP_TIME,
                 PRIMARY_OTHER_AT_HOME_BLOCKS,
                 PRIMARY_MEDIA_BLOCKS,
                 PRIMARY_BATHROOM_BLOCKS,
