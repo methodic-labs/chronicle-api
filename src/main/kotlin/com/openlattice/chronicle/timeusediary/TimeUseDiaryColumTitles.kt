@@ -82,6 +82,7 @@ class TimeUseDiaryColumTitles {
             ACTIVITY_DATE to TimeUseDiaryQuestionCodes.ACTIVITY_DATE,
             WAKE_UP_TIME_AFTER_ACTIVITY_DAY to TimeUseDiaryQuestionCodes.WAKE_UP_TIME_AFTER_ACTIVITY_DAY,
             BEDTIME_AFTER_ACTIVITY_DAY to TimeUseDiaryQuestionCodes.BED_TIME_BEFORE_ACTIVITY_DAY,
+            WAKE_UP_TODAY to TimeUseDiaryQuestionCodes.TODAY_WAKEUP_TIME,
         )
     }
 }
