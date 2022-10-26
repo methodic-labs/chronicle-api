@@ -7,6 +7,7 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_END_TIME
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_START_TIME
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ADULT_MEDIA
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BEDTIME_AFTER_ACTIVITY_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BED_TIME_YESTERDAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BG_AUDIO_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BG_AUDIO_NIGHT
@@ -39,6 +40,7 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.TIMESTAMP
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.TYPICAL_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_COUNT
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_TIME_AFTER_ACTIVITY_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_TODAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_YESTERDAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAVE_ID
@@ -113,7 +115,9 @@ enum class TimeUseDiaryDownloadDataType {
                 BG_TV_DAY,
                 BG_AUDIO_DAY,
                 ADULT_MEDIA,
-                WAKE_UP_YESTERDAY
+                WAKE_UP_YESTERDAY,
+                WAKE_UP_TIME_AFTER_ACTIVITY_DAY,
+                BEDTIME_AFTER_ACTIVITY_DAY,
             )
     },
     NightTime {
@@ -131,6 +135,8 @@ enum class TimeUseDiaryDownloadDataType {
                 TYPICAL_DAY,
                 NON_TYPICAL_DAY_REASON,
                 WAKE_UP_YESTERDAY,
+                WAKE_UP_TIME_AFTER_ACTIVITY_DAY,
+                BEDTIME_AFTER_ACTIVITY_DAY,
                 BED_TIME_YESTERDAY,
                 WAKE_UP_TODAY,
                 DAY_TIME_HOURS,
