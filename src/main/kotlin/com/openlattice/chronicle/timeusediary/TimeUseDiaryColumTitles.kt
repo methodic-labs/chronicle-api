@@ -48,7 +48,7 @@ class TimeUseDiaryColumTitles {
         const val ACTIVITY_DAY = "Activity_Day"
         const val ACTIVITY_DATE = "Activity_Date"
         const val WAKE_UP_TIME_AFTER_ACTIVITY_DAY = "Wake_Up_Time_After_Activity_Day"
-        const val BEDTIME_AFTER_ACTIVITY_DAY = "Wake_Up_Time_After_Activity_Day"
+        const val BEDTIME_AFTER_ACTIVITY_DAY = "Bedtime_After_Activity_Day"
 
         val columnTitleToQuestionCodeMap = mapOf(
             FAMILY_ID to TimeUseDiaryQuestionCodes.FAMILY_ID,

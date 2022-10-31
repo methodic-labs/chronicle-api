@@ -146,7 +146,7 @@ enum class TimeUseDiaryDownloadDataType {
                 SLEEP_ARRANGEMENT,
                 WAKE_UP_COUNT,
                 BG_TV_NIGHT,
-                BG_AUDIO_NIGHT,
+                BG_AUDIO_NIGHT
             )
     },
     Summarized {
