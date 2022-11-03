@@ -3,7 +3,7 @@ package com.openlattice.chronicle.timeusediary
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
-class TimeUseDiaryColumTitles {
+class TimeUseDiaryColumnTitles {
     companion object {
         const val ACTIVITY_COUNTER = "Counter"
         const val ACTIVITY_DURATION = "Duration(Min)"
