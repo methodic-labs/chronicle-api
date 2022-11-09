@@ -18,6 +18,6 @@ class ChronicleData(data: List<ChronicleSample>) : List<ChronicleSample> by data
     }
 
     override fun hashCode(): Int {
-        return javaClass.hashCode()
+        return this.hashCode()
     }
 }
