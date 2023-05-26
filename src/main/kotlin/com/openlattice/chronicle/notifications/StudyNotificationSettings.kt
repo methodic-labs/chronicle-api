@@ -13,7 +13,7 @@ import com.openlattice.chronicle.study.StudySetting
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 data class StudyNotificationSettings(
-    val researchNotificationsEnabled: Boolean = true,
+    val notifyResearchers: Boolean = true,
     val labFriendlyName: String,
     val studyFriendlyName: String,
     val notifyOnEnrollment: Boolean = false,

@@ -77,7 +77,10 @@ class Study(
         fun initialSettings(title: String, labFriendlyName: String = ""): StudySettings {
             return StudySettings(
                 mapOf(
-                    StudySettingType.Notifications to StudyNotificationSettings(labFriendlyName, title),
+                    StudySettingType.Notifications to StudyNotificationSettings(
+                        labFriendlyName = "",
+                        studyFriendlyName = title
+                    ),
                     StudySettingType.TimeUseDiary to TimeUseDiarySettings(),
                     StudySettingType.Survey to SurveySettings()
                 )
@@ -95,6 +98,13 @@ class Study(
 
     fun retrieveConfiguredSensors(): Set<SensorType> {
         return (settings[StudySettingType.Sensor] as SensorSetting? ?: SensorSetting(setOf()))
+    }
+
+    fun getNotifyResearchers(): Boolean {
+        return (settings[StudySettingType.Notifications] as StudyNotificationSettings? ?: StudyNotificationSettings(
+            labFriendlyName = "",
+            studyFriendlyName = title
+        )).notifyResearchers
     }
 
     override fun equals(other: Any?): Boolean {
