@@ -13,9 +13,9 @@ import com.openlattice.chronicle.study.StudySetting
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 data class StudyNotificationSettings(
-    val notifyResearchers: Boolean = true,
     val labFriendlyName: String,
     val studyFriendlyName: String,
+    val notifyResearchers: Boolean = true,
     val notifyOnEnrollment: Boolean = false,
     val noDataUploaded: StudyDuration = StudyDuration(days = 1),
     val noTudSubmitted: StudyDuration = StudyDuration(days = 1),
