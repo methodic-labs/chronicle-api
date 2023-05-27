@@ -17,7 +17,7 @@ data class StudyNotificationSettings(
     val studyFriendlyName: String,
     val notifyResearchers: Boolean = false,
     val notifyOnEnrollment: Boolean = false,
-    val researcherPhoneNumber: String = "",
+    val researcherPhoneNumbers: String = "",
     val noDataUploaded: StudyDuration = StudyDuration(days = 1),
     val noTudSubmitted: StudyDuration = StudyDuration(days = 1),
     val noAppUsageSurveySubmitted: StudyDuration = StudyDuration(days = 1)
