@@ -28,8 +28,8 @@ enum class SystemRole(principalId: String) {
     ADMIN("admin"),
     USER("user"),
     ANONYMOUS_USER("AnonymousUser"),
-    AUTHENTICATED_USER("AuthenticatedUser"),
-    OPENLATTICE("openlatticeRole");
+    AUTHENTICATED_USER("AuthenticatedUser");
+
     val principal : Principal = Principal( PrincipalType.ROLE, principalId)
 
 
