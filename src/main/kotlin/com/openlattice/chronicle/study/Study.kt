@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.study
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
@@ -100,6 +101,7 @@ class Study(
         return (settings[StudySettingType.Sensor] as SensorSetting? ?: SensorSetting(setOf()))
     }
 
+    @JsonIgnore //Required so that jackson will ignore, but still accessible from Hazelcast for indexing.
     fun getNotifyResearchers(): Boolean {
         return (settings[StudySettingType.Notifications] as StudyNotificationSettings? ?: StudyNotificationSettings(
             labFriendlyName = "",
