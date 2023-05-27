@@ -1,6 +1,7 @@
 package com.openlattice.chronicle.study
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.openlattice.chronicle.authorization.AbstractSecurableObject
 import com.openlattice.chronicle.authorization.SecurableObjectType
 import com.openlattice.chronicle.ids.IdConstants
@@ -77,7 +78,10 @@ class Study(
         fun initialSettings(title: String, labFriendlyName: String = ""): StudySettings {
             return StudySettings(
                 mapOf(
-                    StudySettingType.Notifications to StudyNotificationSettings(labFriendlyName, title),
+                    StudySettingType.Notifications to StudyNotificationSettings(
+                        labFriendlyName = "",
+                        studyFriendlyName = title
+                    ),
                     StudySettingType.TimeUseDiary to TimeUseDiarySettings(),
                     StudySettingType.Survey to SurveySettings()
                 )
@@ -95,6 +99,14 @@ class Study(
 
     fun retrieveConfiguredSensors(): Set<SensorType> {
         return (settings[StudySettingType.Sensor] as SensorSetting? ?: SensorSetting(setOf()))
+    }
+
+    @JsonIgnore //Required so that jackson will ignore, but still accessible from Hazelcast for indexing.
+    fun getNotifyResearchers(): Boolean {
+        return (settings[StudySettingType.Notifications] as StudyNotificationSettings? ?: StudyNotificationSettings(
+            labFriendlyName = "",
+            studyFriendlyName = title
+        )).notifyResearchers
     }
 
     override fun equals(other: Any?): Boolean {

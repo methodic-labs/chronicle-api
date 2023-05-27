@@ -76,7 +76,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "${jacoco_tool_version}"
 }
 
 checkstyle {
@@ -161,7 +161,7 @@ test {
     ignoreFailures = true
 }
 
-ext.jackson_version = '2.13.1'
+ext.jackson_version = '2.15.1'
 
 dependencies {
     spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
