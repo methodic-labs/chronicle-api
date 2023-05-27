@@ -76,7 +76,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "${jacoco_tool_version}"
 }
 
 checkstyle {
