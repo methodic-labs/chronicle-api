@@ -22,7 +22,6 @@ interface StudyComplianceApi {
         const val STUDY_ID_PATH = "/{$STUDY_ID}"
 
     }
-
     @GET(BASE + STUDY + STUDY_ID_PATH)
     fun getStudyComplianceViolations(@Path(STUDY_ID) studyId: UUID): Map<UUID, Map<String, List<ComplianceViolation>>>
 

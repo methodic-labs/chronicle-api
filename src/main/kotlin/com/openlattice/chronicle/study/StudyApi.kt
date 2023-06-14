@@ -32,6 +32,7 @@ interface StudyApi {
         const val START_DATE = "startDate"
         const val END_DATE = "endDate"
         const val DATA_TYPE = "dataType"
+        const val RESPONSE_TYPE = "responseType"
         const val CATEGORY = "category"
         const val FILE_NAME = "fileName"
         const val PARTICIPATION_STATUS = "participationStatus"
