@@ -6,7 +6,7 @@ package com.openlattice.chronicle.android
  */
 
 class ChronicleData(data: List<ChronicleSample>) : List<ChronicleSample> by data {
-
+    private val h: Int = data.hashCode()
 
     override fun toString(): String {
         return "[" + this.joinToString(",") + "]"
@@ -17,7 +17,9 @@ class ChronicleData(data: List<ChronicleSample>) : List<ChronicleSample> by data
         else other.mapIndexed { index, chronicleSample -> this[index] == chronicleSample }.all { it }
     }
 
-    override fun hashCode(): Int {
-        return javaClass.hashCode()
-    }
+    /**
+     * This hash code will be valid as long the hashcode of each ChronicleSample cannot be mutated. At the moment
+     * this is true, but if it ever changes in the future we will have to make hashcode computation dynamic.
+     */
+    override fun hashCode(): Int = h
 }

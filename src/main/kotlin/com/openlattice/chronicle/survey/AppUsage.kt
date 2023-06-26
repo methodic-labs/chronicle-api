@@ -10,6 +10,7 @@ data class AppUsage(
     val appPackageName: String,
     var appLabel: String?,
     val timestamp: OffsetDateTime,
+    val eventType: Int,
     val users: List<String> = listOf(),
     val timezone: String,
 ) {

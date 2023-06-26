@@ -21,6 +21,8 @@ class StudySettings(settings: Map<StudySettingType, StudySetting> = mapOf()) :
 
 enum class StudySettingType {
     DataCollection,
-    Sensor,
     Notifications,
+    Sensor,
+    TimeUseDiary,
+    Survey,
 }

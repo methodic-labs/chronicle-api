@@ -3,7 +3,7 @@ package com.openlattice.chronicle.timeusediary
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  */
-class TimeUseDiaryColumTitles {
+class TimeUseDiaryColumnTitles {
     companion object {
         const val ACTIVITY_COUNTER = "Counter"
         const val ACTIVITY_DURATION = "Duration(Min)"
@@ -45,6 +45,10 @@ class TimeUseDiaryColumTitles {
         const val WAKE_UP_TODAY = "Wakeup_Today"
         const val WAKE_UP_YESTERDAY = "Wakeup_Yesterday"
         const val WAVE_ID = "Wave_ID"
+        const val ACTIVITY_DAY = "Activity_Day"
+        const val ACTIVITY_DATE = "Activity_Date"
+        const val WAKE_UP_TIME_AFTER_ACTIVITY_DAY = "Wake_Up_Time_After_Activity_Day"
+        const val BEDTIME_AFTER_ACTIVITY_DAY = "Bedtime_After_Activity_Day"
 
         val columnTitleToQuestionCodeMap = mapOf(
             FAMILY_ID to TimeUseDiaryQuestionCodes.FAMILY_ID,
@@ -73,7 +77,12 @@ class TimeUseDiaryColumTitles {
             SECONDARY_ACTIVITY to TimeUseDiaryQuestionCodes.SECONDARY_ACTIVITY,
             BG_TV_DAY to TimeUseDiaryQuestionCodes.BG_TV_DAY,
             BG_AUDIO_DAY to TimeUseDiaryQuestionCodes.BG_AUDIO_DAY,
-            ADULT_MEDIA to TimeUseDiaryQuestionCodes.ADULT_MEDIA
+            ADULT_MEDIA to TimeUseDiaryQuestionCodes.ADULT_MEDIA,
+            ACTIVITY_DAY to TimeUseDiaryQuestionCodes.ACTIVITY_DAY,
+            ACTIVITY_DATE to TimeUseDiaryQuestionCodes.ACTIVITY_DATE,
+            WAKE_UP_TIME_AFTER_ACTIVITY_DAY to TimeUseDiaryQuestionCodes.WAKE_UP_TIME_AFTER_ACTIVITY_DAY,
+            BEDTIME_AFTER_ACTIVITY_DAY to TimeUseDiaryQuestionCodes.BED_TIME_BEFORE_ACTIVITY_DAY,
+            WAKE_UP_TODAY to TimeUseDiaryQuestionCodes.TODAY_WAKEUP_TIME,
         )
     }
 }

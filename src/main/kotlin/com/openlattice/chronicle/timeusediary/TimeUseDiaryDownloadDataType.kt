@@ -1,45 +1,49 @@
 package com.openlattice.chronicle.timeusediary
 
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_COUNTER
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_DURATION
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_END_TIME
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ACTIVITY_START_TIME
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.ADULT_MEDIA
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BED_TIME_YESTERDAY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BG_AUDIO_DAY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BG_AUDIO_NIGHT
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BG_TV_DAY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.BG_TV_NIGHT
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.CAREGIVER
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.DAY_OF_WEEK
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.DAY_TIME_HOURS
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.FAMILY_ID
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.NON_TYPICAL_DAY_REASON
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.NON_TYPICAL_SLEEP_PATTERN
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PARTICIPANT_ID
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PRIMARY_ACTIVITY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PRIMARY_BOOK_TITLE
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PRIMARY_BOOK_TYPE
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PRIMARY_MEDIA_ACTIVITY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PRIMARY_MEDIA_AGE
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.PRIMARY_MEDIA_NAME
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SECONDARY_ACTIVITY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SECONDARY_BOOK_TITLE
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SECONDARY_BOOK_TYPE
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SECONDARY_MEDIA_ACTIVITY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SECONDARY_MEDIA_AGE
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SECONDARY_MEDIA_NAME
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SLEEP_ARRANGEMENT
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SLEEP_HOURS
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SLEEP_PATTERN
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.STUDY_ID
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.SUBMISSION_ID
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.TIMESTAMP
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.TYPICAL_DAY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_COUNT
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_TODAY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAKE_UP_YESTERDAY
-import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumTitles.Companion.WAVE_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ACTIVITY_COUNTER
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ACTIVITY_DATE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ACTIVITY_DAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ACTIVITY_DURATION
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ACTIVITY_END_TIME
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ACTIVITY_START_TIME
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.ADULT_MEDIA
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BEDTIME_AFTER_ACTIVITY_DAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BED_TIME_YESTERDAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BG_AUDIO_DAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BG_AUDIO_NIGHT
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BG_TV_DAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BG_TV_NIGHT
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.CAREGIVER
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.DAY_OF_WEEK
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.DAY_TIME_HOURS
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.FAMILY_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.NON_TYPICAL_DAY_REASON
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.NON_TYPICAL_SLEEP_PATTERN
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PARTICIPANT_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_ACTIVITY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_TITLE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_TYPE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_ACTIVITY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_AGE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_NAME
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_ACTIVITY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_BOOK_TITLE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_BOOK_TYPE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_MEDIA_ACTIVITY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_MEDIA_AGE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_MEDIA_NAME
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SLEEP_ARRANGEMENT
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SLEEP_HOURS
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SLEEP_PATTERN
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.STUDY_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SUBMISSION_ID
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.TIMESTAMP
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.TYPICAL_DAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.WAKE_UP_COUNT
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.WAKE_UP_TIME_AFTER_ACTIVITY_DAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.WAKE_UP_TODAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.WAKE_UP_YESTERDAY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.WAVE_ID
 import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.ADULT_MEDIA_BLOCKS
 import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.ADULT_MEDIA_DURATION
 import com.openlattice.chronicle.timeusediary.TimeUseDiarySummarizedDataVariables.Companion.BD_MEDIA_DAY_BLOCKS
@@ -86,7 +90,9 @@ enum class TimeUseDiaryDownloadDataType {
                 FAMILY_ID,
                 WAVE_ID,
                 TIMESTAMP,
+                ACTIVITY_DATE,
                 DAY_OF_WEEK,
+                ACTIVITY_DAY,
                 TYPICAL_DAY,
                 NON_TYPICAL_DAY_REASON,
                 ACTIVITY_COUNTER,
@@ -108,7 +114,10 @@ enum class TimeUseDiaryDownloadDataType {
                 SECONDARY_ACTIVITY,
                 BG_TV_DAY,
                 BG_AUDIO_DAY,
-                ADULT_MEDIA
+                ADULT_MEDIA,
+                WAKE_UP_YESTERDAY,
+                WAKE_UP_TIME_AFTER_ACTIVITY_DAY,
+                BEDTIME_AFTER_ACTIVITY_DAY,
             )
     },
     NightTime {
@@ -120,10 +129,14 @@ enum class TimeUseDiaryDownloadDataType {
                 FAMILY_ID,
                 WAVE_ID,
                 TIMESTAMP,
+                ACTIVITY_DATE,
                 DAY_OF_WEEK,
+                ACTIVITY_DAY,
                 TYPICAL_DAY,
                 NON_TYPICAL_DAY_REASON,
                 WAKE_UP_YESTERDAY,
+                WAKE_UP_TIME_AFTER_ACTIVITY_DAY,
+                BEDTIME_AFTER_ACTIVITY_DAY,
                 BED_TIME_YESTERDAY,
                 WAKE_UP_TODAY,
                 DAY_TIME_HOURS,
