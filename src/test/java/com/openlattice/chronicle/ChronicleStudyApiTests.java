@@ -44,10 +44,10 @@ public class ChronicleStudyApiTests {
                 RandomStringUtils.random( 10 ),
                 RandomStringUtils.random( 10 ),
                 RandomStringUtils.random( 10 ),
-                Optional.of( ImmutableMap.of( RandomStringUtils.random( 10 ),
+                ImmutableMap.of( RandomStringUtils.random( 10 ),
                         10,
                         RandomStringUtils.random( 10 ),
-                        RandomStringUtils.random( 10 ) ) ) );
+                        RandomStringUtils.random( 10 ) ), "" );
         UUID id = chronicleStudyApi
                 .enrollSource( UUID.randomUUID(),
                         RandomStringUtils.randomAlphanumeric( 16 ),

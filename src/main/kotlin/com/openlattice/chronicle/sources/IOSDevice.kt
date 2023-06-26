@@ -7,6 +7,7 @@ import java.util.*
 /**
  * @author alfoncenzioka &lt;alfonce@openlattice.com&gt;
  *
+ * TODO: We are unfortunately stuck with this typo forever until we migrate the json stored in the db.
  * Describes an iOS device: https://developer.apple.com/documentation/uikit/uidevice
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
@@ -17,6 +18,7 @@ class IOSDevice @JsonCreator constructor(
         val localizedModel: String,
         val version: String,
         val deviceId: String,
+        val apnDeviceToken: String = "" //This is the token for device push notifications.
 ) : SourceDevice {
 
     override fun equals(other: Any?): Boolean {
