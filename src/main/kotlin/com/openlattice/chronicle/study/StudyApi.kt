@@ -36,6 +36,7 @@ interface StudyApi {
         const val CATEGORY = "category"
         const val FILE_NAME = "fileName"
         const val PARTICIPATION_STATUS = "participationStatus"
+        const val SETTING_TYPE = "settingType"
 
         const val VERIFY_PATH = "/verify"
         const val DATA_PATH = "/data"
@@ -48,8 +49,9 @@ interface StudyApi {
         const val PARTICIPANTS_PATH = "/participants"
         const val ORGANIZATION_PATH = "/organization"
         const val UPLOAD_PATH = "/upload"
-        const val SENSORS_PATH = "/sensors"
+        const val SENSORS_PATH = "/gd"
         const val SETTINGS_PATH = "/settings"
+        const val SETTING_TYPE_PATH = "/{$SETTING_TYPE}"
         const val STATS_PATH = "/stats"
         const val STATUS_PATH = "/status"
         const val IOS_PATH = "/ios"
@@ -79,7 +81,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(SOURCE_DEVICE_ID) sourceDeviceId: String,
-        @Body datasource: SourceDevice
+        @Body datasource: SourceDevice,
     ): UUID
 
     /**
@@ -123,21 +125,23 @@ interface StudyApi {
     fun updateStudy(
         @Path(STUDY_ID) studyId: UUID,
         @Body study: StudyUpdate,
-        @Query(RETRIEVE) retrieve: Boolean = false
+        @Query(RETRIEVE) retrieve: Boolean = false,
     ): Study?
 
     /**
-     * Manage SensorKit data collection for a study. Due to Apple restrictions this is an admin only API.
+     * Updates study settings for a study.
+     *
+     * Updating SensorKit data collection for a study requires admin permission due to Apple restrictions.
      *
      * @param studyId The id of the study to update.
-     * @param sensorSetting The list of sensor kit sensors to collect for this study.
-     *
-     * Does not accept changes to associated organizations.
+     * @param settingType The setting type to update.
+     * @param settings The new settings for the study.
      */
-    @PUT(BASE + STUDY_ID_PATH + SETTINGS_PATH)
-    fun updateStudyAppleSettings(
+    @PATCH(BASE + STUDY_ID_PATH + SETTINGS_PATH + SETTING_TYPE_PATH)
+    fun updateStudySettings(
         @Path(STUDY_ID) studyId: UUID,
-        @Body sensorSetting: SensorSetting,
+        @Path(SETTING_TYPE) settingType: StudySettingType,
+        @Body settings: StudySetting,
     ): OK
 
     /**
@@ -160,13 +164,13 @@ interface StudyApi {
      * @return the ids of the background jobs created to delete data related to the deleted participants
      */
     @HTTP(
-        path = BASE + STUDY_ID_PATH + PARTICIPANTS_PATH, 
+        path = BASE + STUDY_ID_PATH + PARTICIPANTS_PATH,
         method = "DELETE",
         hasBody = true
     )
     fun deleteStudyParticipants(
         @Path(STUDY_ID) studyId: UUID,
-        @Body participantIds: Set<String>
+        @Body participantIds: Set<String>,
     ): Iterable<UUID>
 
     /**
@@ -177,7 +181,7 @@ interface StudyApi {
     @POST(BASE + STUDY_ID_PATH + PARTICIPANT_PATH)
     fun registerParticipant(
         @Path(STUDY_ID) studyId: UUID,
-        @Body participant: Participant
+        @Body participant: Participant,
     ): UUID
 
     /**
@@ -194,7 +198,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(SOURCE_DEVICE_ID) sourceDeviceId: String,
-        @Body data: List<SensorDataSample>
+        @Body data: List<SensorDataSample>,
     ): Int
 
     /**
@@ -207,7 +211,7 @@ interface StudyApi {
     @PUT(BASE + STUDY_ID_PATH + DATA_COLLECTION)
     fun setChronicleDataCollectionSettings(
         @Path(STUDY_ID) studyId: UUID,
-        @Body dataCollectionSettings: ChronicleDataCollectionSettings
+        @Body dataCollectionSettings: ChronicleDataCollectionSettings,
     ): OK
 
     /**
@@ -217,20 +221,26 @@ interface StudyApi {
      */
     @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH)
     fun getStudySettings(
-        @Path(STUDY_ID) studyId: UUID
+        @Path(STUDY_ID) studyId: UUID,
     ): Map<StudySettingType, StudySetting>
 
+    @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH + SETTING_TYPE_PATH)
+    fun getStudySetting(
+        @Path(STUDY_ID) studyId: UUID,
+        @Path(SETTING_TYPE) settingsKey: StudySettingType,
+    ): StudySetting
+
     /**
-     * Fetches sensors configured for a study.
+     * Fetches sensors configured for a study. This is used by iOS devices to retrieve the sensors enabled for a particular study.
      *
      * @param studyId studyId
      * @return all sensor types for given study
      */
+    @Deprecated("Prefer getStudySetting, this is left in for app compat.")
     @GET(BASE + STUDY_ID_PATH + SETTINGS_PATH + SENSORS_PATH)
     fun getStudySensors(
-        @Path(STUDY_ID) studyId: UUID
+        @Path(STUDY_ID) studyId: UUID,
     ): Set<SensorType>
-
 
     /** Upload usage event data from android devices
      * @param studyId studyId
@@ -245,7 +255,7 @@ interface StudyApi {
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
         @Path(SOURCE_DEVICE_ID) datasourceId: String,
-        @Body data: ChronicleData
+        @Body data: ChronicleData,
     ): Int
 
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH)
@@ -260,11 +270,11 @@ interface StudyApi {
     @GET(BASE + STUDY_ID_PATH + PARTICIPANT_PATH + PARTICIPANT_ID_PATH + VERIFY_PATH)
     fun isKnownParticipant(
         @Path(STUDY_ID) studyId: UUID,
-        @Path(PARTICIPANT_ID) participantId: String
+        @Path(PARTICIPANT_ID) participantId: String,
     ): Boolean
-    
+
     @GET(BASE)
-    fun getAllStudies() : Iterable<Study>
+    fun getAllStudies(): Iterable<Study>
 
     /**
      * Retrieves stats of participant in a study
@@ -273,7 +283,7 @@ interface StudyApi {
      */
     @GET(BASE + STUDY_ID_PATH + PARTICIPANTS_PATH + STATS_PATH)
     fun getParticipantStats(
-        @Path(STUDY_ID) studyId: UUID
+        @Path(STUDY_ID) studyId: UUID,
     ): Map<String, ParticipantStats>
 
 
@@ -305,6 +315,6 @@ interface StudyApi {
     fun updateParticipationStatus(
         @Path(STUDY_ID) studyId: UUID,
         @Path(PARTICIPANT_ID) participantId: String,
-        @Query(PARTICIPATION_STATUS) participationStatus: ParticipationStatus
+        @Query(PARTICIPATION_STATUS) participationStatus: ParticipationStatus,
     ): OK
 }
