@@ -10,9 +10,11 @@ import java.util.*
 data class ParticipantStats(
     val studyId: UUID,
     val participantId: String,
+    val androidLastPing: OffsetDateTime?=null,
     val androidFirstDate: OffsetDateTime? = null,
     val androidLastDate: OffsetDateTime? = null,
     val androidUniqueDates: Set<LocalDate> = setOf(),
+    val iosLastPing: OffsetDateTime?=null,
     val iosFirstDate: OffsetDateTime? = null,
     val iosLastDate: OffsetDateTime? = null,
     val iosUniqueDates: Set<LocalDate> = setOf(),

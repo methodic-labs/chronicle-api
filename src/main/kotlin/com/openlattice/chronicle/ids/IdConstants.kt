@@ -22,11 +22,10 @@
 package com.openlattice.chronicle.ids
 
 import java.util.UUID
-import javax.swing.text.html.HTML.Tag.OL
 
 enum class IdConstants(val id: UUID) {
     UNINITIALIZED(UUID(0L, 0L)),
-    SYSTEM(UUID(0,1L)),
+    METHODIC(UUID(0, 1L)),
 
     /* Organizations */
 
@@ -46,10 +45,8 @@ enum class IdConstants(val id: UUID) {
     // metadata
     LAST_INDEX_ID(UUID(0L, 6L)),
     LAST_LINK_ID(UUID(0L, 7L)),
-    LAST_WRITE_ID(UUID(0L, 8L)),
+    LAST_WRITE_ID(UUID(0L, 8L));
 
-    // system
-    SYSTEM_ID(UUID(0L, 9L));
     companion object {
         @JvmField
         val RESERVED_IDS_BASE = values().maxOf{ it.id.leastSignificantBits } + 1

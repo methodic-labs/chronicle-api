@@ -24,4 +24,5 @@ enum class StudySettingType {
     Notifications,
     Sensor,
     TimeUseDiary,
+    Survey,
 }

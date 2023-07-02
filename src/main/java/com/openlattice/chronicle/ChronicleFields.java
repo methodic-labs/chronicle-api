@@ -14,6 +14,7 @@ public final class ChronicleFields {
     public static final String SDK_VERSION     = "sdkVersion";
     public static final String ADDITIONAL_INFO = "additionalInfo";
 
+    public static final String FCM_REGISTRATION_TOKEN = "fcmRegistrationToken";
     private ChronicleFields() {
     }
 

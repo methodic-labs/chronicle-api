@@ -35,10 +35,10 @@ plugins {
     id 'checkstyle'
     id 'maven-publish'
     id 'signing'
-    id 'com.github.spotbugs' version '4.6.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.20'
-    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.20'
-    id 'org.jetbrains.dokka' version '1.6.10'
+    id 'com.github.spotbugs' version '5.0.14'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.20'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.7.20'
+    id 'org.jetbrains.dokka' version '1.8.10'
 }
 
 if (hasProperty('buildScan')) {
@@ -65,18 +65,18 @@ if( project.hasProperty('developmentMode') && project.developmentMode ) {
 }
 
 // Still on java 8 as a implementation target for android
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
         freeCompilerArgs += '-Xjvm-default=compatibility'
     }
 }
 
 jacoco {
-    toolVersion = "0.8.2"
+    toolVersion = "${jacoco_tool_version}"
 }
 
 checkstyle {
@@ -93,8 +93,8 @@ tasks.withType(Javadoc) {
 
 tasks.withType(Checkstyle) {
     reports {
-        xml.enabled = false
-        html.enabled = true
+        xml.required = false
+        html.required = true
     }
 }
 
@@ -161,7 +161,7 @@ test {
     ignoreFailures = true
 }
 
-ext.jackson_version = '2.13.1'
+ext.jackson_version = '2.15.1'
 
 dependencies {
     spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
@@ -203,7 +203,7 @@ dependencies {
     /*
      * TESTING
      */
-    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: "${log4j_version}"
+    testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: "${log4j_version}"
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j_version}"
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j_version}"
     testImplementation group: 'org.apache.logging.log4j', name: 'log4j-web', version: "${log4j_version}"

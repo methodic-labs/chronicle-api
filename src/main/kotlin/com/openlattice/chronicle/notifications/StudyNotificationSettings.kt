@@ -15,7 +15,9 @@ import com.openlattice.chronicle.study.StudySetting
 data class StudyNotificationSettings(
     val labFriendlyName: String,
     val studyFriendlyName: String,
+    val notifyResearchers: Boolean = false,
     val notifyOnEnrollment: Boolean = false,
+    val researcherPhoneNumbers: String = "",
     val noDataUploaded: StudyDuration = StudyDuration(days = 1),
     val noTudSubmitted: StudyDuration = StudyDuration(days = 1),
     val noAppUsageSurveySubmitted: StudyDuration = StudyDuration(days = 1)

@@ -24,7 +24,7 @@ data class StudyLimits(
         .plusYears(studyDuration.years.toLong())
         .plusMonths(studyDuration.months.toLong())
         .plusDays(studyDuration.days.toLong()),
-    val studyDataExpires: OffsetDateTime = OffsetDateTime.now()
+    val studyDataExpires: OffsetDateTime = studyEnds
         .plusYears(dataRetentionDuration.years.toLong())
         .plusMonths(dataRetentionDuration.months.toLong())
         .plusDays(dataRetentionDuration.days.toLong()),

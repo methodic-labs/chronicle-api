@@ -19,7 +19,7 @@ interface StudyLimitsApi {
         const val STUDY_ID = "studyId"
         const val STUDY = "/study"
 
-        const val STUDY_ID_PATH = "$STUDY/{$STUDY_ID}"
+        const val STUDY_ID_PATH = "/{$STUDY_ID}"
 
     }
 
