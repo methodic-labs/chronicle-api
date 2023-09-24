@@ -11,6 +11,7 @@ data class ComplianceViolation(
 
 enum class ViolationReason {
     NO_DATA_UPLOADED,
-    NO_RECENT_DATA_UPLOADED
+    NO_RECENT_DATA_UPLOADED,
+    NOT_ENROLLED
 }
 
