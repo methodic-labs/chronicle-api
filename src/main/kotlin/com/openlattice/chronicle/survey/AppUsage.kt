@@ -13,6 +13,7 @@ data class AppUsage(
     val eventType: Int,
     val users: List<String> = listOf(),
     val timezone: String,
+    val uploadedAt: Optional<OffsetDateTime>
 ) {
     init {
         if (appLabel?.isBlank() == true) {
