@@ -30,15 +30,28 @@ data class ChronicleUsageEvent(
 
 fun fromInteractionType(interactionType: String): Int {
     return when (interactionType) {
+        "Activity Paused" -> ChronicleUsageEventType.ACTIVITY_PAUSED.value
+        "Activity Resumed" -> ChronicleUsageEventType.ACTIVITY_RESUMED.value
+        "Activity Stopped" -> ChronicleUsageEventType.ACTIVITY_STOPPED.value
+        "Configuration Change" -> ChronicleUsageEventType.CONFIGURATION_CHANGE.value
+        "Device Shutdown" -> ChronicleUsageEventType.DEVICE_SHUTDOWN.value
+        "Device Startup" -> ChronicleUsageEventType.DEVICE_STARTUP.value
+        "Foreground Service Start" -> ChronicleUsageEventType.FOREGROUND_SERVICE_START.value
+        "Foreground Service Stop" -> ChronicleUsageEventType.FOREGROUND_SERVICE_STOP.value
+        "Keyguard Shown" -> ChronicleUsageEventType.KEYGUARD_SHOWN.value
+        "Keyguard Hidden" -> ChronicleUsageEventType.KEYGUARD_HIDDEN.value
         "Move to Background" -> ChronicleUsageEventType.MOVE_TO_BACKGROUND.value
         "Move to Foreground" -> ChronicleUsageEventType.MOVE_TO_FOREGROUND.value
-        "Configuration Change" -> ChronicleUsageEventType.CONFIGURATION_CHANGE.value
-        "Shortcut Invocation" -> ChronicleUsageEventType.SHORTCUT_INVOCATION.value
-        "User Interaction" -> ChronicleUsageEventType.USER_INTERACTION.value
         "None" -> ChronicleUsageEventType.NONE.value
+        "Shortcut Invocation" -> ChronicleUsageEventType.SHORTCUT_INVOCATION.value
+        "Screen Interactive" -> ChronicleUsageEventType.SCREEN_INTERACTIVE.value
+        "Screen Non-interactive" -> ChronicleUsageEventType.SCREEN_NON_INTERACTIVE.value
+        "User Interaction" -> ChronicleUsageEventType.USER_INTERACTION.value
         "Usage Stat" -> -1
         else -> {
             interactionType.substringAfter("Unknown importance: ").toInt()
         }
     }
 }
+
+
