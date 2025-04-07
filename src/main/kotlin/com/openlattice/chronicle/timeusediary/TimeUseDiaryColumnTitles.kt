@@ -16,6 +16,7 @@ class TimeUseDiaryColumnTitles {
         const val BG_TV_DAY = "Background_TV_Day"
         const val BG_TV_NIGHT = "Background_TV_Night"
         const val CAREGIVER = "Caregiver"
+        const val COLLABORATOR = "collaborator"
         const val DAY_OF_WEEK = "Day"
         const val DAY_TIME_HOURS = "Daytime_Hours"
         const val FAMILY_ID = "Family_ID"
@@ -25,6 +26,7 @@ class TimeUseDiaryColumnTitles {
         const val PRIMARY_ACTIVITY = "Primary_Activity"
         const val PRIMARY_BOOK_TITLE = "Primary_Book_Title"
         const val PRIMARY_BOOK_TYPE = "Primary_Book_Type"
+        const val PRIMARY_DEVICE_TYPE = "Primary_Device_Type"
         const val PRIMARY_MEDIA_ACTIVITY ="Primary_Media_Activity"
         const val PRIMARY_MEDIA_AGE = "Primary_Media_Age"
         const val PRIMARY_MEDIA_NAME = "Primary_Media_Name"
@@ -63,12 +65,14 @@ class TimeUseDiaryColumnTitles {
             BG_TV_NIGHT to TimeUseDiaryQuestionCodes.BG_TV_NIGHT,
             BG_AUDIO_NIGHT to TimeUseDiaryQuestionCodes.BG_AUDIO_NIGHT,
             CAREGIVER to TimeUseDiaryQuestionCodes.CAREGIVER,
+            COLLABORATOR to TimeUseDiaryQuestionCodes.COLLABORATOR,
             PRIMARY_MEDIA_ACTIVITY to TimeUseDiaryQuestionCodes.PRIMARY_MEDIA_ACTIVITY,
             PRIMARY_ACTIVITY to TimeUseDiaryQuestionCodes.PRIMARY_ACTIVITY,
             PRIMARY_MEDIA_AGE to TimeUseDiaryQuestionCodes.PRIMARY_MEDIA_AGE,
             PRIMARY_MEDIA_NAME to TimeUseDiaryQuestionCodes.PRIMARY_MEDIA_NAME,
             PRIMARY_BOOK_TYPE to TimeUseDiaryQuestionCodes.PRIMARY_BOOK_TYPE,
             PRIMARY_BOOK_TITLE to TimeUseDiaryQuestionCodes.PRIMARY_BOOK_TITLE,
+            PRIMARY_DEVICE_TYPE to TimeUseDiaryQuestionCodes.PRIMARY_DEVICE_TYPE,
             SECONDARY_MEDIA_ACTIVITY to TimeUseDiaryQuestionCodes.SECONDARY_MEDIA_ACTIVITY,
             SECONDARY_MEDIA_AGE to TimeUseDiaryQuestionCodes.SECONDARY_MEDIA_AGE,
             SECONDARY_MEDIA_NAME to TimeUseDiaryQuestionCodes.SECONDARY_MEDIA_NAME,
