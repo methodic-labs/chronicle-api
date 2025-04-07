@@ -14,6 +14,7 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BG_TV_DAY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.BG_TV_NIGHT
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.CAREGIVER
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.COLLABORATOR
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.DAY_OF_WEEK
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.DAY_TIME_HOURS
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.FAMILY_ID
@@ -23,6 +24,7 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_ACTIVITY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_TITLE
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_TYPE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_DEVICE_TYPE
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_ACTIVITY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_AGE
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_NAME
@@ -101,11 +103,13 @@ enum class TimeUseDiaryDownloadDataType {
                 ACTIVITY_END_TIME,
                 ACTIVITY_DURATION,
                 CAREGIVER,
+                COLLABORATOR,
                 PRIMARY_MEDIA_ACTIVITY,
                 PRIMARY_MEDIA_AGE,
                 PRIMARY_MEDIA_NAME,
                 PRIMARY_BOOK_TYPE,
                 PRIMARY_BOOK_TITLE,
+                PRIMARY_DEVICE_TYPE,
                 SECONDARY_MEDIA_ACTIVITY,
                 SECONDARY_MEDIA_AGE,
                 SECONDARY_MEDIA_NAME,
@@ -146,7 +150,9 @@ enum class TimeUseDiaryDownloadDataType {
                 SLEEP_ARRANGEMENT,
                 WAKE_UP_COUNT,
                 BG_TV_NIGHT,
-                BG_AUDIO_NIGHT
+                BG_AUDIO_NIGHT,
+                PRIMARY_DEVICE_TYPE,
+                COLLABORATOR,
             )
     },
     Summarized {
