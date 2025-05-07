@@ -12,6 +12,11 @@ enum class ChronicleStorage(val id: String) {
     PLATFORM("default"),
 
     /**
+     * Platform download hits the read only endpoint of the cluster and is tuned to allow deep queueing of downloads
+     * without interfering with operation of the website.
+     */
+    PLATFORM_READ("platform_read"),
+    /**
      * Chronicle storage is expected to handle larger data sets and in production is likely to live in a data warehouse
      * like redshift or snowflake
      */
