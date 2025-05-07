@@ -1,10 +1,12 @@
 package com.openlattice.chronicle.study
 
+import com.fasterxml.jackson.annotation.JsonCreator
+
 /**
  *
  * @author Matthew Tamayo-Rios &lt;matthew@getmethodic.com&gt;
  */
-class StudySettings(settings: Map<StudySettingType, StudySetting> = mapOf()) :
+class StudySettings @JsonCreator constructor( settings: Map<StudySettingType, StudySetting> = mapOf()) :
     Map<StudySettingType, StudySetting> by settings {
     private val h = settings.hashCode()
     override fun equals(other: Any?): Boolean {
