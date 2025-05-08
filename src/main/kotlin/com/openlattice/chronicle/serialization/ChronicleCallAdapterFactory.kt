@@ -28,7 +28,7 @@ class ChronicleCallAdapterFactory : CallAdapter.Factory() {
                         val body = IOUtils.toString(
                             response.errorBody()!!.byteStream(), Charsets.UTF_8
                         )
-                        val url = call.request().url().toString()
+                        val url = call.request().url.toString()
                         val message = response.message()
                         val exMsg = "Call to $url failed with code $code and message $message"
                         logger.error(exMsg)
@@ -36,7 +36,7 @@ class ChronicleCallAdapterFactory : CallAdapter.Factory() {
                     }
                     response.body()
                 } catch (e: IOException) {
-                    logger.error("Call to ${call.request().url()} failed due to exception.", e)
+                    logger.error("Call to ${call.request().url} failed due to exception.", e)
                     throw e
                 }
             }

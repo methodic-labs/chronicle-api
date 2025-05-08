@@ -1,11 +1,13 @@
 package com.openlattice.chronicle.android
 
+import com.fasterxml.jackson.annotation.JsonCreator
+
 /**
  *
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
 
-class ChronicleData(data: List<ChronicleSample>) : List<ChronicleSample> by data {
+class ChronicleData @JsonCreator constructor(data: List<ChronicleSample>) : List<ChronicleSample> by data {
     private val h: Int = data.hashCode()
 
     override fun toString(): String {

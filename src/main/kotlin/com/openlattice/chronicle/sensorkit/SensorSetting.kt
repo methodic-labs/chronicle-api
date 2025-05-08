@@ -1,7 +1,9 @@
 package com.openlattice.chronicle.sensorkit
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.openlattice.chronicle.study.StudySetting
+import java.util.function.IntFunction
 
 /**
  *
@@ -13,7 +15,7 @@ import com.openlattice.chronicle.study.StudySetting
  * interface for delegation, so this ends up being cleaner.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
-class SensorSetting(private val sensors: Set<SensorType>) : StudySetting, Set<SensorType> by sensors {
+class SensorSetting @JsonCreator constructor(private val sensors: Set<SensorType>) : StudySetting, Set<SensorType> by sensors {
     companion object {
         val NO_SENSORS = SensorSetting(emptySet())
     }
@@ -25,6 +27,5 @@ class SensorSetting(private val sensors: Set<SensorType>) : StudySetting, Set<Se
     override fun hashCode(): Int {
         return sensors.hashCode()
     }
-
 
 }

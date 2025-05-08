@@ -1,11 +1,12 @@
 package com.openlattice.chronicle.authorization
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import java.util.*
 
 /**
  * @author Matthew Tamayo-Rios &lt;matthew@openlattice.com&gt;
  */
-data class AclKey(private val ids: List<UUID>) : List<UUID> by ids {
+data class AclKey @JsonCreator constructor(private val ids: List<UUID>) : List<UUID> by ids {
     constructor(vararg ids: UUID) : this(ids.asList())
 
     val index: String = joinToString("") {it.toString().replace("-","") }

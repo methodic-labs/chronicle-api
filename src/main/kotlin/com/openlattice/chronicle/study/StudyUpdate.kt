@@ -1,5 +1,6 @@
 package com.openlattice.chronicle.study
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import com.google.common.base.Preconditions
 import com.openlattice.chronicle.sensorkit.SensorSetting
 import java.time.OffsetDateTime
@@ -7,7 +8,7 @@ import java.time.OffsetDateTime
 /**
  * @author Solomon Tang <solomon@openlattice.com>
  */
-data class StudyUpdate(
+data class StudyUpdate @JsonCreator constructor(
     val title: String? = null,
     val description: String? = null,
     val lat: Double? = null,
