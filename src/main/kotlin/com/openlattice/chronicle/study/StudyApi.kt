@@ -51,6 +51,7 @@ interface StudyApi {
         const val UPLOAD_PATH = "/upload"
         const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
+        const val PERMISSIONS_PATH = "/permissions"
         const val SETTING_TYPE_PATH = "/type/{$SETTING_TYPE}"
         const val STATS_PATH = "/stats"
         const val STATUS_PATH = "/status"
@@ -143,6 +144,25 @@ interface StudyApi {
         @Path(SETTING_TYPE) settingType: StudySettingType,
         @Body settings: StudySetting,
     ): OK
+
+    /**
+     * Retrieves the study permissions for a study.
+     *
+     * Requires owner permissions to read the ACL.
+     */
+    @GET(BASE + STUDY_ID_PATH + PERMISSIONS_PATH)
+    fun getStudyPermissions(@Path(STUDY_ID) studyId: UUID): StudyPermissions
+
+    /**
+     * Updates the permissions for a study.
+     *
+     * Requires owner permissions to modify the ACL.
+     */
+    @POST(BASE + STUDY_ID_PATH + PERMISSIONS_PATH)
+    fun updateStudyPermissions(
+        @Path(STUDY_ID) studyId: UUID,
+        @Body permissionsUpdate: StudyPermissionsUpdate
+    ): StudyPermissions
 
     /**
      * Deletes an existing study, its associations to any organizations, and removes
