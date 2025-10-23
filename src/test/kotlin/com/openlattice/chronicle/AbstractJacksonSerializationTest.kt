@@ -111,7 +111,7 @@ abstract class AbstractJacksonSerializationTest<T> {
             smileMapper.registerModule(GuavaModule())
             smileMapper.registerModule(JavaTimeModule())
             smileMapper.registerModule(JodaModule())
-            smileMapper.registerModule(KotlinModule())
+            smileMapper.registerModule(KotlinModule.Builder().build())
             smileMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             smileMapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
             return smileMapper
@@ -123,7 +123,7 @@ abstract class AbstractJacksonSerializationTest<T> {
             mapper.registerModule(GuavaModule())
             mapper.registerModule(JodaModule())
 
-            mapper.registerModule(KotlinModule())
+            mapper.registerModule(KotlinModule.Builder().build())
             mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             mapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
             return mapper
