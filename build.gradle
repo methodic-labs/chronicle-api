@@ -36,8 +36,8 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'com.github.spotbugs' version '6.4.4'
-    id 'org.jetbrains.kotlin.jvm' version '2.1.0'
-    id 'org.jetbrains.kotlin.plugin.spring' version '2.1.0'
+    id 'org.jetbrains.kotlin.jvm' version '2.3.10'
+    id 'org.jetbrains.kotlin.plugin.spring' version '2.3.10'
     id 'org.jetbrains.dokka' version '2.0.0'
 }
 
@@ -161,7 +161,7 @@ test {
     ignoreFailures = true
 }
 
-ext.jackson_version = '2.19.0'
+ext.jackson_version = '2.21.0'
 
 dependencies {
     spotbugsPlugins "com.h3xstream.findsecbugs:findsecbugs-plugin:${findsecbugs_version}"
