@@ -1,6 +1,5 @@
 package com.openlattice.chronicle.study
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import java.time.OffsetDateTime
 import java.util.*
 
@@ -18,7 +17,7 @@ import java.util.*
  * @param features The modules enabled for this study.
  *
  */
-data class StudyLimits @JsonCreator(mode = JsonCreator.Mode.PROPERTIES) constructor(
+data class StudyLimits(
     val studyDuration: StudyDuration = StudyDuration(years = 1),
     val dataRetentionDuration: StudyDuration = StudyDuration(days = 90),
     val studyEnds: OffsetDateTime = OffsetDateTime.now()
