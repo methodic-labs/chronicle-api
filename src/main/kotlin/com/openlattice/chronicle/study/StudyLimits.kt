@@ -18,7 +18,7 @@ import java.util.*
  * @param features The modules enabled for this study.
  *
  */
-data class StudyLimits @JsonCreator constructor(
+data class StudyLimits @JsonCreator(mode = JsonCreator.Mode.PROPERTIES) constructor(
     val studyDuration: StudyDuration = StudyDuration(years = 1),
     val dataRetentionDuration: StudyDuration = StudyDuration(days = 90),
     val studyEnds: OffsetDateTime = OffsetDateTime.now()
