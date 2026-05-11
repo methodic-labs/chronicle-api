@@ -8,5 +8,6 @@ data class TimeUseDiarySettings(
     val enableChangesForSherbrookeUniversity: Boolean = false,
     val enableChangesForOhioStateUniversity: Boolean = false,
     val language: String = "en",
-    val clockFormat: Int = 12
+    val clockFormat: Int = 12,
+    val clockFormatLocked: Boolean = false
 ) : StudySetting
