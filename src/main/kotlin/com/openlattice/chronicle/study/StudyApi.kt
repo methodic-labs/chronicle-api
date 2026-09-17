@@ -11,6 +11,7 @@ import com.openlattice.chronicle.sensorkit.SensorDataSample
 import com.openlattice.chronicle.sensorkit.SensorSetting
 import com.openlattice.chronicle.sensorkit.SensorType
 import com.openlattice.chronicle.sources.SourceDevice
+import com.openlattice.chronicle.users.ChronicleUser
 import retrofit2.http.*
 import java.time.OffsetDateTime
 import java.util.*
@@ -37,6 +38,7 @@ interface StudyApi {
         const val FILE_NAME = "fileName"
         const val PARTICIPATION_STATUS = "participationStatus"
         const val SETTING_TYPE = "settingType"
+        const val EMAIL = "email"
 
         const val VERIFY_PATH = "/verify"
         const val DATA_PATH = "/data"
@@ -52,6 +54,7 @@ interface StudyApi {
         const val SENSORS_PATH = "/sensors"
         const val SETTINGS_PATH = "/settings"
         const val PERMISSIONS_PATH = "/permissions"
+        const val SEARCH_PATH = "/search"
         const val SETTING_TYPE_PATH = "/type/{$SETTING_TYPE}"
         const val STATS_PATH = "/stats"
         const val STATUS_PATH = "/status"
@@ -146,17 +149,47 @@ interface StudyApi {
     ): OK
 
     /**
-     * Retrieves the study permissions for a study.
+     * Retrieves who has access to a study, bucketed by level of access, with each principal resolved against the user
+     * directory so that callers can present an email address and login type rather than an opaque principal id.
      *
      * Requires owner permissions to read the ACL.
+     *
+     * @param studyId The id of the study.
      */
     @GET(BASE + STUDY_ID_PATH + PERMISSIONS_PATH)
     fun getStudyPermissions(@Path(STUDY_ID) studyId: UUID): StudyPermissions
 
     /**
-     * Updates the permissions for a study.
+     * Searches the user directory for users that can be granted access to a study.
      *
-     * Requires owner permissions to modify the ACL.
+     * Requires owner permissions on the study, since granting access is the only reason to browse the directory and
+     * only owners may grant it.
+     *
+     * @param studyId The id of the study access would be granted on.
+     * @param email An email address, or the leading portion of one, to search for. Matching is case insensitive and
+     * the search is a prefix search -- "jane" matches "jane@example.com", "example.com" does not.
+     * @return The matching users, ordered by email address.
+     */
+    @GET(BASE + STUDY_ID_PATH + PERMISSIONS_PATH + SEARCH_PATH)
+    fun searchUsersForStudy(
+        @Path(STUDY_ID) studyId: UUID,
+        @Query(EMAIL) email: String,
+    ): List<ChronicleUser>
+
+    /**
+     * Updates who can access a study.
+     *
+     * Grants are idempotent and additive: granting owner access assigns
+     * {MATERIALIZE, LINK, READ, WRITE, OWNER, INTEGRATE} on the study, granting manage access assigns {READ, WRITE},
+     * and granting view access assigns {READ}. Revocations are applied before grants so that a principal can be moved
+     * between levels in one request.
+     *
+     * Requires owner permissions to modify the ACL. A study must always retain at least one owner, so a request that
+     * would revoke the last one is rejected.
+     *
+     * @param studyId The id of the study.
+     * @param permissionsUpdate The grants and revocations to apply.
+     * @return The study's access after the update has been applied.
      */
     @POST(BASE + STUDY_ID_PATH + PERMISSIONS_PATH)
     fun updateStudyPermissions(
