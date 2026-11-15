@@ -22,11 +22,15 @@ import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.NON_TYPICAL_SLEEP_PATTERN
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PARTICIPANT_ID
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_ACTIVITY
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_LANGUAGE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_LANGUAGE_NON_ENGLISH
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_TITLE
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_BOOK_TYPE
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_DEVICE_TYPE
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_ACTIVITY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_AGE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_LANGUAGE
+import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_LANGUAGE_NON_ENGLISH
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.PRIMARY_MEDIA_NAME
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_ACTIVITY
 import com.openlattice.chronicle.timeusediary.TimeUseDiaryColumnTitles.Companion.SECONDARY_BOOK_TITLE
@@ -110,6 +114,10 @@ enum class TimeUseDiaryDownloadDataType {
                 PRIMARY_BOOK_TYPE,
                 PRIMARY_BOOK_TITLE,
                 PRIMARY_DEVICE_TYPE,
+                PRIMARY_MEDIA_LANGUAGE_NON_ENGLISH,
+                PRIMARY_MEDIA_LANGUAGE,
+                PRIMARY_BOOK_LANGUAGE_NON_ENGLISH,
+                PRIMARY_BOOK_LANGUAGE,
                 SECONDARY_MEDIA_ACTIVITY,
                 SECONDARY_MEDIA_AGE,
                 SECONDARY_MEDIA_NAME,
