@@ -30,12 +30,16 @@ class TimeUseDiaryColumnTitles {
         const val PRIMARY_MEDIA_ACTIVITY ="Primary_Media_Activity"
         const val PRIMARY_MEDIA_AGE = "Primary_Media_Age"
         const val PRIMARY_MEDIA_NAME = "Primary_Media_Name"
+        const val PRIMARY_BOOK_LANGUAGE_NON_ENGLISH = "Primary_Book_Language_Non_English"
+        const val PRIMARY_BOOK_LANGUAGE = "Primary_Book_Language"
+        const val PRIMARY_MEDIA_LANGUAGE_NON_ENGLISH = "Primary_Media_Language_Non_English"
+        const val PRIMARY_MEDIA_LANGUAGE = "Primary_Media_Language"
         const val SECONDARY_ACTIVITY = "Secondary_Activity"
         const val SECONDARY_BOOK_TITLE ="Secondary_Book_Title"
         const val SECONDARY_BOOK_TYPE = "Secondary_Book_Type"
         const val SECONDARY_MEDIA_ACTIVITY = "Secondary_Media_Activity"
         const val SECONDARY_MEDIA_AGE = "Secondary_Media_Age"
-        const val SECONDARY_MEDIA_NAME = "Secondary_Media_Age"
+        const val SECONDARY_MEDIA_NAME = "Secondary_Media_Name"
         const val SLEEP_ARRANGEMENT = "Sleeping_Arrangement"
         const val SLEEP_HOURS = "Sleep_Hours"
         const val STUDY_ID = "Study_ID"
@@ -73,6 +77,10 @@ class TimeUseDiaryColumnTitles {
             PRIMARY_BOOK_TYPE to TimeUseDiaryQuestionCodes.PRIMARY_BOOK_TYPE,
             PRIMARY_BOOK_TITLE to TimeUseDiaryQuestionCodes.PRIMARY_BOOK_TITLE,
             PRIMARY_DEVICE_TYPE to TimeUseDiaryQuestionCodes.PRIMARY_DEVICE_TYPE,
+            PRIMARY_BOOK_LANGUAGE_NON_ENGLISH to TimeUseDiaryQuestionCodes.PRIMARY_BOOK_LANGUAGE_NON_ENGLISH,
+            PRIMARY_BOOK_LANGUAGE to TimeUseDiaryQuestionCodes.PRIMARY_BOOK_LANGUAGE,
+            PRIMARY_MEDIA_LANGUAGE_NON_ENGLISH to TimeUseDiaryQuestionCodes.PRIMARY_MEDIA_LANGUAGE_NON_ENGLISH,
+            PRIMARY_MEDIA_LANGUAGE to TimeUseDiaryQuestionCodes.PRIMARY_MEDIA_LANGUAGE,
             SECONDARY_MEDIA_ACTIVITY to TimeUseDiaryQuestionCodes.SECONDARY_MEDIA_ACTIVITY,
             SECONDARY_MEDIA_AGE to TimeUseDiaryQuestionCodes.SECONDARY_MEDIA_AGE,
             SECONDARY_MEDIA_NAME to TimeUseDiaryQuestionCodes.SECONDARY_MEDIA_NAME,
